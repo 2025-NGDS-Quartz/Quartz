@@ -3,30 +3,24 @@
 from __future__ import annotations
 
 import asyncio
-import json
 import logging
 import os
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
-from pathlib import Path
 from typing import Any, Dict, List, Optional
 
 import numpy as np
 import pandas as pd
 import yfinance as yf  # type: ignore[import-untyped]
-from contextlib import asynccontextmanager
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import JSONResponse
+from pydantic import BaseModel, Field
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s | %(levelname)s | %(name)s | %(message)s",
 )
-
-PROJECT_ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_CACHE_PATH = PROJECT_ROOT / "shared" / "data" / "chart_signals.json"
-
 
 @dataclass(frozen=True)
 class TimeframeConfig:
@@ -38,8 +32,6 @@ class TimeframeConfig:
 @dataclass(frozen=True)
 class TechnicalAgentConfig:
     ticker: str = "SPY"
-    interval_seconds: int = 300
-    cache_path: Path = DEFAULT_CACHE_PATH
     macd_fast: int = 14
     macd_slow: int = 28
     macd_signal: int = 9
@@ -61,8 +53,6 @@ class TechnicalAgentConfig:
         """환경 변수 기반 설정."""
 
         ticker = os.getenv("TECH_AGENT_TICKER", cls.ticker)
-        interval_seconds = int(os.getenv("TECH_AGENT_INTERVAL_SECONDS", cls.interval_seconds))
-        cache_path = Path(os.getenv("TECH_AGENT_CACHE_PATH", str(DEFAULT_CACHE_PATH)))
         macd_fast = int(os.getenv("TECH_AGENT_MACD_FAST", cls.macd_fast))
         macd_slow = int(os.getenv("TECH_AGENT_MACD_SLOW", cls.macd_slow))
         macd_signal = int(os.getenv("TECH_AGENT_MACD_SIGNAL", cls.macd_signal))
@@ -72,8 +62,6 @@ class TechnicalAgentConfig:
         ma_tail = int(os.getenv("TECH_AGENT_MA_TAIL", cls.ma_tail))
         return cls(
             ticker=ticker,
-            interval_seconds=interval_seconds,
-            cache_path=cache_path,
             macd_fast=macd_fast,
             macd_slow=macd_slow,
             macd_signal=macd_signal,
@@ -84,34 +72,18 @@ class TechnicalAgentConfig:
         )
 
 
-class IndicatorCache:
-    """파일 기반 캐시."""
+class AnalyzeRequest(BaseModel):
+    tickers: List[str] = Field(..., min_length=1, description="기술 분석을 요청할 티커 목록")
 
-    def __init__(self, path: Path) -> None:
-        self.path = path
-        self.path.parent.mkdir(parents=True, exist_ok=True)
-        self._lock = asyncio.Lock()
-
-    async def write(self, data: Dict[str, Any]) -> None:
-        text = json.dumps(data, ensure_ascii=False, indent=2)
-
-        async with self._lock:
-            await asyncio.to_thread(self._write_atomic, text)
-
-    async def read(self) -> Optional[Dict[str, Any]]:
-        if not self.path.exists():
-            return None
-        async with self._lock:
-            return await asyncio.to_thread(self._read_json)
-
-    def _write_atomic(self, text: str) -> None:
-        tmp_path = self.path.with_suffix(".tmp")
-        tmp_path.write_text(text, encoding="utf-8")
-        tmp_path.replace(self.path)
-
-    def _read_json(self) -> Dict[str, Any]:
-        raw = self.path.read_text(encoding="utf-8")
-        return json.loads(raw)
+    def unique_tickers(self) -> List[str]:
+        unique: List[str] = []
+        for ticker in self.tickers:
+            normalized = ticker.strip().upper()
+            if not normalized:
+                continue
+            if normalized not in unique:
+                unique.append(normalized)
+        return unique
 
 
 class IndicatorCalculator:
@@ -120,28 +92,29 @@ class IndicatorCalculator:
     def __init__(self, config: TechnicalAgentConfig) -> None:
         self.config = config
 
-    async def build_payload(self) -> Dict[str, Any]:
-        return await asyncio.to_thread(self._build_payload_sync)
+    async def build_payload(self, ticker: Optional[str] = None) -> Dict[str, Any]:
+        return await asyncio.to_thread(self._build_payload_sync, ticker)
 
-    def _build_payload_sync(self) -> Dict[str, Any]:
+    def _build_payload_sync(self, ticker: Optional[str] = None) -> Dict[str, Any]:
+        target_ticker = (ticker or self.config.ticker).upper()
         sections: Dict[str, Dict[str, Any]] = {}
         for name, timeframe in self.config.timeframes.items():
-            logger.info("지표 계산 시작: %s", name)
-            data = self._download_history(timeframe)
+            logger.info("지표 계산 시작: %s (%s)", name, target_ticker)
+            data = self._download_history(target_ticker, timeframe)
             sections[name] = self._compute_section(data, timeframe)
 
         timestamp = datetime.now(timezone.utc).isoformat()
         payload: Dict[str, Any] = {
             "timestamp": timestamp,
-            "ticker": self.config.ticker,
+            "ticker": target_ticker,
             **sections,
         }
         payload["summation"] = self._summarize_signals(sections)
         return payload
 
-    def _download_history(self, timeframe: TimeframeConfig) -> pd.DataFrame:
+    def _download_history(self, ticker: str, timeframe: TimeframeConfig) -> pd.DataFrame:
         df = yf.download(
-            self.config.ticker,
+            ticker,
             period=timeframe.period,
             interval=timeframe.interval,
             auto_adjust=False,
@@ -149,7 +122,7 @@ class IndicatorCalculator:
             threads=False,
         )
         if df.empty:
-            raise ValueError(f"데이터를 불러오지 못했습니다. ticker={self.config.ticker}")
+            raise ValueError(f"데이터를 불러오지 못했습니다. ticker={ticker}")
         # 일관된 컬럼명을 위해 MultiIndex 제거
         if isinstance(df.columns, pd.MultiIndex):
             df.columns = [col[0] for col in df.columns]
@@ -261,87 +234,31 @@ class IndicatorCalculator:
         return max(min(round(normalized, 6), 1.0), -1.0)
 
 
-class IndicatorWorker:
-    """5분 주기로 지표를 계산하고 캐시에 저장."""
-
-    def __init__(self, calculator: IndicatorCalculator, cache: IndicatorCache, interval: int) -> None:
-        self.calculator = calculator
-        self.cache = cache
-        self.interval = interval
-        self._task: Optional[asyncio.Task[None]] = None
-        self._stop_event = asyncio.Event()
-
-    async def start(self) -> None:
-        if self._task is not None:
-            return
-        await self._run_once()
-        self._stop_event.clear()
-        self._task = asyncio.create_task(self._run())
-
-    async def stop(self) -> None:
-        if self._task is None:
-            return
-        self._stop_event.set()
-        await self._task
-        self._task = None
-
-    async def _run(self) -> None:
-        while True:
-            try:
-                await asyncio.wait_for(self._stop_event.wait(), timeout=self.interval)
-                break
-            except asyncio.TimeoutError:
-                await self._run_once()
-                continue
-
-    async def _run_once(self) -> None:
-        try:
-            payload = await self.calculator.build_payload()
-            await self.cache.write(payload)
-            logger.info("지표 계산 완료: %s", payload["timestamp"])
-        except Exception as exc:  # noqa: BLE001
-            logger.exception("지표 계산 실패: %s", exc)
-
-
 config = TechnicalAgentConfig.from_env()
-cache = IndicatorCache(config.cache_path)
 calculator = IndicatorCalculator(config)
-worker = IndicatorWorker(calculator, cache, config.interval_seconds)
-
-
-@asynccontextmanager
-async def lifespan(_: FastAPI):
-    await worker.start()
-    try:
-        yield
-    finally:
-        await worker.stop()
 
 
 app = FastAPI(
     title="Chart Technical Analysis Agent",
     version="0.1.0",
-    lifespan=lifespan,
 )
 
 
-@app.get("/health")
-async def health() -> JSONResponse:
-    cached = await cache.read()
-    return JSONResponse(
-        {
-            "status": "ok",
-            "ticker": config.ticker,
-            "last_updated": cached["timestamp"] if cached else None,
-        }
-    )
+@app.post("/api/analyze")
+async def api_analyze(request: AnalyzeRequest) -> JSONResponse:
+    unique_tickers = request.unique_tickers()
+    if not unique_tickers:
+        raise HTTPException(status_code=422, detail="no valid tickers provided")
 
+    async def _analyze_single(ticker: str) -> Dict[str, Any]:
+        try:
+            payload = await calculator.build_payload(ticker=ticker)
+            return {"ticker": ticker, "status": "ok", "payload": payload}
+        except Exception as exc:  # noqa: BLE001
+            logger.exception("티커 %s 기술 분석 실패: %s", ticker, exc)
+            return {"ticker": ticker, "status": "error", "detail": str(exc)}
 
-@app.post("/api/result")
-async def api_result() -> JSONResponse:
-    cached = await cache.read()
-    if cached is None:
-        raise HTTPException(status_code=503, detail="indicator cache empty")
-    return JSONResponse(cached)
+    results = await asyncio.gather(*(_analyze_single(ticker) for ticker in unique_tickers))
+    return JSONResponse({"requested": unique_tickers, "results": results})
 
 
