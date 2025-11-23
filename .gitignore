@@ -10,6 +10,7 @@
 */.env.test.local
 */.env.production.local
 
-.venv/
+.venv
+.venv/*
 .env
 .env.local
