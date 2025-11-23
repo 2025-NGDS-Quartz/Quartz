@@ -89,11 +89,11 @@
 
 **분석 프로세스**:
 ```
-재무제표 수집 → 뉴스 크롤링 → FinBERT 감성분석 → ChatGPT 종합분석 → 종목 추천 리스트 생성
+재무제표 수집 → 뉴스 크롤링 → ChatGPT 종합분석 → 종목 추천 리스트 생성
 ```
 
 **기술 스택**:
-- Python 3.11+
+- Python 3.12+
 - yfinance, dart-fss (데이터 수집)
 - BeautifulSoup4 (뉴스 크롤링)
 - OpenAI SDK
@@ -135,7 +135,7 @@ schedule: "*/30 * * * *"  # 30분마다 실행
 ```
 
 **기술 스택**:
-- Python 3.11+
+- Python 3.12+
 - TA-Lib (기술 지표)
 - pandas, numpy
 - OpenAI SDK
@@ -179,7 +179,7 @@ update_frequency: "1m"  # 1분마다 업데이트
 ```
 
 **기술 스택**:
-- Python 3.11+
+- Python 3.12+
 - 증권사 SDK
 - asyncio (비동기 처리)
 - PostgreSQL (거래 이력)
@@ -231,7 +231,7 @@ high_availability: true
 ```
 
 **기술 스택**:
-- Python 3.11+
+- Python 3.12+
 - FastAPI (내부 API)
 - OpenAI SDK (GPT-4 권장)
 - Redis (에이전트 간 통신)
