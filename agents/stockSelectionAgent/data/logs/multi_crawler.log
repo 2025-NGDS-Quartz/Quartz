@@ -1,0 +1,117 @@
+2025-12-02 08:16:25,644 [INFO] __main__: Crawling from naver...
+2025-12-02 08:16:25,644 [INFO] crawlers.base_crawler.NaverFinance: Crawling NaverFinance page 1: https://finance.naver.com/news/news_list.naver?mode=LSS2D&section_id=101&section_id2=258&page=1
+2025-12-02 08:16:25,764 [INFO] crawlers.base_crawler.NaverFinance: Parsed 20 unique news items from NaverFinance
+2025-12-02 08:16:25,765 [INFO] crawlers.base_crawler.NaverFinance: Waiting 2.29 seconds...
+2025-12-02 08:16:28,058 [INFO] crawlers.base_crawler.NaverFinance: Crawling NaverFinance page 2: https://finance.naver.com/news/news_list.naver?mode=LSS2D&section_id=101&section_id2=258&page=2
+2025-12-02 08:16:28,105 [INFO] crawlers.base_crawler.NaverFinance: Parsed 19 unique news items from NaverFinance
+2025-12-02 08:16:28,105 [INFO] crawlers.base_crawler.NaverFinance: Waiting 2.32 seconds...
+2025-12-02 08:16:30,431 [INFO] crawlers.base_crawler.NaverFinance: Crawling NaverFinance page 3: https://finance.naver.com/news/news_list.naver?mode=LSS2D&section_id=101&section_id2=258&page=3
+2025-12-02 08:16:30,483 [INFO] crawlers.base_crawler.NaverFinance: Parsed 20 unique news items from NaverFinance
+2025-12-02 08:16:30,483 [INFO] __main__: ✅ naver: 59 news
+2025-12-02 08:16:32,489 [INFO] __main__: Crawling from hankyung...
+2025-12-02 08:16:32,489 [INFO] crawlers.base_crawler.Hankyung: Crawling Hankyung page 1: https://www.hankyung.com/economy/stock?page=1
+2025-12-02 08:16:32,609 [WARNING] crawlers.base_crawler.Hankyung: Request failed (attempt 1): 404 Client Error: Not Found for url: https://www.hankyung.com/economy/stock?page=1
+2025-12-02 08:16:34,675 [WARNING] crawlers.base_crawler.Hankyung: Request failed (attempt 2): 404 Client Error: Not Found for url: https://www.hankyung.com/economy/stock?page=1
+2025-12-02 08:16:38,759 [WARNING] crawlers.base_crawler.Hankyung: Request failed (attempt 3): 404 Client Error: Not Found for url: https://www.hankyung.com/economy/stock?page=1
+2025-12-02 08:16:38,760 [ERROR] crawlers.base_crawler.Hankyung: Failed to fetch https://www.hankyung.com/economy/stock?page=1
+2025-12-02 08:16:38,760 [INFO] crawlers.base_crawler.Hankyung: Waiting 2.41 seconds...
+2025-12-02 08:16:41,174 [INFO] crawlers.base_crawler.Hankyung: Crawling Hankyung page 2: https://www.hankyung.com/economy/stock?page=2
+2025-12-02 08:16:41,243 [WARNING] crawlers.base_crawler.Hankyung: Request failed (attempt 1): 404 Client Error: Not Found for url: https://www.hankyung.com/economy/stock?page=2
+2025-12-02 08:16:43,307 [WARNING] crawlers.base_crawler.Hankyung: Request failed (attempt 2): 404 Client Error: Not Found for url: https://www.hankyung.com/economy/stock?page=2
+2025-12-02 08:16:47,366 [WARNING] crawlers.base_crawler.Hankyung: Request failed (attempt 3): 404 Client Error: Not Found for url: https://www.hankyung.com/economy/stock?page=2
+2025-12-02 08:16:47,366 [ERROR] crawlers.base_crawler.Hankyung: Failed to fetch https://www.hankyung.com/economy/stock?page=2
+2025-12-02 08:16:47,366 [INFO] crawlers.base_crawler.Hankyung: Waiting 1.05 seconds...
+2025-12-02 08:16:48,420 [INFO] crawlers.base_crawler.Hankyung: Crawling Hankyung page 3: https://www.hankyung.com/economy/stock?page=3
+2025-12-02 08:16:48,491 [WARNING] crawlers.base_crawler.Hankyung: Request failed (attempt 1): 404 Client Error: Not Found for url: https://www.hankyung.com/economy/stock?page=3
+2025-12-02 08:16:50,555 [WARNING] crawlers.base_crawler.Hankyung: Request failed (attempt 2): 404 Client Error: Not Found for url: https://www.hankyung.com/economy/stock?page=3
+2025-12-02 08:16:54,625 [WARNING] crawlers.base_crawler.Hankyung: Request failed (attempt 3): 404 Client Error: Not Found for url: https://www.hankyung.com/economy/stock?page=3
+2025-12-02 08:16:54,625 [ERROR] crawlers.base_crawler.Hankyung: Failed to fetch https://www.hankyung.com/economy/stock?page=3
+2025-12-02 08:16:54,625 [INFO] __main__: ✅ hankyung: 0 news
+2025-12-02 08:16:56,629 [INFO] __main__: Crawling from mk...
+2025-12-02 08:16:56,629 [INFO] crawlers.base_crawler.MK: Crawling MK page 1: https://www.mk.co.kr/news/economy/?page=1
+2025-12-02 08:16:56,747 [INFO] crawlers.base_crawler.MK: Parsed 0 unique news items from MK
+2025-12-02 08:16:56,747 [INFO] crawlers.base_crawler.MK: Waiting 2.50 seconds...
+2025-12-02 08:16:59,254 [INFO] crawlers.base_crawler.MK: Crawling MK page 2: https://www.mk.co.kr/news/economy/?page=2
+2025-12-02 08:16:59,307 [INFO] crawlers.base_crawler.MK: Parsed 0 unique news items from MK
+2025-12-02 08:16:59,307 [INFO] crawlers.base_crawler.MK: Waiting 2.57 seconds...
+2025-12-02 08:17:01,886 [INFO] crawlers.base_crawler.MK: Crawling MK page 3: https://www.mk.co.kr/news/economy/?page=3
+2025-12-02 08:17:01,936 [INFO] crawlers.base_crawler.MK: Parsed 0 unique news items from MK
+2025-12-02 08:17:01,936 [INFO] __main__: ✅ mk: 0 news
+2025-12-02 08:17:03,939 [INFO] __main__: 
+💾 Saved 59 news to data/news_raw/multi_20251202_08.json
+2025-12-02 08:17:03,940 [INFO] __main__: 📊 Source breakdown: {'NaverFinance': 59}
+2025-12-02 08:17:03,940 [INFO] __main__: 
+⏱️  Completed in 38.30 seconds
+2025-12-02 08:17:03,940 [INFO] __main__: 📈 Total news collected: 59
+2025-12-02 08:27:18,729 [INFO] __main__: Crawling from naver...
+2025-12-02 08:27:18,729 [INFO] crawlers.base_crawler.NaverFinance: Crawling NaverFinance page 1: https://finance.naver.com/news/news_list.naver?mode=LSS2D&section_id=101&section_id2=258&page=1
+2025-12-02 08:27:18,848 [INFO] crawlers.base_crawler.NaverFinance: Parsed 20 unique news items from NaverFinance
+2025-12-02 08:27:18,848 [INFO] crawlers.base_crawler.NaverFinance: Waiting 2.39 seconds...
+2025-12-02 08:27:21,240 [INFO] crawlers.base_crawler.NaverFinance: Crawling NaverFinance page 2: https://finance.naver.com/news/news_list.naver?mode=LSS2D&section_id=101&section_id2=258&page=2
+2025-12-02 08:27:21,290 [INFO] crawlers.base_crawler.NaverFinance: Parsed 20 unique news items from NaverFinance
+2025-12-02 08:27:21,290 [INFO] crawlers.base_crawler.NaverFinance: Waiting 2.52 seconds...
+2025-12-02 08:27:23,811 [INFO] crawlers.base_crawler.NaverFinance: Crawling NaverFinance page 3: https://finance.naver.com/news/news_list.naver?mode=LSS2D&section_id=101&section_id2=258&page=3
+2025-12-02 08:27:23,864 [INFO] crawlers.base_crawler.NaverFinance: Parsed 19 unique news items from NaverFinance
+2025-12-02 08:27:23,864 [INFO] __main__: ✅ naver: 59 news
+2025-12-02 08:27:25,869 [INFO] __main__: Crawling from hankyung...
+2025-12-02 08:27:25,869 [INFO] crawlers.base_crawler.Hankyung: Crawling Hankyung page 1: https://www.hankyung.com/economy/macro?page=1
+2025-12-02 08:27:26,362 [INFO] crawlers.base_crawler.Hankyung: Parsed 20 unique news items from Hankyung
+2025-12-02 08:27:26,363 [INFO] crawlers.base_crawler.Hankyung: Waiting 1.85 seconds...
+2025-12-02 08:27:28,217 [INFO] crawlers.base_crawler.Hankyung: Crawling Hankyung page 2: https://www.hankyung.com/economy/macro?page=2
+2025-12-02 08:27:28,396 [INFO] crawlers.base_crawler.Hankyung: Parsed 20 unique news items from Hankyung
+2025-12-02 08:27:28,396 [INFO] crawlers.base_crawler.Hankyung: Waiting 2.89 seconds...
+2025-12-02 08:27:31,289 [INFO] crawlers.base_crawler.Hankyung: Crawling Hankyung page 3: https://www.hankyung.com/economy/macro?page=3
+2025-12-02 08:27:31,476 [INFO] crawlers.base_crawler.Hankyung: Parsed 20 unique news items from Hankyung
+2025-12-02 08:27:31,476 [INFO] __main__: ✅ hankyung: 60 news
+2025-12-02 08:27:33,482 [INFO] __main__: Crawling from mk...
+2025-12-02 08:27:33,482 [INFO] crawlers.base_crawler.MK: Crawling MK page 1: https://www.mk.co.kr/news/economy/?page=1
+2025-12-02 08:27:33,875 [INFO] crawlers.base_crawler.MK: Parsed 1 unique news items from MK
+2025-12-02 08:27:33,875 [INFO] crawlers.base_crawler.MK: Waiting 1.60 seconds...
+2025-12-02 08:27:35,485 [INFO] crawlers.base_crawler.MK: Crawling MK page 2: https://www.mk.co.kr/news/economy/?page=2
+2025-12-02 08:27:35,538 [INFO] crawlers.base_crawler.MK: Parsed 0 unique news items from MK
+2025-12-02 08:27:35,538 [INFO] crawlers.base_crawler.MK: Waiting 1.83 seconds...
+2025-12-02 08:27:37,370 [INFO] crawlers.base_crawler.MK: Crawling MK page 3: https://www.mk.co.kr/news/economy/?page=3
+2025-12-02 08:27:37,431 [INFO] crawlers.base_crawler.MK: Parsed 0 unique news items from MK
+2025-12-02 08:27:37,431 [INFO] __main__: ✅ mk: 1 news
+2025-12-02 08:27:39,435 [INFO] __main__: 
+💾 Saved 120 news to data/news_raw/20251202_08.json
+2025-12-02 08:27:39,435 [INFO] __main__: 📊 Source breakdown: {'NaverFinance': 59, 'Hankyung': 60, 'MK': 1}
+2025-12-02 08:27:39,435 [INFO] __main__: 
+⏱️  Completed in 20.71 seconds
+2025-12-02 08:27:39,435 [INFO] __main__: 📈 Total news collected: 120
+2025-12-02 09:16:57,096 [INFO] __main__: Crawling from naver...
+2025-12-02 09:16:57,096 [INFO] crawlers.base_crawler.NaverFinance: Crawling NaverFinance page 1: https://finance.naver.com/news/news_list.naver?mode=LSS2D&section_id=101&section_id2=258&page=1
+2025-12-02 09:16:57,226 [INFO] crawlers.base_crawler.NaverFinance: Parsed 20 unique news items from NaverFinance
+2025-12-02 09:16:57,226 [INFO] crawlers.base_crawler.NaverFinance: Waiting 1.72 seconds...
+2025-12-02 09:16:58,944 [INFO] crawlers.base_crawler.NaverFinance: Crawling NaverFinance page 2: https://finance.naver.com/news/news_list.naver?mode=LSS2D&section_id=101&section_id2=258&page=2
+2025-12-02 09:16:58,994 [INFO] crawlers.base_crawler.NaverFinance: Parsed 18 unique news items from NaverFinance
+2025-12-02 09:16:58,994 [INFO] crawlers.base_crawler.NaverFinance: Waiting 2.17 seconds...
+2025-12-02 09:17:01,169 [INFO] crawlers.base_crawler.NaverFinance: Crawling NaverFinance page 3: https://finance.naver.com/news/news_list.naver?mode=LSS2D&section_id=101&section_id2=258&page=3
+2025-12-02 09:17:01,216 [INFO] crawlers.base_crawler.NaverFinance: Parsed 20 unique news items from NaverFinance
+2025-12-02 09:17:01,216 [INFO] __main__: ✅ naver: 58 news
+2025-12-02 09:17:03,222 [INFO] __main__: Crawling from hankyung...
+2025-12-02 09:17:03,222 [INFO] crawlers.base_crawler.Hankyung: Crawling Hankyung page 1: https://www.hankyung.com/economy/macro?page=1
+2025-12-02 09:17:03,486 [INFO] crawlers.base_crawler.Hankyung: Parsed 20 unique news items from Hankyung
+2025-12-02 09:17:03,486 [INFO] crawlers.base_crawler.Hankyung: Waiting 2.13 seconds...
+2025-12-02 09:17:05,619 [INFO] crawlers.base_crawler.Hankyung: Crawling Hankyung page 2: https://www.hankyung.com/economy/macro?page=2
+2025-12-02 09:17:05,801 [INFO] crawlers.base_crawler.Hankyung: Parsed 20 unique news items from Hankyung
+2025-12-02 09:17:05,802 [INFO] crawlers.base_crawler.Hankyung: Waiting 2.56 seconds...
+2025-12-02 09:17:08,364 [INFO] crawlers.base_crawler.Hankyung: Crawling Hankyung page 3: https://www.hankyung.com/economy/macro?page=3
+2025-12-02 09:17:08,574 [INFO] crawlers.base_crawler.Hankyung: Parsed 20 unique news items from Hankyung
+2025-12-02 09:17:08,574 [INFO] __main__: ✅ hankyung: 60 news
+2025-12-02 09:17:10,579 [INFO] __main__: Crawling from mk...
+2025-12-02 09:17:10,580 [INFO] crawlers.base_crawler.MK: Crawling MK page 1: https://www.mk.co.kr/news/economy/?page=1
+2025-12-02 09:17:10,711 [INFO] crawlers.base_crawler.MK: Parsed 1 unique news items from MK
+2025-12-02 09:17:10,712 [INFO] crawlers.base_crawler.MK: Waiting 2.20 seconds...
+2025-12-02 09:17:12,921 [INFO] crawlers.base_crawler.MK: Crawling MK page 2: https://www.mk.co.kr/news/economy/?page=2
+2025-12-02 09:17:12,975 [INFO] crawlers.base_crawler.MK: Parsed 0 unique news items from MK
+2025-12-02 09:17:12,975 [INFO] crawlers.base_crawler.MK: Waiting 2.52 seconds...
+2025-12-02 09:17:15,502 [INFO] crawlers.base_crawler.MK: Crawling MK page 3: https://www.mk.co.kr/news/economy/?page=3
+2025-12-02 09:17:15,568 [INFO] crawlers.base_crawler.MK: Parsed 0 unique news items from MK
+2025-12-02 09:17:15,568 [INFO] __main__: ✅ mk: 1 news
+2025-12-02 09:17:17,571 [INFO] __main__: 
+💾 Saved 119 news to data/news_raw/20251202_09.json
+2025-12-02 09:17:17,572 [INFO] __main__: 📊 Source breakdown: {'NaverFinance': 58, 'Hankyung': 60, 'MK': 1}
+2025-12-02 09:17:17,572 [INFO] __main__: 
+⏱️  Completed in 20.48 seconds
+2025-12-02 09:17:17,572 [INFO] __main__: 📈 Total news collected: 119
