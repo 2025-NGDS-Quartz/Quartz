@@ -628,5 +628,320 @@
     "score": 0.65,
     "confidence": 0.8,
     "reasoning": "긍정적 정책 변화"
+  },
+  "2e5823a68a574fa15b43d59e4cb2cc59": {
+    "headline": "동국제약, 전립선비대증 복합제 '유레스코정' 국내 출시",
+    "sentiment": "positive",
+    "score": 0.8,
+    "confidence": 0.9,
+    "reasoning": "신제품 출시로 성장 기대"
+  },
+  "54c7ea3cc36a48785ce87ebdea88fd55": {
+    "headline": "미래에셋, 'TIGER TOP10' → 'TIGER 코리아TOP10' 명칭 변경",
+    "sentiment": "neutral",
+    "score": 0.5,
+    "confidence": 0.7,
+    "reasoning": "단순 명칭 변경"
+  },
+  "520faf0fcf0ea87e370fcd7e6a0069b9": {
+    "headline": "“투자 습관 형성 골든타임”…투교협, 군 장병 대상 ‘금융투자 아카데미’ 콘텐츠 공개",
+    "sentiment": "positive",
+    "score": 0.75,
+    "confidence": 0.85,
+    "reasoning": "교육 콘텐츠 공개 긍정적"
+  },
+  "2f1e03b280d9d0248b476ca9eb606da4": {
+    "headline": "국내 증시 엇갈린 흐름 속 코스피 상승 출발…코스닥은 하락",
+    "sentiment": "neutral",
+    "score": 0.5,
+    "confidence": 0.6,
+    "reasoning": "혼조세로 중립적"
+  },
+  "139abd153deb6dab3cdb4cc30bf4fc00": {
+    "headline": "[게시판] 우리카드, 디지털 정기 결제 캐시백 이벤트",
+    "sentiment": "positive",
+    "score": 0.7,
+    "confidence": 0.8,
+    "reasoning": "이벤트로 고객 유치 기대"
+  },
+  "60e86caa9633a236d05655d137ecc4de": {
+    "headline": "코팬글로벌, 글로벌 인기 캐릭터 ‘핑구’ X 태연 캐릭터 ‘탱그’ 팝업스토어 오픈",
+    "sentiment": "positive",
+    "score": 0.85,
+    "confidence": 0.9,
+    "reasoning": "인기 캐릭터 협업 긍정적"
+  },
+  "7b221b7eb8f625f5ee91f6f7d323a911": {
+    "headline": "코스피, 외인·기관 매수 속 3970대 회복…코스닥은 약보합",
+    "sentiment": "positive",
+    "score": 0.7,
+    "confidence": 0.75,
+    "reasoning": "매수세로 회복 긍정적"
+  },
+  "97f8020c80c7e8b41f39c7cc9c095e1b": {
+    "headline": "엠앤와이즈, ‘wiseU Cloud’ PUSH 채널 정식 오픈",
+    "sentiment": "positive",
+    "score": 0.75,
+    "confidence": 0.8,
+    "reasoning": "신서비스 출시 긍정적"
+  },
+  "caec817cddf2f49410f1583b0aee6ba6": {
+    "headline": "한국투자증권, 글로벌 대체운용사와 전략적 제휴",
+    "sentiment": "positive",
+    "score": 0.8,
+    "confidence": 0.85,
+    "reasoning": "전략적 제휴로 성장 기대"
+  },
+  "0527be1f19b397ae2056452099a5b79b": {
+    "headline": "유안타증권, '대만 반도체 인베스트먼트 데이' 개최",
+    "sentiment": "neutral",
+    "score": 0.5,
+    "confidence": 0.7,
+    "reasoning": "사실 전달로 중립"
+  },
+  "ef0e8dae7e5f44d9e1717a9d831b5675": {
+    "headline": "하나증권, 초고액자산가 프리미엄 서비스 전담 센터 오픈",
+    "sentiment": "positive",
+    "score": 0.8,
+    "confidence": 0.85,
+    "reasoning": "프리미엄 서비스 확대 긍정"
+  },
+  "ba6de96fd652a9464f322b35bb2aaa0e": {
+    "headline": "방향성 꺾인 비트코인…\"크립토 트레저리 위기 자극\"",
+    "sentiment": "negative",
+    "score": 0.3,
+    "confidence": 0.75,
+    "reasoning": "위기 언급으로 부정적"
+  },
+  "409f548a1b0d678f3a1ae8a3c0532ddf": {
+    "headline": "미래에셋, 'TIGER TOP10'→'TIGER 코리아TOP10' 명칭 바꿔",
+    "sentiment": "neutral",
+    "score": 0.5,
+    "confidence": 0.7,
+    "reasoning": "단순 명칭 변경"
+  },
+  "c77520c93d491fd911504ea17ca2d056": {
+    "headline": "더즌, 트리플에이와 국내 디지털자산 결제 확대 MOU",
+    "sentiment": "positive",
+    "score": 0.75,
+    "confidence": 0.8,
+    "reasoning": "MOU로 사업 확장 기대"
+  },
+  "f1e8f92ebabd6b45fcb4580904d5b56d": {
+    "headline": "키움·메리츠, 10년 만에 신용등급 오르나…등급전망 '긍정적' 상향",
+    "sentiment": "positive",
+    "score": 0.9,
+    "confidence": 0.9,
+    "reasoning": "신용등급 상승 긍정적"
+  },
+  "06f54f43d84bb080af474f3dba43241c": {
+    "headline": "NH證, ‘2025 퇴직연금사업자 평가’ 종합 우수사업자 선정…증권업서도 1위",
+    "sentiment": "positive",
+    "score": 0.85,
+    "confidence": 0.9,
+    "reasoning": "우수사업자 선정 긍정적"
+  },
+  "84be98bff60e948f0f09731f10d39b0d": {
+    "headline": "네오펙트, 임시주총서 모든 안건 원안 가결…신사업 확장 본격화",
+    "sentiment": "positive",
+    "score": 0.8,
+    "confidence": 0.85,
+    "reasoning": "안건 가결로 확장 기대"
+  },
+  "307fac511646868948e84e5e16c66d97": {
+    "headline": "미래에셋증권, '미래에셋 CD금리 플러스' ETN 신규 상장",
+    "sentiment": "positive",
+    "score": 0.75,
+    "confidence": 0.8,
+    "reasoning": "신규 상장으로 긍정적"
+  },
+  "3604bd6ffedc6f98fe8a1822eb66e845": {
+    "headline": "[특징주]'한국차 관세 15%' 공식 확인에 자동차부품株 강세",
+    "sentiment": "positive",
+    "score": 0.8,
+    "confidence": 0.85,
+    "reasoning": "관세 확인으로 주가 상승"
+  },
+  "97d10dd0618d0429bc9b46465dbd541f": {
+    "headline": "유안타증권, 기관투자자 대상 '대만 반도체 인베스트먼트 데이' 진행",
+    "sentiment": "neutral",
+    "score": 0.5,
+    "confidence": 0.6,
+    "reasoning": "행사 진행 중립적"
+  },
+  "b4d72ce21424748031a5572cd5389ac6": {
+    "headline": "735조 짜리 청산 공포…한숨 쉬던 국채 금리 순식간에 연고점",
+    "sentiment": "negative",
+    "score": 0.2,
+    "confidence": 0.9,
+    "reasoning": "국채 금리 상승 우려"
+  },
+  "2f73dde04e63cf191dbd66d593433c30": {
+    "headline": "미래운용, ‘TIGER TOP10’→‘TIGER 코리아TOP10’ ETF로 명칭 변경",
+    "sentiment": "neutral",
+    "score": 0.5,
+    "confidence": 0.8,
+    "reasoning": "단순 명칭 변경"
+  },
+  "db0c8de29657fde8232df0a39e92539a": {
+    "headline": "[속보] 코스피, 4,000선 재진입 시도…외인·기관, 순매수",
+    "sentiment": "positive",
+    "score": 0.8,
+    "confidence": 0.85,
+    "reasoning": "코스피 상승 기대"
+  },
+  "db0e678cac0e56cfd095b497b8f6389f": {
+    "headline": "[게시판] 업비트 '코인 모으기' 누적 투자액 4천400억원…이용자 21만명",
+    "sentiment": "positive",
+    "score": 0.7,
+    "confidence": 0.8,
+    "reasoning": "투자액 증가 긍정적"
+  },
+  "856d8a5b56c6b73e6da2f7afe77156dc": {
+    "headline": "KB증권, 4분기 '소비자보호의 날' 행사…5대 뉴스 선정",
+    "sentiment": "neutral",
+    "score": 0.5,
+    "confidence": 0.75,
+    "reasoning": "행사 소식 전달"
+  },
+  "5cec318bf280ceb872ba93b71cabf498": {
+    "headline": "키움증권, '국내선물옵션 수수료 최대 90% 할인' 이벤트",
+    "sentiment": "positive",
+    "score": 0.9,
+    "confidence": 0.85,
+    "reasoning": "할인 이벤트 긍정적"
+  },
+  "f75bc78720a5673c3515b60c60639d4b": {
+    "headline": "[게시판] 코인원, 적립식 투자 서비스 '코인모으기' 출시",
+    "sentiment": "positive",
+    "score": 0.75,
+    "confidence": 0.8,
+    "reasoning": "신규 서비스 출시"
+  },
+  "1c1a67d150f9eb4c881489cb141b13ae": {
+    "headline": "NH證, '2025 퇴직연금사업자 평가' 2관왕",
+    "sentiment": "positive",
+    "score": 0.8,
+    "confidence": 0.9,
+    "reasoning": "2관왕 수상으로 긍정적"
+  },
+  "87a4dd5653635c33061e14105588266c": {
+    "headline": "현대차·기아, 韓자동차 관세 인하 소식에 3~4% 강세",
+    "sentiment": "positive",
+    "score": 0.85,
+    "confidence": 0.9,
+    "reasoning": "관세 인하로 주가 상승"
+  },
+  "ba84b7bf5685e4f05f93d3f3aca915df": {
+    "headline": "현대차 4% 급등…美 관세 소급 적용 소식에 자동차株 '화색'",
+    "sentiment": "positive",
+    "score": 0.9,
+    "confidence": 0.95,
+    "reasoning": "급등으로 긍정적 분위기"
+  },
+  "abcc47e24b10c114b90683de93518f1d": {
+    "headline": "배당소득 분리과세 수혜주 찾자…화색 도는 은행株 [줍줍 리포트]",
+    "sentiment": "positive",
+    "score": 0.75,
+    "confidence": 0.85,
+    "reasoning": "배당소득 수혜로 긍정"
+  },
+  "dea682a02bf39545a937b5833f1f8529": {
+    "headline": "코스피, 장중 3,960선 상승…환율 1,470원대",
+    "sentiment": "positive",
+    "score": 0.7,
+    "confidence": 0.8,
+    "reasoning": "지수 상승으로 긍정적"
+  },
+  "aad3565f00a6b8bb74220bd2054279ae": {
+    "headline": "한국투자증권, 글로벌 대체운용사 클리프워터와 제휴",
+    "sentiment": "positive",
+    "score": 0.8,
+    "confidence": 0.85,
+    "reasoning": "제휴로 성장 기대"
+  },
+  "38315a44715bb13ce0761a878f3c45ec": {
+    "headline": "하나증권, 초고액자산가 고객 전담할 'THE 센터필드 W' 오픈",
+    "sentiment": "positive",
+    "score": 0.75,
+    "confidence": 0.8,
+    "reasoning": "새로운 서비스 출시 긍정"
+  },
+  "514fd80f138ff0a0393c1f0c0a3e3358": {
+    "headline": "올해 정부 자본시장 정책, '코리아 디스카운트' 해소에 도움됐나",
+    "sentiment": "neutral",
+    "score": 0.5,
+    "confidence": 0.7,
+    "reasoning": "중립적 사실 전달"
+  },
+  "d4a640d1507cdd2c0413d13e72f3a90b": {
+    "headline": "“은행 울타리에 가두면 韓 스테이블코인 사망”... 안도걸, ‘개방형 혁신’ 승부수 던졌다",
+    "sentiment": "negative",
+    "score": 0.3,
+    "confidence": 0.75,
+    "reasoning": "부정적 경고 발언"
+  },
+  "addac38de595a5e4fdb60d24afc235f5": {
+    "headline": "유안타증권, 대만 반도체 애널리스트 초청 국내기관 설명회",
+    "sentiment": "neutral",
+    "score": 0.5,
+    "confidence": 0.7,
+    "reasoning": "사실 전달로 중립"
+  },
+  "97cd20cf0a90a06d4e126802643be505": {
+    "headline": "하나증권, 초고액 자산가 전담센터 'THE 센터필드 W' 개점",
+    "sentiment": "positive",
+    "score": 0.75,
+    "confidence": 0.8,
+    "reasoning": "센터 개점으로 긍정"
+  },
+  "5c1c215e4c9bc925e121fe2f8b5797b2": {
+    "headline": "칠리즈, ‘바이낸스 블록체인 위크 2025’ 참여...스포츠파이 비전 공유",
+    "sentiment": "positive",
+    "score": 0.7,
+    "confidence": 0.8,
+    "reasoning": "참여로 긍정적 이미지"
+  },
+  "0a17dc900e493444958ba36586a2a8ab": {
+    "headline": "한투운용, 20대 투자자 공략…대학교 캠퍼스서 ACE ETF 알려",
+    "sentiment": "positive",
+    "score": 0.65,
+    "confidence": 0.75,
+    "reasoning": "젊은 투자자 공략 긍정"
+  },
+  "505e4ffff77fbf8ea1c60866297fd4dc": {
+    "headline": "정은경 \"의대 정원, 내년 초 마무리…공공의대는 증원 필요성\"",
+    "sentiment": "neutral",
+    "score": 0.5,
+    "confidence": 0.7,
+    "reasoning": "중립적 발언"
+  },
+  "6672c17740ebb9de9e9413bfea3deb32": {
+    "headline": "\"3개월 연속 500억\"…롯데관광개발, 역대급 흐름[줌인e종목]",
+    "sentiment": "positive",
+    "score": 0.8,
+    "confidence": 0.85,
+    "reasoning": "역대급 흐름으로 긍정"
+  },
+  "0d451ce48b15ccc71e4779cd064897b2": {
+    "headline": "'55만닉스 탈환' SK하이닉스, 3% 강세…삼성전자도 1%↑[핫종목]",
+    "sentiment": "positive",
+    "score": 0.85,
+    "confidence": 0.9,
+    "reasoning": "주가 상승으로 긍정"
+  },
+  "b848beabc74c50d140bc1661a2e7d431": {
+    "headline": "“비트코인 4만달러까지 추락 경고”에 ‘2조원 현금’ 쌓은 스트래티지",
+    "sentiment": "negative",
+    "score": 0.4,
+    "confidence": 0.75,
+    "reasoning": "부정적 경고 발언"
+  },
+  "1c5deceb293dbe5f279a79a9b98ac086": {
+    "headline": "한국투자증권, 클리프워터와 제휴…사모자산 공급 역량 확대",
+    "sentiment": "positive",
+    "score": 0.8,
+    "confidence": 0.85,
+    "reasoning": "제휴로 역량 확대 긍정"
   }
 }

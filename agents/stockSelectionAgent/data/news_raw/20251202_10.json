@@ -1,14 +1,15 @@
 {
-  "timestamp": "2025-12-02T10:30:16.796969",
+  "timestamp": "2025-12-02T10:28:44.685709",
   "total_count": 120,
-  "statistics": {
-    "news_with_stocks": 26,
-    "stock_match_rate": "21.7%",
-    "sentiment_distribution": {
-      "positive": 57,
-      "negative": 36,
-      "neutral": 27
-    }
+  "sources": [
+    "NaverFinance",
+    "Hankyung",
+    "MK"
+  ],
+  "source_stats": {
+    "NaverFinance": 59,
+    "Hankyung": 60,
+    "MK": 1
   },
   "news": [
     {
@@ -18,13 +19,7 @@
       "published_time": "",
       "summary": "",
       "source": "NaverFinance",
-      "crawled_at": "2025-12-02T10:28:25.362569",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "positive",
-      "sentiment_score": 0.8,
-      "sentiment_confidence": 0.9,
-      "sentiment_reasoning": "신제품 출시로 성장 기대"
+      "crawled_at": "2025-12-02T10:28:25.362569"
     },
     {
       "headline": "미래에셋, 'TIGER TOP10' → 'TIGER 코리아TOP10' 명칭 변경",
@@ -33,17 +28,7 @@
       "published_time": "",
       "summary": "",
       "source": "NaverFinance",
-      "crawled_at": "2025-12-02T10:28:25.362682",
-      "tickers": [
-        "006800"
-      ],
-      "ticker_names": [
-        "미래에셋증권"
-      ],
-      "sentiment": "neutral",
-      "sentiment_score": 0.5,
-      "sentiment_confidence": 0.7,
-      "sentiment_reasoning": "단순 명칭 변경"
+      "crawled_at": "2025-12-02T10:28:25.362682"
     },
     {
       "headline": "“투자 습관 형성 골든타임”…투교협, 군 장병 대상 ‘금융투자 아카데미’ 콘텐츠 공개",
@@ -52,13 +37,7 @@
       "published_time": "",
       "summary": "",
       "source": "NaverFinance",
-      "crawled_at": "2025-12-02T10:28:25.362761",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "positive",
-      "sentiment_score": 0.75,
-      "sentiment_confidence": 0.85,
-      "sentiment_reasoning": "교육 콘텐츠 공개 긍정적"
+      "crawled_at": "2025-12-02T10:28:25.362761"
     },
     {
       "headline": "국내 증시 엇갈린 흐름 속 코스피 상승 출발…코스닥은 하락",
@@ -67,13 +46,7 @@
       "published_time": "",
       "summary": "",
       "source": "NaverFinance",
-      "crawled_at": "2025-12-02T10:28:25.362832",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "neutral",
-      "sentiment_score": 0.5,
-      "sentiment_confidence": 0.6,
-      "sentiment_reasoning": "혼조세로 중립적"
+      "crawled_at": "2025-12-02T10:28:25.362832"
     },
     {
       "headline": "[게시판] 우리카드, 디지털 정기 결제 캐시백 이벤트",
@@ -82,17 +55,7 @@
       "published_time": "",
       "summary": "",
       "source": "NaverFinance",
-      "crawled_at": "2025-12-02T10:28:25.362901",
-      "tickers": [
-        "316140"
-      ],
-      "ticker_names": [
-        "우리금융지주"
-      ],
-      "sentiment": "positive",
-      "sentiment_score": 0.7,
-      "sentiment_confidence": 0.8,
-      "sentiment_reasoning": "이벤트로 고객 유치 기대"
+      "crawled_at": "2025-12-02T10:28:25.362901"
     },
     {
       "headline": "코팬글로벌, 글로벌 인기 캐릭터 ‘핑구’ X 태연 캐릭터 ‘탱그’ 팝업스토어 오픈",
@@ -101,13 +64,7 @@
       "published_time": "",
       "summary": "",
       "source": "NaverFinance",
-      "crawled_at": "2025-12-02T10:28:25.362970",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "positive",
-      "sentiment_score": 0.85,
-      "sentiment_confidence": 0.9,
-      "sentiment_reasoning": "인기 캐릭터 협업 긍정적"
+      "crawled_at": "2025-12-02T10:28:25.362970"
     },
     {
       "headline": "코스피, 외인·기관 매수 속 3970대 회복…코스닥은 약보합",
@@ -116,13 +73,7 @@
       "published_time": "",
       "summary": "",
       "source": "NaverFinance",
-      "crawled_at": "2025-12-02T10:28:25.363041",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "positive",
-      "sentiment_score": 0.7,
-      "sentiment_confidence": 0.75,
-      "sentiment_reasoning": "매수세로 회복 긍정적"
+      "crawled_at": "2025-12-02T10:28:25.363041"
     },
     {
       "headline": "엠앤와이즈, ‘wiseU Cloud’ PUSH 채널 정식 오픈",
@@ -131,13 +82,7 @@
       "published_time": "",
       "summary": "",
       "source": "NaverFinance",
-      "crawled_at": "2025-12-02T10:28:25.363109",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "positive",
-      "sentiment_score": 0.75,
-      "sentiment_confidence": 0.8,
-      "sentiment_reasoning": "신서비스 출시 긍정적"
+      "crawled_at": "2025-12-02T10:28:25.363109"
     },
     {
       "headline": "한국투자증권, 글로벌 대체운용사와 전략적 제휴",
@@ -146,13 +91,7 @@
       "published_time": "",
       "summary": "",
       "source": "NaverFinance",
-      "crawled_at": "2025-12-02T10:28:25.363174",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "positive",
-      "sentiment_score": 0.8,
-      "sentiment_confidence": 0.85,
-      "sentiment_reasoning": "전략적 제휴로 성장 기대"
+      "crawled_at": "2025-12-02T10:28:25.363174"
     },
     {
       "headline": "유안타증권, '대만 반도체 인베스트먼트 데이' 개최",
@@ -161,13 +100,7 @@
       "published_time": "",
       "summary": "",
       "source": "NaverFinance",
-      "crawled_at": "2025-12-02T10:28:25.363240",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "neutral",
-      "sentiment_score": 0.5,
-      "sentiment_confidence": 0.7,
-      "sentiment_reasoning": "사실 전달로 중립"
+      "crawled_at": "2025-12-02T10:28:25.363240"
     },
     {
       "headline": "하나증권, 초고액자산가 프리미엄 서비스 전담 센터 오픈",
@@ -176,17 +109,7 @@
       "published_time": "",
       "summary": "",
       "source": "NaverFinance",
-      "crawled_at": "2025-12-02T10:28:25.363306",
-      "tickers": [
-        "086790"
-      ],
-      "ticker_names": [
-        "하나금융지주"
-      ],
-      "sentiment": "positive",
-      "sentiment_score": 0.8,
-      "sentiment_confidence": 0.85,
-      "sentiment_reasoning": "프리미엄 서비스 확대 긍정"
+      "crawled_at": "2025-12-02T10:28:25.363306"
     },
     {
       "headline": "방향성 꺾인 비트코인…\"크립토 트레저리 위기 자극\"",
@@ -195,13 +118,7 @@
       "published_time": "",
       "summary": "",
       "source": "NaverFinance",
-      "crawled_at": "2025-12-02T10:28:25.363373",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "negative",
-      "sentiment_score": 0.3,
-      "sentiment_confidence": 0.75,
-      "sentiment_reasoning": "위기 언급으로 부정적"
+      "crawled_at": "2025-12-02T10:28:25.363373"
     },
     {
       "headline": "미래에셋, 'TIGER TOP10'→'TIGER 코리아TOP10' 명칭 바꿔",
@@ -210,17 +127,7 @@
       "published_time": "",
       "summary": "",
       "source": "NaverFinance",
-      "crawled_at": "2025-12-02T10:28:25.363439",
-      "tickers": [
-        "006800"
-      ],
-      "ticker_names": [
-        "미래에셋증권"
-      ],
-      "sentiment": "neutral",
-      "sentiment_score": 0.5,
-      "sentiment_confidence": 0.7,
-      "sentiment_reasoning": "단순 명칭 변경"
+      "crawled_at": "2025-12-02T10:28:25.363439"
     },
     {
       "headline": "더즌, 트리플에이와 국내 디지털자산 결제 확대 MOU",
@@ -229,13 +136,7 @@
       "published_time": "",
       "summary": "",
       "source": "NaverFinance",
-      "crawled_at": "2025-12-02T10:28:25.363503",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "positive",
-      "sentiment_score": 0.75,
-      "sentiment_confidence": 0.8,
-      "sentiment_reasoning": "MOU로 사업 확장 기대"
+      "crawled_at": "2025-12-02T10:28:25.363503"
     },
     {
       "headline": "키움·메리츠, 10년 만에 신용등급 오르나…등급전망 '긍정적' 상향",
@@ -244,13 +145,7 @@
       "published_time": "",
       "summary": "",
       "source": "NaverFinance",
-      "crawled_at": "2025-12-02T10:28:25.363568",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "positive",
-      "sentiment_score": 0.9,
-      "sentiment_confidence": 0.9,
-      "sentiment_reasoning": "신용등급 상승 긍정적"
+      "crawled_at": "2025-12-02T10:28:25.363568"
     },
     {
       "headline": "NH證, ‘2025 퇴직연금사업자 평가’ 종합 우수사업자 선정…증권업서도 1위",
@@ -259,13 +154,7 @@
       "published_time": "",
       "summary": "",
       "source": "NaverFinance",
-      "crawled_at": "2025-12-02T10:28:25.363645",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "positive",
-      "sentiment_score": 0.85,
-      "sentiment_confidence": 0.9,
-      "sentiment_reasoning": "우수사업자 선정 긍정적"
+      "crawled_at": "2025-12-02T10:28:25.363645"
     },
     {
       "headline": "네오펙트, 임시주총서 모든 안건 원안 가결…신사업 확장 본격화",
@@ -274,13 +163,7 @@
       "published_time": "",
       "summary": "",
       "source": "NaverFinance",
-      "crawled_at": "2025-12-02T10:28:25.363709",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "positive",
-      "sentiment_score": 0.8,
-      "sentiment_confidence": 0.85,
-      "sentiment_reasoning": "안건 가결로 확장 기대"
+      "crawled_at": "2025-12-02T10:28:25.363709"
     },
     {
       "headline": "미래에셋증권, '미래에셋 CD금리 플러스' ETN 신규 상장",
@@ -289,17 +172,7 @@
       "published_time": "",
       "summary": "",
       "source": "NaverFinance",
-      "crawled_at": "2025-12-02T10:28:25.363773",
-      "tickers": [
-        "006800"
-      ],
-      "ticker_names": [
-        "미래에셋증권"
-      ],
-      "sentiment": "positive",
-      "sentiment_score": 0.75,
-      "sentiment_confidence": 0.8,
-      "sentiment_reasoning": "신규 상장으로 긍정적"
+      "crawled_at": "2025-12-02T10:28:25.363773"
     },
     {
       "headline": "[특징주]'한국차 관세 15%' 공식 확인에 자동차부품株 강세",
@@ -308,13 +181,7 @@
       "published_time": "",
       "summary": "",
       "source": "NaverFinance",
-      "crawled_at": "2025-12-02T10:28:25.363838",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "positive",
-      "sentiment_score": 0.8,
-      "sentiment_confidence": 0.85,
-      "sentiment_reasoning": "관세 확인으로 주가 상승"
+      "crawled_at": "2025-12-02T10:28:25.363838"
     },
     {
       "headline": "유안타증권, 기관투자자 대상 '대만 반도체 인베스트먼트 데이' 진행",
@@ -323,13 +190,7 @@
       "published_time": "",
       "summary": "",
       "source": "NaverFinance",
-      "crawled_at": "2025-12-02T10:28:26.477682",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "neutral",
-      "sentiment_score": 0.5,
-      "sentiment_confidence": 0.6,
-      "sentiment_reasoning": "행사 진행 중립적"
+      "crawled_at": "2025-12-02T10:28:26.477682"
     },
     {
       "headline": "735조 짜리 청산 공포…한숨 쉬던 국채 금리 순식간에 연고점",
@@ -338,13 +199,7 @@
       "published_time": "",
       "summary": "",
       "source": "NaverFinance",
-      "crawled_at": "2025-12-02T10:28:26.477768",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "negative",
-      "sentiment_score": 0.2,
-      "sentiment_confidence": 0.9,
-      "sentiment_reasoning": "국채 금리 상승 우려"
+      "crawled_at": "2025-12-02T10:28:26.477768"
     },
     {
       "headline": "미래운용, ‘TIGER TOP10’→‘TIGER 코리아TOP10’ ETF로 명칭 변경",
@@ -353,13 +208,7 @@
       "published_time": "",
       "summary": "",
       "source": "NaverFinance",
-      "crawled_at": "2025-12-02T10:28:26.477838",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "neutral",
-      "sentiment_score": 0.5,
-      "sentiment_confidence": 0.8,
-      "sentiment_reasoning": "단순 명칭 변경"
+      "crawled_at": "2025-12-02T10:28:26.477838"
     },
     {
       "headline": "[속보] 코스피, 4,000선 재진입 시도…외인·기관, 순매수",
@@ -368,13 +217,7 @@
       "published_time": "",
       "summary": "",
       "source": "NaverFinance",
-      "crawled_at": "2025-12-02T10:28:26.477904",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "positive",
-      "sentiment_score": 0.8,
-      "sentiment_confidence": 0.85,
-      "sentiment_reasoning": "코스피 상승 기대"
+      "crawled_at": "2025-12-02T10:28:26.477904"
     },
     {
       "headline": "[게시판] 업비트 '코인 모으기' 누적 투자액 4천400억원…이용자 21만명",
@@ -383,13 +226,7 @@
       "published_time": "",
       "summary": "",
       "source": "NaverFinance",
-      "crawled_at": "2025-12-02T10:28:26.477971",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "positive",
-      "sentiment_score": 0.7,
-      "sentiment_confidence": 0.8,
-      "sentiment_reasoning": "투자액 증가 긍정적"
+      "crawled_at": "2025-12-02T10:28:26.477971"
     },
     {
       "headline": "KB증권, 4분기 '소비자보호의 날' 행사…5대 뉴스 선정",
@@ -398,17 +235,7 @@
       "published_time": "",
       "summary": "",
       "source": "NaverFinance",
-      "crawled_at": "2025-12-02T10:28:26.478038",
-      "tickers": [
-        "105560"
-      ],
-      "ticker_names": [
-        "KB금융"
-      ],
-      "sentiment": "neutral",
-      "sentiment_score": 0.5,
-      "sentiment_confidence": 0.75,
-      "sentiment_reasoning": "행사 소식 전달"
+      "crawled_at": "2025-12-02T10:28:26.478038"
     },
     {
       "headline": "키움증권, '국내선물옵션 수수료 최대 90% 할인' 이벤트",
@@ -417,13 +244,7 @@
       "published_time": "",
       "summary": "",
       "source": "NaverFinance",
-      "crawled_at": "2025-12-02T10:28:26.478102",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "positive",
-      "sentiment_score": 0.9,
-      "sentiment_confidence": 0.85,
-      "sentiment_reasoning": "할인 이벤트 긍정적"
+      "crawled_at": "2025-12-02T10:28:26.478102"
     },
     {
       "headline": "[게시판] 코인원, 적립식 투자 서비스 '코인모으기' 출시",
@@ -432,13 +253,7 @@
       "published_time": "",
       "summary": "",
       "source": "NaverFinance",
-      "crawled_at": "2025-12-02T10:28:26.478166",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "positive",
-      "sentiment_score": 0.75,
-      "sentiment_confidence": 0.8,
-      "sentiment_reasoning": "신규 서비스 출시"
+      "crawled_at": "2025-12-02T10:28:26.478166"
     },
     {
       "headline": "NH證, '2025 퇴직연금사업자 평가' 2관왕",
@@ -447,13 +262,7 @@
       "published_time": "",
       "summary": "",
       "source": "NaverFinance",
-      "crawled_at": "2025-12-02T10:28:26.478230",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "positive",
-      "sentiment_score": 0.8,
-      "sentiment_confidence": 0.9,
-      "sentiment_reasoning": "2관왕 수상으로 긍정적"
+      "crawled_at": "2025-12-02T10:28:26.478230"
     },
     {
       "headline": "현대차·기아, 韓자동차 관세 인하 소식에 3~4% 강세",
@@ -462,19 +271,7 @@
       "published_time": "",
       "summary": "",
       "source": "NaverFinance",
-      "crawled_at": "2025-12-02T10:28:26.478293",
-      "tickers": [
-        "000270",
-        "005380"
-      ],
-      "ticker_names": [
-        "기아",
-        "현대차"
-      ],
-      "sentiment": "positive",
-      "sentiment_score": 0.85,
-      "sentiment_confidence": 0.9,
-      "sentiment_reasoning": "관세 인하로 주가 상승"
+      "crawled_at": "2025-12-02T10:28:26.478293"
     },
     {
       "headline": "현대차 4% 급등…美 관세 소급 적용 소식에 자동차株 '화색'",
@@ -483,17 +280,7 @@
       "published_time": "",
       "summary": "",
       "source": "NaverFinance",
-      "crawled_at": "2025-12-02T10:28:26.478356",
-      "tickers": [
-        "005380"
-      ],
-      "ticker_names": [
-        "현대차"
-      ],
-      "sentiment": "positive",
-      "sentiment_score": 0.9,
-      "sentiment_confidence": 0.95,
-      "sentiment_reasoning": "급등으로 긍정적 분위기"
+      "crawled_at": "2025-12-02T10:28:26.478356"
     },
     {
       "headline": "배당소득 분리과세 수혜주 찾자…화색 도는 은행株 [줍줍 리포트]",
@@ -502,13 +289,7 @@
       "published_time": "",
       "summary": "",
       "source": "NaverFinance",
-      "crawled_at": "2025-12-02T10:28:26.478419",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "positive",
-      "sentiment_score": 0.75,
-      "sentiment_confidence": 0.85,
-      "sentiment_reasoning": "배당소득 수혜로 긍정"
+      "crawled_at": "2025-12-02T10:28:26.478419"
     },
     {
       "headline": "코스피, 장중 3,960선 상승…환율 1,470원대",
@@ -517,13 +298,7 @@
       "published_time": "",
       "summary": "",
       "source": "NaverFinance",
-      "crawled_at": "2025-12-02T10:28:26.478482",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "positive",
-      "sentiment_score": 0.7,
-      "sentiment_confidence": 0.8,
-      "sentiment_reasoning": "지수 상승으로 긍정적"
+      "crawled_at": "2025-12-02T10:28:26.478482"
     },
     {
       "headline": "한국투자증권, 글로벌 대체운용사 클리프워터와 제휴",
@@ -532,13 +307,7 @@
       "published_time": "",
       "summary": "",
       "source": "NaverFinance",
-      "crawled_at": "2025-12-02T10:28:26.478545",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "positive",
-      "sentiment_score": 0.8,
-      "sentiment_confidence": 0.85,
-      "sentiment_reasoning": "제휴로 성장 기대"
+      "crawled_at": "2025-12-02T10:28:26.478545"
     },
     {
       "headline": "하나증권, 초고액자산가 고객 전담할 'THE 센터필드 W' 오픈",
@@ -547,17 +316,7 @@
       "published_time": "",
       "summary": "",
       "source": "NaverFinance",
-      "crawled_at": "2025-12-02T10:28:26.478610",
-      "tickers": [
-        "086790"
-      ],
-      "ticker_names": [
-        "하나금융지주"
-      ],
-      "sentiment": "positive",
-      "sentiment_score": 0.75,
-      "sentiment_confidence": 0.8,
-      "sentiment_reasoning": "새로운 서비스 출시 긍정"
+      "crawled_at": "2025-12-02T10:28:26.478610"
     },
     {
       "headline": "올해 정부 자본시장 정책, '코리아 디스카운트' 해소에 도움됐나",
@@ -566,13 +325,7 @@
       "published_time": "",
       "summary": "",
       "source": "NaverFinance",
-      "crawled_at": "2025-12-02T10:28:26.478673",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "neutral",
-      "sentiment_score": 0.5,
-      "sentiment_confidence": 0.7,
-      "sentiment_reasoning": "중립적 사실 전달"
+      "crawled_at": "2025-12-02T10:28:26.478673"
     },
     {
       "headline": "“은행 울타리에 가두면 韓 스테이블코인 사망”... 안도걸, ‘개방형 혁신’ 승부수 던졌다",
@@ -581,13 +334,7 @@
       "published_time": "",
       "summary": "",
       "source": "NaverFinance",
-      "crawled_at": "2025-12-02T10:28:26.478737",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "negative",
-      "sentiment_score": 0.3,
-      "sentiment_confidence": 0.75,
-      "sentiment_reasoning": "부정적 경고 발언"
+      "crawled_at": "2025-12-02T10:28:26.478737"
     },
     {
       "headline": "유안타증권, 대만 반도체 애널리스트 초청 국내기관 설명회",
@@ -596,13 +343,7 @@
       "published_time": "",
       "summary": "",
       "source": "NaverFinance",
-      "crawled_at": "2025-12-02T10:28:26.478801",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "neutral",
-      "sentiment_score": 0.5,
-      "sentiment_confidence": 0.7,
-      "sentiment_reasoning": "사실 전달로 중립"
+      "crawled_at": "2025-12-02T10:28:26.478801"
     },
     {
       "headline": "하나증권, 초고액 자산가 전담센터 'THE 센터필드 W' 개점",
@@ -611,17 +352,7 @@
       "published_time": "",
       "summary": "",
       "source": "NaverFinance",
-      "crawled_at": "2025-12-02T10:28:26.478865",
-      "tickers": [
-        "086790"
-      ],
-      "ticker_names": [
-        "하나금융지주"
-      ],
-      "sentiment": "positive",
-      "sentiment_score": 0.75,
-      "sentiment_confidence": 0.8,
-      "sentiment_reasoning": "센터 개점으로 긍정"
+      "crawled_at": "2025-12-02T10:28:26.478865"
     },
     {
       "headline": "칠리즈, ‘바이낸스 블록체인 위크 2025’ 참여...스포츠파이 비전 공유",
@@ -630,13 +361,7 @@
       "published_time": "",
       "summary": "",
       "source": "NaverFinance",
-      "crawled_at": "2025-12-02T10:28:26.478928",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "positive",
-      "sentiment_score": 0.7,
-      "sentiment_confidence": 0.8,
-      "sentiment_reasoning": "참여로 긍정적 이미지"
+      "crawled_at": "2025-12-02T10:28:26.478928"
     },
     {
       "headline": "[게시판] 코인원, 적립식 투자 서비스 '코인모으기' 출시",
@@ -645,13 +370,7 @@
       "published_time": "",
       "summary": "",
       "source": "NaverFinance",
-      "crawled_at": "2025-12-02T10:28:29.400544",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "positive",
-      "sentiment_score": 0.75,
-      "sentiment_confidence": 0.8,
-      "sentiment_reasoning": "신규 서비스 출시"
+      "crawled_at": "2025-12-02T10:28:29.400544"
     },
     {
       "headline": "NH證, '2025 퇴직연금사업자 평가' 2관왕",
@@ -660,13 +379,7 @@
       "published_time": "",
       "summary": "",
       "source": "NaverFinance",
-      "crawled_at": "2025-12-02T10:28:29.400634",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "positive",
-      "sentiment_score": 0.8,
-      "sentiment_confidence": 0.9,
-      "sentiment_reasoning": "2관왕 수상으로 긍정적"
+      "crawled_at": "2025-12-02T10:28:29.400634"
     },
     {
       "headline": "현대차·기아, 韓자동차 관세 인하 소식에 3~4% 강세",
@@ -675,19 +388,7 @@
       "published_time": "",
       "summary": "",
       "source": "NaverFinance",
-      "crawled_at": "2025-12-02T10:28:29.400871",
-      "tickers": [
-        "000270",
-        "005380"
-      ],
-      "ticker_names": [
-        "기아",
-        "현대차"
-      ],
-      "sentiment": "positive",
-      "sentiment_score": 0.85,
-      "sentiment_confidence": 0.9,
-      "sentiment_reasoning": "관세 인하로 주가 상승"
+      "crawled_at": "2025-12-02T10:28:29.400871"
     },
     {
       "headline": "현대차 4% 급등…美 관세 소급 적용 소식에 자동차株 '화색'",
@@ -696,17 +397,7 @@
       "published_time": "",
       "summary": "",
       "source": "NaverFinance",
-      "crawled_at": "2025-12-02T10:28:29.400943",
-      "tickers": [
-        "005380"
-      ],
-      "ticker_names": [
-        "현대차"
-      ],
-      "sentiment": "positive",
-      "sentiment_score": 0.9,
-      "sentiment_confidence": 0.95,
-      "sentiment_reasoning": "급등으로 긍정적 분위기"
+      "crawled_at": "2025-12-02T10:28:29.400943"
     },
     {
       "headline": "배당소득 분리과세 수혜주 찾자…화색 도는 은행株 [줍줍 리포트]",
@@ -715,13 +406,7 @@
       "published_time": "",
       "summary": "",
       "source": "NaverFinance",
-      "crawled_at": "2025-12-02T10:28:29.401012",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "positive",
-      "sentiment_score": 0.75,
-      "sentiment_confidence": 0.85,
-      "sentiment_reasoning": "배당소득 수혜로 긍정"
+      "crawled_at": "2025-12-02T10:28:29.401012"
     },
     {
       "headline": "코스피, 장중 3,960선 상승…환율 1,470원대",
@@ -730,13 +415,7 @@
       "published_time": "",
       "summary": "",
       "source": "NaverFinance",
-      "crawled_at": "2025-12-02T10:28:29.401084",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "positive",
-      "sentiment_score": 0.7,
-      "sentiment_confidence": 0.8,
-      "sentiment_reasoning": "지수 상승으로 긍정적"
+      "crawled_at": "2025-12-02T10:28:29.401084"
     },
     {
       "headline": "한국투자증권, 글로벌 대체운용사 클리프워터와 제휴",
@@ -745,13 +424,7 @@
       "published_time": "",
       "summary": "",
       "source": "NaverFinance",
-      "crawled_at": "2025-12-02T10:28:29.401153",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "positive",
-      "sentiment_score": 0.8,
-      "sentiment_confidence": 0.85,
-      "sentiment_reasoning": "제휴로 성장 기대"
+      "crawled_at": "2025-12-02T10:28:29.401153"
     },
     {
       "headline": "하나증권, 초고액자산가 고객 전담할 'THE 센터필드 W' 오픈",
@@ -760,17 +433,7 @@
       "published_time": "",
       "summary": "",
       "source": "NaverFinance",
-      "crawled_at": "2025-12-02T10:28:29.401220",
-      "tickers": [
-        "086790"
-      ],
-      "ticker_names": [
-        "하나금융지주"
-      ],
-      "sentiment": "positive",
-      "sentiment_score": 0.75,
-      "sentiment_confidence": 0.8,
-      "sentiment_reasoning": "새로운 서비스 출시 긍정"
+      "crawled_at": "2025-12-02T10:28:29.401220"
     },
     {
       "headline": "올해 정부 자본시장 정책, '코리아 디스카운트' 해소에 도움됐나",
@@ -779,13 +442,7 @@
       "published_time": "",
       "summary": "",
       "source": "NaverFinance",
-      "crawled_at": "2025-12-02T10:28:29.401286",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "neutral",
-      "sentiment_score": 0.5,
-      "sentiment_confidence": 0.7,
-      "sentiment_reasoning": "중립적 사실 전달"
+      "crawled_at": "2025-12-02T10:28:29.401286"
     },
     {
       "headline": "“은행 울타리에 가두면 韓 스테이블코인 사망”... 안도걸, ‘개방형 혁신’ 승부수 던졌다",
@@ -794,13 +451,7 @@
       "published_time": "",
       "summary": "",
       "source": "NaverFinance",
-      "crawled_at": "2025-12-02T10:28:29.401355",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "negative",
-      "sentiment_score": 0.3,
-      "sentiment_confidence": 0.75,
-      "sentiment_reasoning": "부정적 경고 발언"
+      "crawled_at": "2025-12-02T10:28:29.401355"
     },
     {
       "headline": "유안타증권, 대만 반도체 애널리스트 초청 국내기관 설명회",
@@ -809,13 +460,7 @@
       "published_time": "",
       "summary": "",
       "source": "NaverFinance",
-      "crawled_at": "2025-12-02T10:28:29.401422",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "neutral",
-      "sentiment_score": 0.5,
-      "sentiment_confidence": 0.7,
-      "sentiment_reasoning": "사실 전달로 중립"
+      "crawled_at": "2025-12-02T10:28:29.401422"
     },
     {
       "headline": "하나증권, 초고액 자산가 전담센터 'THE 센터필드 W' 개점",
@@ -824,17 +469,7 @@
       "published_time": "",
       "summary": "",
       "source": "NaverFinance",
-      "crawled_at": "2025-12-02T10:28:29.401487",
-      "tickers": [
-        "086790"
-      ],
-      "ticker_names": [
-        "하나금융지주"
-      ],
-      "sentiment": "positive",
-      "sentiment_score": 0.75,
-      "sentiment_confidence": 0.8,
-      "sentiment_reasoning": "센터 개점으로 긍정"
+      "crawled_at": "2025-12-02T10:28:29.401487"
     },
     {
       "headline": "칠리즈, ‘바이낸스 블록체인 위크 2025’ 참여...스포츠파이 비전 공유",
@@ -843,13 +478,7 @@
       "published_time": "",
       "summary": "",
       "source": "NaverFinance",
-      "crawled_at": "2025-12-02T10:28:29.401552",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "positive",
-      "sentiment_score": 0.7,
-      "sentiment_confidence": 0.8,
-      "sentiment_reasoning": "참여로 긍정적 이미지"
+      "crawled_at": "2025-12-02T10:28:29.401552"
     },
     {
       "headline": "한투운용, 20대 투자자 공략…대학교 캠퍼스서 ACE ETF 알려",
@@ -858,13 +487,7 @@
       "published_time": "",
       "summary": "",
       "source": "NaverFinance",
-      "crawled_at": "2025-12-02T10:28:29.401618",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "positive",
-      "sentiment_score": 0.65,
-      "sentiment_confidence": 0.75,
-      "sentiment_reasoning": "젊은 투자자 공략 긍정"
+      "crawled_at": "2025-12-02T10:28:29.401618"
     },
     {
       "headline": "유안타증권, '대만 반도체 인베스트먼트 데이' 개최",
@@ -873,13 +496,7 @@
       "published_time": "",
       "summary": "",
       "source": "NaverFinance",
-      "crawled_at": "2025-12-02T10:28:29.401683",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "neutral",
-      "sentiment_score": 0.5,
-      "sentiment_confidence": 0.7,
-      "sentiment_reasoning": "사실 전달로 중립"
+      "crawled_at": "2025-12-02T10:28:29.401683"
     },
     {
       "headline": "정은경 \"의대 정원, 내년 초 마무리…공공의대는 증원 필요성\"",
@@ -888,13 +505,7 @@
       "published_time": "",
       "summary": "",
       "source": "NaverFinance",
-      "crawled_at": "2025-12-02T10:28:29.401749",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "neutral",
-      "sentiment_score": 0.5,
-      "sentiment_confidence": 0.7,
-      "sentiment_reasoning": "중립적 발언"
+      "crawled_at": "2025-12-02T10:28:29.401749"
     },
     {
       "headline": "\"3개월 연속 500억\"…롯데관광개발, 역대급 흐름[줌인e종목]",
@@ -903,13 +514,7 @@
       "published_time": "",
       "summary": "",
       "source": "NaverFinance",
-      "crawled_at": "2025-12-02T10:28:29.401814",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "positive",
-      "sentiment_score": 0.8,
-      "sentiment_confidence": 0.85,
-      "sentiment_reasoning": "역대급 흐름으로 긍정"
+      "crawled_at": "2025-12-02T10:28:29.401814"
     },
     {
       "headline": "'55만닉스 탈환' SK하이닉스, 3% 강세…삼성전자도 1%↑[핫종목]",
@@ -918,21 +523,7 @@
       "published_time": "",
       "summary": "",
       "source": "NaverFinance",
-      "crawled_at": "2025-12-02T10:28:29.401881",
-      "tickers": [
-        "034730",
-        "005930",
-        "000660"
-      ],
-      "ticker_names": [
-        "SK",
-        "삼성전자",
-        "SK하이닉스"
-      ],
-      "sentiment": "positive",
-      "sentiment_score": 0.85,
-      "sentiment_confidence": 0.9,
-      "sentiment_reasoning": "주가 상승으로 긍정"
+      "crawled_at": "2025-12-02T10:28:29.401881"
     },
     {
       "headline": "“비트코인 4만달러까지 추락 경고”에 ‘2조원 현금’ 쌓은 스트래티지",
@@ -941,13 +532,7 @@
       "published_time": "",
       "summary": "",
       "source": "NaverFinance",
-      "crawled_at": "2025-12-02T10:28:29.402056",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "negative",
-      "sentiment_score": 0.4,
-      "sentiment_confidence": 0.75,
-      "sentiment_reasoning": "부정적 경고 발언"
+      "crawled_at": "2025-12-02T10:28:29.402056"
     },
     {
       "headline": "한국투자증권, 클리프워터와 제휴…사모자산 공급 역량 확대",
@@ -956,13 +541,7 @@
       "published_time": "",
       "summary": "",
       "source": "NaverFinance",
-      "crawled_at": "2025-12-02T10:28:29.402201",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "positive",
-      "sentiment_score": 0.8,
-      "sentiment_confidence": 0.85,
-      "sentiment_reasoning": "제휴로 역량 확대 긍정"
+      "crawled_at": "2025-12-02T10:28:29.402201"
     },
     {
       "headline": "반도체·車 '쌍끌이'…올 수출 7000억 달러 신기록 쓰나",
@@ -971,13 +550,7 @@
       "published_time": "",
       "summary": "고환율(원화 약세) 효과와 인공지능(AI)발(發) 반도체 수요 등으로 지난달 수출이 역대 11월 기준 사상 최대 규모를 기록했다. 정부는 올해 연간 수출이 사상 처음으로 7000억달러를 돌파할 것으로 전망하고 있다.산업통상부는 1일 발표한 2025년 11월 수출입동향에...",
       "source": "Hankyung",
-      "crawled_at": "2025-12-02T10:28:31.613962",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "positive",
-      "sentiment_score": 0.9,
-      "sentiment_confidence": 0.95,
-      "sentiment_reasoning": "신기록 가능성 긍정적"
+      "crawled_at": "2025-12-02T10:28:31.613962"
     },
     {
       "headline": "\"韓 기업, 달러로 번 돈 절반만 환전…경상수지 여유 없어\"",
@@ -986,13 +559,7 @@
       "published_time": "",
       "summary": "국내 기업의 해외 소득 환전 비율이 코로나19 이전 90%에서 최근 50% 수준으로 떨어졌다는 해외 투자은행(IB)의 분석 보고서가 석 달 전 이미 나온 것으로 확인됐다. 기업의 소극적인 원·달러 환전이 환율 상승으로 이어지고 있다는 분석이다. 보...",
       "source": "Hankyung",
-      "crawled_at": "2025-12-02T10:28:31.614149",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "negative",
-      "sentiment_score": 0.3,
-      "sentiment_confidence": 0.8,
-      "sentiment_reasoning": "경상수지 우려 부정적"
+      "crawled_at": "2025-12-02T10:28:31.614149"
     },
     {
       "headline": "10월 온라인쇼핑 거래액 22조원 돌파",
@@ -1001,13 +568,7 @@
       "published_time": "",
       "summary": "추석이 있었던 지난 10월 온라인쇼핑 거래액이 작년보다 5% 가까이 증가했다. ‘기프티콘’ 같은 e 쿠폰 서비스 거래액이 20% 넘게 늘었다.1일 국가데이터처가 발표한 2025년 10월 온라인쇼핑 동향에 따르면, 지난 10월 온라인쇼핑 거래액은 2...",
       "source": "Hankyung",
-      "crawled_at": "2025-12-02T10:28:31.614293",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "positive",
-      "sentiment_score": 0.85,
-      "sentiment_confidence": 0.9,
-      "sentiment_reasoning": "거래액 증가 긍정적"
+      "crawled_at": "2025-12-02T10:28:31.614293"
     },
     {
       "headline": "'뉴노멀' 고환율, 물가 얼마나 끌어올렸을까",
@@ -1016,13 +577,7 @@
       "published_time": "",
       "summary": "이번주에는 고공행진 중인 환율이 물가에 끼친 영향을 확인할 수 있다. 속보치에서 전기 대비 1.2% ‘깜짝 성장’을 기록한 3분기 국내총생산(GDP) 잠정치도 공개된다. 경제협력개발기구(OECD)는 ‘세계 경제 전망’을 통해 내년 한국의 경제성장률 전망치를 내놓는다.국가데이터처는 2일 ‘11월 소비자물가...",
       "source": "Hankyung",
-      "crawled_at": "2025-12-02T10:28:31.614415",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "neutral",
-      "sentiment_score": 0.5,
-      "sentiment_confidence": 0.7,
-      "sentiment_reasoning": "중립적 질문"
+      "crawled_at": "2025-12-02T10:28:31.614415"
     },
     {
       "headline": "\"韓 원리금 부담 증가속도 세계2위, 소비 발목 잡혀\"",
@@ -1031,17 +586,7 @@
       "published_time": "",
       "summary": "우리나라가 원리금 부담 증가 폭이 세계 2위인 것으로 나타났다. 빠르게 늘어난 가계부채와 원리금 부담으로 민간 소비가 발목이 잡혔단 분석이다.한국은행이 30일 발표한 '부동산발 가계부채 누증이 소비에 미치는 영향' 보고서에 따르면 국제통화기금(IMF) 통...",
       "source": "Hankyung",
-      "crawled_at": "2025-12-02T10:28:31.614559",
-      "tickers": [
-        "316140"
-      ],
-      "ticker_names": [
-        "우리금융지주"
-      ],
-      "sentiment": "negative",
-      "sentiment_score": 0.2,
-      "sentiment_confidence": 0.85,
-      "sentiment_reasoning": "부담 증가 부정적"
+      "crawled_at": "2025-12-02T10:28:31.614559"
     },
     {
       "headline": "\"가계부채, 동맥경화처럼 민간소비 제약\"…한은의 경고",
@@ -1050,13 +595,7 @@
       "published_time": "",
       "summary": "최근 10년간 부동산 관련 가계부채가 누적되면서 민간소비 수준이 5% 안팎 낮아졌다고 한국은행이 분석했다. 한은은 이런 가계부채가 \"한국경제 소비를 구조적으로 제약하는 만성질환으로 자리 잡았다\"며 일관된 정책 대응을 주문했다.30일 한은이 발표한 ‘부동산발(...",
       "source": "Hankyung",
-      "crawled_at": "2025-12-02T10:28:31.614704",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "negative",
-      "sentiment_score": 0.2,
-      "sentiment_confidence": 0.9,
-      "sentiment_reasoning": "부정적 경고 내용"
+      "crawled_at": "2025-12-02T10:28:31.614704"
     },
     {
       "headline": "치솟은 환율에 韓 '달러 GDP' 올해 뒷걸음질",
@@ -1065,17 +604,7 @@
       "published_time": "",
       "summary": "달러 환산 국내총생산(GDP)이 올해 역성장할 전망이다. 원·달러 환율이 치솟은 결과다.30일 국제통화기금(IMF)에 따르면 IMF는 최근 연례협의 보고서에서 우리나라의 올해 달러화 기준 명목 GDP를 1조8586억달러로 추산했다. 지난해 1조8754억달러...",
       "source": "Hankyung",
-      "crawled_at": "2025-12-02T10:28:31.614850",
-      "tickers": [
-        "316140"
-      ],
-      "ticker_names": [
-        "우리금융지주"
-      ],
-      "sentiment": "negative",
-      "sentiment_score": 0.3,
-      "sentiment_confidence": 0.85,
-      "sentiment_reasoning": "GDP 감소 우려"
+      "crawled_at": "2025-12-02T10:28:31.614850"
     },
     {
       "headline": "고환율·코스피 덕에 두둑해진 나라곳간…10월 국세수입 2.8조 ↑",
@@ -1084,13 +613,7 @@
       "published_time": "",
       "summary": "1400원대 후반의 고환율과 코스피 상승에 따른 낙수효과로 지난달 국세 수입이 전년보다 3조원 가까이 증가한 것으로 나타났다. 해외 주식 투자로 수익을 올린 ‘서학개미’도 나라 곳간에 힘을 보탰다.기획재정부가 28일 발표한 ‘2025년 ...",
       "source": "Hankyung",
-      "crawled_at": "2025-12-02T10:28:31.614995",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "positive",
-      "sentiment_score": 0.7,
-      "sentiment_confidence": 0.8,
-      "sentiment_reasoning": "국세수입 증가 긍정"
+      "crawled_at": "2025-12-02T10:28:31.614995"
     },
     {
       "headline": "행복을 더하는 기부, 기부로 바꾸는 내일",
@@ -1099,17 +622,7 @@
       "published_time": "",
       "summary": "한국경제신문사는 한국신문협회, 사회복지공동모금회와 함께 연말연시를 맞아 ‘희망 2026 나눔캠페인’ 성금 모금을 시작합니다. 여러분의 정성으로 모인 성금은 우리 주변에 도움이 필요한 이웃에게 소중하게 쓰입니다. ‘기부로 행복을 더하는 내...",
       "source": "Hankyung",
-      "crawled_at": "2025-12-02T10:28:31.615138",
-      "tickers": [
-        "316140"
-      ],
-      "ticker_names": [
-        "우리금융지주"
-      ],
-      "sentiment": "positive",
-      "sentiment_score": 0.8,
-      "sentiment_confidence": 0.9,
-      "sentiment_reasoning": "기부의 긍정적 메시지"
+      "crawled_at": "2025-12-02T10:28:31.615138"
     },
     {
       "headline": "한은, 금리인하 종료 시사",
@@ -1118,13 +631,7 @@
       "published_time": "",
       "summary": "한국은행이 27일 연 2.50%인 기준금리를 유지하기로 했다. 고환율과 물가 상승 우려가 추가 금리 인하의 발목을 잡았다. 한은은 특히 금리 결정문에서 ‘금리 인하 기조를 이어간다’는 표현을 삭제해 인하 사이클의 조기 종료 가능성을 시사했다. 한은은 이날 서울 남대문로 한은 본관에서 금융통화위원회 통화정책방향 회의를 열어 이같...",
       "source": "Hankyung",
-      "crawled_at": "2025-12-02T10:28:31.615255",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "negative",
-      "sentiment_score": 0.4,
-      "sentiment_confidence": 0.75,
-      "sentiment_reasoning": "금리인하 종료 우려"
+      "crawled_at": "2025-12-02T10:28:31.615255"
     },
     {
       "headline": "한은 '금리인하 기조' 삭제…'가능성'만 남겨놨다",
@@ -1133,13 +640,7 @@
       "published_time": "",
       "summary": "한국은행이 27일 금융통화위원회 통화정책방향 회의에서 기준금리를 연 2.50%로 동결한 뒤 배포한 보도자료에서 '금리인하 기조를 이어나간다'는 표현을 삭제했다. 한은은 이날 배포한 참고자료에서 \"향후 통화정책은 금리인하 가능성을 열어두되, 이 과...",
       "source": "Hankyung",
-      "crawled_at": "2025-12-02T10:28:31.615404",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "negative",
-      "sentiment_score": 0.35,
-      "sentiment_confidence": 0.8,
-      "sentiment_reasoning": "부정적 변화 암시"
+      "crawled_at": "2025-12-02T10:28:31.615404"
     },
     {
       "headline": "한은 \"내년 경제성장률 1.8%…2027년 1.9%\"",
@@ -1148,13 +649,7 @@
       "published_time": "",
       "summary": "한국은행이 27일 내년 한국의 경제성장률을 1.8%로 전망했다. 잠재성장률(약 1.8%) 수준의 성장세를 회복할 수 있을 것으로 봤다. 이는 국제통화기금(IMF)과 한국개발연구원(KDI)의 전망치와 같은 수준이다. 경제협력개발기구(2.2%), 금융연구원(2.1...",
       "source": "Hankyung",
-      "crawled_at": "2025-12-02T10:28:31.615550",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "neutral",
-      "sentiment_score": 0.5,
-      "sentiment_confidence": 0.7,
-      "sentiment_reasoning": "중립적 성장 전망"
+      "crawled_at": "2025-12-02T10:28:31.615550"
     },
     {
       "headline": "한국은행, 기준금리 4연속 동결…\"연 2.50% 유지\"",
@@ -1163,13 +658,7 @@
       "published_time": "",
       "summary": "한국은행이 27일 오전 서울 남대문로 한은 본관에서 금융통화위원회 통화정책방향 회의를 열고 기준금리를 연 2.50%에서 유지하기로 결정했다. 한은은 지난 5월 금통위에서 금리를 연 2.75%에서 연 2.50%로 낮춘 뒤 지난 7월과 8월, 10월 통화정책방향 ...",
       "source": "Hankyung",
-      "crawled_at": "2025-12-02T10:28:31.615689",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "neutral",
-      "sentiment_score": 0.5,
-      "sentiment_confidence": 0.75,
-      "sentiment_reasoning": "기준금리 동결 중립"
+      "crawled_at": "2025-12-02T10:28:31.615689"
     },
     {
       "headline": "3분기까지 태어난 아기…18년 만에 최대폭 증가",
@@ -1178,13 +667,7 @@
       "published_time": "",
       "summary": "26일 경기 고양 차의과학대 일산차병원 신생아실에서 간호사가 신생아를 돌보고 있다. 국가데이터처에 따르면 올해 3분기까지 태어난 아기는 19만1040명으로, 전년 동기 대비 증가 폭이 2007년 이후 18년 만에 가장 컸다. 9월 혼인 건수는 1만8462건으로 전년 동...",
       "source": "Hankyung",
-      "crawled_at": "2025-12-02T10:28:31.615842",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "positive",
-      "sentiment_score": 0.9,
-      "sentiment_confidence": 0.85,
-      "sentiment_reasoning": "출생률 증가 긍정"
+      "crawled_at": "2025-12-02T10:28:31.615842"
     },
     {
       "headline": "10월 서학개미 해외 투자 68억달러 ＞ 무역수지 61억달러",
@@ -1193,13 +676,7 @@
       "published_time": "",
       "summary": "지난달 개인투자자들의 해외 주식 투자로 국내에서 빠져나간 달러가 수출로 벌어들인 달러보다 약 7억달러 많은 것으로 나타났다. 1400원대 중후반으로 치솟는 원·달러 고환율의 배경에 서학개미들의 해외 투자 증가가 있다는 진단이 나온다.26일 한국예탁결제원 증...",
       "source": "Hankyung",
-      "crawled_at": "2025-12-02T10:28:31.615981",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "positive",
-      "sentiment_score": 0.75,
-      "sentiment_confidence": 0.8,
-      "sentiment_reasoning": "해외 투자 증가 긍정"
+      "crawled_at": "2025-12-02T10:28:31.615981"
     },
     {
       "headline": "구윤철 \"환율 안정에 국민연금 동원, 결코 아니다\"",
@@ -1208,13 +685,7 @@
       "published_time": "",
       "summary": "구윤철 부총리 겸 기획재정부 장관이 외환시장을 주제로 별도 기자간담회를 열고 \"국민연금 수익성과 외환시장 안정을 조화시키기 위해 '국민연금 뉴프레임워크' 구축을 위한 논의를 개시했다\"고 밝혔다.부총리가 별도 기자간담회를 가지는 것은 이례적이다. 더군다나 ...",
       "source": "Hankyung",
-      "crawled_at": "2025-12-02T10:28:31.616123",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "neutral",
-      "sentiment_score": 0.5,
-      "sentiment_confidence": 0.7,
-      "sentiment_reasoning": "중립적 발언"
+      "crawled_at": "2025-12-02T10:28:31.616123"
     },
     {
       "headline": "구윤철 \"수익성-외환안정 조화 '국민연금 뉴프레임워크' 논의\"",
@@ -1223,13 +694,7 @@
       "published_time": "",
       "summary": "신현보 한경닷컴 기자 greaterfool@hankyung.com",
       "source": "Hankyung",
-      "crawled_at": "2025-12-02T10:28:31.616265",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "neutral",
-      "sentiment_score": 0.5,
-      "sentiment_confidence": 0.7,
-      "sentiment_reasoning": "중립적 논의 내용"
+      "crawled_at": "2025-12-02T10:28:31.616265"
     },
     {
       "headline": "구윤철 \"원화, 다른 통화대비 민감…환율 변동성 확대 단호대응\"",
@@ -1238,13 +703,7 @@
       "published_time": "",
       "summary": "신현보 한경닷컴 기자 greaterfool@hankyung.com",
       "source": "Hankyung",
-      "crawled_at": "2025-12-02T10:28:31.616405",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "neutral",
-      "sentiment_score": 0.5,
-      "sentiment_confidence": 0.7,
-      "sentiment_reasoning": "중립적 대응 언급"
+      "crawled_at": "2025-12-02T10:28:31.616405"
     },
     {
       "headline": "구윤철 \"일시방편이나 국민연금 동원 결코 아니다\"",
@@ -1253,13 +712,7 @@
       "published_time": "",
       "summary": "신현보 한경닷컴 기자 greaterfool@hankyung.com",
       "source": "Hankyung",
-      "crawled_at": "2025-12-02T10:28:31.616545",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "neutral",
-      "sentiment_score": 0.5,
-      "sentiment_confidence": 0.7,
-      "sentiment_reasoning": "중립적 발언"
+      "crawled_at": "2025-12-02T10:28:31.616545"
     },
     {
       "headline": "고환율에 우는 제조업…\"자금사정 악화\"",
@@ -1268,13 +721,7 @@
       "published_time": "",
       "summary": "원·달러 환율이 이달들어 큰 폭으로 상승하면서 제조업 기업을 중심으로 자금사정이 악화한 것으로 나타났다. 이런 자금 압박은 다음달에도 계속될 것으로 전망됐다. 반도체 호황 영향으로 기업의 전반적인 체감경기는 13개월만에 최고를 기록했다.26일 한국은행이 발...",
       "source": "Hankyung",
-      "crawled_at": "2025-12-02T10:28:31.616697",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "negative",
-      "sentiment_score": 0.25,
-      "sentiment_confidence": 0.85,
-      "sentiment_reasoning": "부정적 자금사정"
+      "crawled_at": "2025-12-02T10:28:31.616697"
     },
     {
       "headline": "\"한국, 60세→65세 정년만 연장하면…\" IMF 이례적 경고",
@@ -1283,13 +730,7 @@
       "published_time": "",
       "summary": "국제통화기금(IMF)이 한국의 정년 연장 필요성에 공감하며, 국민연금 수급 개시 연령을 조정하는 개혁을 동시에 추진해야 한다고 권고했다. IMF가 특정 국가의 정년 문제를 구체적으로 언급한 것은 이례적이다.IMF는 최근 홈페이지에 공개한 한국 특별보고서에서 정년 연장과...",
       "source": "Hankyung",
-      "crawled_at": "2025-12-02T10:28:33.314384",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "negative",
-      "sentiment_score": 0.3,
-      "sentiment_confidence": 0.8,
-      "sentiment_reasoning": "부정적 경고"
+      "crawled_at": "2025-12-02T10:28:33.314384"
     },
     {
       "headline": "\"국민연금 '월 66만원' 받는 노인들 보니…\" 무서운 경고",
@@ -1298,13 +739,7 @@
       "published_time": "",
       "summary": "한국의 고령층이 경제협력개발기구(OECD) 회원국 가운데 가장 늦게까지 일하며 가장 높은 고용률을 보이고 있는 것으로 나타났다. 그러나 높은 고용률의 배경에는 '일하는 즐거움'이 아닌 생활비 마련을 위한 생계형 노동이 자리하고 있다는 분석이 제기된다.국민...",
       "source": "Hankyung",
-      "crawled_at": "2025-12-02T10:28:33.314555",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "negative",
-      "sentiment_score": 0.2,
-      "sentiment_confidence": 0.85,
-      "sentiment_reasoning": "부정적 경고"
+      "crawled_at": "2025-12-02T10:28:33.314555"
     },
     {
       "headline": "'지갑 열어볼까'…소비심리 8년 만에 최고",
@@ -1313,13 +748,7 @@
       "published_time": "",
       "summary": "지난 3분기 소비자 심리가 8년 만에 최고 수준을 기록했다. 경제 성장률이 회복된 데다 한·미 관세협상이 타결된 영향으로 분석됐다.한은이 25일 발표한 ‘소비자동향조사’ 결과에 따르면 11월 소비자심리지수(CCSI)는 112.4로 전달보다 2.6포인트 상승했다. 2017년 11월(113.9) 후 8년 만에 가장 높았다. C...",
       "source": "Hankyung",
-      "crawled_at": "2025-12-02T10:28:33.314678",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "positive",
-      "sentiment_score": 0.85,
-      "sentiment_confidence": 0.9,
-      "sentiment_reasoning": "소비심리 개선 긍정"
+      "crawled_at": "2025-12-02T10:28:33.314678"
     },
     {
       "headline": "高환율에도 해외쇼핑 급증…3분기 60억弗 긁은 한국인",
@@ -1328,13 +757,7 @@
       "published_time": "",
       "summary": "한국인의 해외 카드 사용액이 올 3분기 약 60억달러로 역대 최고액을 기록했다. 1400원 안팎의 원·달러 환율에도 해외 쇼핑과 해외여행 수요가 견조하다는 사실을 보여준다.25일 한국은행이 발표한 3분기 거주자의 카드 해외 사용실적 자료에 따르면 지난 7월...",
       "source": "Hankyung",
-      "crawled_at": "2025-12-02T10:28:33.314822",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "positive",
-      "sentiment_score": 0.8,
-      "sentiment_confidence": 0.85,
-      "sentiment_reasoning": "해외쇼핑 증가 긍정"
+      "crawled_at": "2025-12-02T10:28:33.314822"
     },
     {
       "headline": "\"해외여행은 못 참지\"…3개월간 '8.7조' 긁은 한국인들",
@@ -1343,13 +766,7 @@
       "published_time": "",
       "summary": "한국인의 해외 카드 사용액이 3분기 60억달러에 육박해 역대 최고액을 기록했다. 원·달러 환율이 1400원을 오르내리는 등 높은 수준을 나타내고 있지만 한국인들의 해외 소비 증가세는 여전히 견조했다.  25일 한국은행이 발표한 3...",
       "source": "Hankyung",
-      "crawled_at": "2025-12-02T10:28:33.314967",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "positive",
-      "sentiment_score": 0.75,
-      "sentiment_confidence": 0.8,
-      "sentiment_reasoning": "해외여행 지출 증가 긍정"
+      "crawled_at": "2025-12-02T10:28:33.314967"
     },
     {
       "headline": "5년간 농지 8만헥타르 전용…불법전용은 하루 20건씩 적발",
@@ -1358,13 +775,7 @@
       "published_time": "",
       "summary": "최근 5년간 농사에 쓰이는 땅을 다른 목적으로 변경한 면적이 8만㏊를 넘는 것으로 나타났다. 지난해엔 하루 20건씩 농지를 불법으로 전용한 사례가 적발된 것으로 나타났다.25일 정희용 국민의힘 의원실이 농림축산식품부에서 제출받은 자료에 따르면, 농지를 농업생산 또는 농...",
       "source": "Hankyung",
-      "crawled_at": "2025-12-02T10:28:33.315114",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "negative",
-      "sentiment_score": 0.2,
-      "sentiment_confidence": 0.9,
-      "sentiment_reasoning": "불법 전용 적발로 부정적"
+      "crawled_at": "2025-12-02T10:28:33.315114"
     },
     {
       "headline": "소비심리, 8년 만에 최고…\"GDP 서프라이즈에 살아났다\"",
@@ -1373,13 +784,7 @@
       "published_time": "",
       "summary": "지난 3분기 경제성장률이 큰 폭 상승하면서 소비자들의 경제 심리가 8년만에 최고 수준으로 높아졌다. 한미 관세협상 타결도 심리 개선에 영향을 줬다. 집값 상승에 대한 기대는 여전히 높은 수준을 기록했다. 한은이 25일 발표한 '소비자동향조사' 결...",
       "source": "Hankyung",
-      "crawled_at": "2025-12-02T10:28:33.315259",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "positive",
-      "sentiment_score": 0.8,
-      "sentiment_confidence": 0.9,
-      "sentiment_reasoning": "소비심리 개선으로 긍정적"
+      "crawled_at": "2025-12-02T10:28:33.315259"
     },
     {
       "headline": "IMF \"韓, 잠재성장률 회복 땐 완화적 재정 정책 조정해야\"",
@@ -1388,13 +793,7 @@
       "published_time": "",
       "summary": "국제통화기금(IMF)은 24일 “현시점에서 한국의 완화적 통화·재정 정책이 적절하다”고 평가하면서도 “잠재성장률 회복 이후엔 재정정책 기조를 조정할 필요가 있다”고 조언했다. 또 민간 소비 회복을 위해 가계부채 관리를 강화하고 직무 중심으로의 임금체계 개편, 서비스업 규제 완화 등 구조 개혁에 나서야 ...",
       "source": "Hankyung",
-      "crawled_at": "2025-12-02T10:28:33.315381",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "neutral",
-      "sentiment_score": 0.5,
-      "sentiment_confidence": 0.8,
-      "sentiment_reasoning": "중립적 정책 제안"
+      "crawled_at": "2025-12-02T10:28:33.315381"
     },
     {
       "headline": "\"중국산 써도 아무도 몰라요\"…15년 만에 결국 터졌다",
@@ -1403,13 +802,7 @@
       "published_time": "",
       "summary": "농산물 무역수지를 유심히 보는 전문가라면 올해 수치를 보면서 고개를 갸웃할지도 모르겠다. 배추 무역수지가 15년 만에 적자로 돌아설 전망이어서다. 23일 관세청 수출입무역통계에 따르면, 올해 1~10월 배추 무역수지는 423만3000달러 적자를 기록했다. 통상 배추 수...",
       "source": "Hankyung",
-      "crawled_at": "2025-12-02T10:28:33.315528",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "negative",
-      "sentiment_score": 0.3,
-      "sentiment_confidence": 0.85,
-      "sentiment_reasoning": "부정적 상황 발생"
+      "crawled_at": "2025-12-02T10:28:33.315528"
     },
     {
       "headline": "고환율에 미뤄지는 금리인하…10명 중 8명 \"내년 1월에도 동결\"",
@@ -1418,13 +811,7 @@
       "published_time": "",
       "summary": "한경 이코노미스트 클럽 경제전문가들은 지난달까지만 해도 ‘연내 금리 인하’ 기대를 유지했다. 응답자 중 60%가 이달엔 금리를 내릴 것으로 봤다. 한 달 만에 이런 기대는 완전히 사라졌다. 달러당 1470원 위로 치솟은 환율과 1%대 성장률 회복 ...",
       "source": "Hankyung",
-      "crawled_at": "2025-12-02T10:28:33.315673",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "negative",
-      "sentiment_score": 0.4,
-      "sentiment_confidence": 0.85,
-      "sentiment_reasoning": "금리 동결로 부정적"
+      "crawled_at": "2025-12-02T10:28:33.315673"
     },
     {
       "headline": "사상 초유의 기록…'검은 반도체' 결국 일냈다",
@@ -1433,13 +820,7 @@
       "published_time": "",
       "summary": "김 수출액이 10년새 세 배 넘게 늘면서 사상 처음으로 10억달러를 넘어섰다. 생산 기반 확충과 해외 소비자 취향에 맞춘 제품 개발이 맞아떨어졌다는 평가다. 단 수출 확대의 영향으로 국내 가격이 급등한 점은 해결해야 할 과제로 꼽힌다.해양수산부는 올해 김 수출액이 지난...",
       "source": "Hankyung",
-      "crawled_at": "2025-12-02T10:28:33.315817",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "positive",
-      "sentiment_score": 0.7,
-      "sentiment_confidence": 0.9,
-      "sentiment_reasoning": "기록적인 성과로 긍정적"
+      "crawled_at": "2025-12-02T10:28:33.315817"
     },
     {
       "headline": "\"환헤지 재량권 확대 땐 정치권 입김 강해져\"",
@@ -1448,13 +829,7 @@
       "published_time": "",
       "summary": "외환시장 안정 대책으로 국민연금이 거론되자 기금운용본부 운용역들은 “기금운용에 대한 외부 개입으로 또다시 감사, 징계를 받게 되는 것 아니냐”고 우려하고 있다.21일 투자은행(IB)업계에 따르면 최근 정부와 일부 정치권 인사가 고환율 대책의 일환으...",
       "source": "Hankyung",
-      "crawled_at": "2025-12-02T10:28:33.315962",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "negative",
-      "sentiment_score": 0.3,
-      "sentiment_confidence": 0.8,
-      "sentiment_reasoning": "정치적 우려로 부정적"
+      "crawled_at": "2025-12-02T10:28:33.315962"
     },
     {
       "headline": "코스피 하락, 환율 7개월 만에 최고치",
@@ -1463,17 +838,7 @@
       "published_time": "",
       "summary": "21일 서울 중구 하나은행 본점 딜링룸 전광판에 종가가 표시되어 있다. 이날 코스피는 전일 대비 151.59포인트(p)(3.79%) 하락한 3853.26, 코스닥은 27.99p (3.14%) 하락한 863.95로 마감했다. 서울외환시장에서 달러·원 환율은 ...",
       "source": "Hankyung",
-      "crawled_at": "2025-12-02T10:28:33.316106",
-      "tickers": [
-        "086790"
-      ],
-      "ticker_names": [
-        "하나금융지주"
-      ],
-      "sentiment": "negative",
-      "sentiment_score": 0.2,
-      "sentiment_confidence": 0.9,
-      "sentiment_reasoning": "주가 하락으로 부정적"
+      "crawled_at": "2025-12-02T10:28:33.316106"
     },
     {
       "headline": "면세업계 고환율 '직격탄'…직원조차 \"백화점 가세요\"",
@@ -1482,17 +847,7 @@
       "published_time": "",
       "summary": "유럽 출장길을 앞두고 서울의 한 면세점에서 쇼핑하던 40대 김모씨는 명품 스카프를 하나 사려다 깜짝 놀랐다. 직원이 들릴 듯 말 듯한 목소리로 인근 백화점에 가면 같은 제품을 더 싸게 살 수 있다고 이야기해줬기 때문이다. 김씨는 마음에 들었던 스카프를 매대에 올려두고 ...",
       "source": "Hankyung",
-      "crawled_at": "2025-12-02T10:28:33.316255",
-      "tickers": [
-        "086790"
-      ],
-      "ticker_names": [
-        "하나금융지주"
-      ],
-      "sentiment": "negative",
-      "sentiment_score": 0.3,
-      "sentiment_confidence": 0.85,
-      "sentiment_reasoning": "업계 어려움으로 부정적"
+      "crawled_at": "2025-12-02T10:28:33.316255"
     },
     {
       "headline": "이러다 '감튀' 없는 햄버거 먹을 판…강원도 '감자' 대란",
@@ -1501,13 +856,7 @@
       "published_time": "",
       "summary": "올여름 감자 주산지인 강원 지역에 극심한 가뭄이 들면서 고랭지 감자 생산량이 8년 만에 최저 수준으로 떨어졌다. 감자 도매가격이 지난해보다 약 30% 오른 데다 가을 감자 생산까지 부진해 감자 가격 강세가 당분간 이어질 것으로 전망된다.국가데이터처가 21일 발표한 &l...",
       "source": "Hankyung",
-      "crawled_at": "2025-12-02T10:28:33.316400",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "negative",
-      "sentiment_score": 0.4,
-      "sentiment_confidence": 0.8,
-      "sentiment_reasoning": "식자재 대란으로 부정적"
+      "crawled_at": "2025-12-02T10:28:33.316400"
     },
     {
       "headline": "\"가짜뉴스 근절, 콘텐츠 신뢰 확보 힘 합쳐야\"",
@@ -1516,13 +865,7 @@
       "published_time": "",
       "summary": "한국광고주협회와 한국온라인신문협회는 20일 서울 태평로 프레스센터에서 ‘가짜뉴스 근절과 신뢰할 수 있는 콘텐츠 유통 환경 조성’을 위한 업무협약(MOU)을 체결했다.두 기관은 가짜뉴스, 허위 정보 대응을 위한 공동 모니터링 체계를 구축하기로 했다....",
       "source": "Hankyung",
-      "crawled_at": "2025-12-02T10:28:33.316547",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "neutral",
-      "sentiment_score": 0.5,
-      "sentiment_confidence": 0.75,
-      "sentiment_reasoning": "신뢰 확보 제안으로 중립"
+      "crawled_at": "2025-12-02T10:28:33.316547"
     },
     {
       "headline": "기혼여성 7명 중 1명 '경력단절'",
@@ -1531,17 +874,7 @@
       "published_time": "",
       "summary": "우리나라 기혼 여성 7명 중 1명은 육아 등의 이유로 일을 그만둔 경력단절 여성인 것으로 집계됐다. 자녀가 있는 경력단절 여성 중 6세 이하 자녀를 둔 비율이 52%를 차지해 자녀가 어릴수록 경력 단절을 경험할 가능성이 높다는 점이 통계로 입증됐다.국가데이터처가 20일 발표한 ‘2025년 상반기 지역별 고용조사 기혼여성의 고용현황’에 ...",
       "source": "Hankyung",
-      "crawled_at": "2025-12-02T10:28:33.316669",
-      "tickers": [
-        "316140"
-      ],
-      "ticker_names": [
-        "우리금융지주"
-      ],
-      "sentiment": "negative",
-      "sentiment_score": 0.3,
-      "sentiment_confidence": 0.85,
-      "sentiment_reasoning": "경력단절로 부정적"
+      "crawled_at": "2025-12-02T10:28:33.316669"
     },
     {
       "headline": "이창용 총재 \"버블 있어도 AI붐은 계속…반도체 강국 韓은 안전\"",
@@ -1550,17 +883,7 @@
       "published_time": "",
       "summary": "인공지능(AI) 버블 우려가 제기되는 가운데 이창용 한국은행 총재가 외신 인터뷰에서 “버블이 일부 있다고 해도 AI 붐은 계속될 것”이라는 전망을 내놨다. 한국이 AI 분야에서 좋은 위치를 차지하고 있는 만큼 우리 경제에 새로운 기회가 올 것이라고...",
       "source": "Hankyung",
-      "crawled_at": "2025-12-02T10:28:33.316815",
-      "tickers": [
-        "316140"
-      ],
-      "ticker_names": [
-        "우리금융지주"
-      ],
-      "sentiment": "positive",
-      "sentiment_score": 0.7,
-      "sentiment_confidence": 0.85,
-      "sentiment_reasoning": "안전성 강조로 긍정적"
+      "crawled_at": "2025-12-02T10:28:33.316815"
     },
     {
       "headline": "2분기 제조업 일자리, 1년새 1만3000개 '뚝'",
@@ -1569,13 +892,7 @@
       "published_time": "",
       "summary": "‘양질의 일자리’로 분류되는 제조업 일자리가 올 2분기 1만3000개 줄었다. 청년 일자리는 감소하고 60대 이상 취업자가 늘어나는 ‘일자리 양극화’ 현상도 심화하고 있다.18일 국가데이터처가 공개한 ‘2분기 임금근...",
       "source": "Hankyung",
-      "crawled_at": "2025-12-02T10:28:33.316962",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "negative",
-      "sentiment_score": 0.2,
-      "sentiment_confidence": 0.9,
-      "sentiment_reasoning": "일자리 감소로 부정적"
+      "crawled_at": "2025-12-02T10:28:33.316962"
     },
     {
       "headline": "이창용 \"기후대응, 지연 되면 안되지만 과속도 문제\"",
@@ -1584,13 +901,7 @@
       "published_time": "",
       "summary": "이창용 한국은행 총재가 18일 기후충격으로 인한 성장 잠재력 악화와 너무 빠른 대응으로 인한 산업경쟁력 및 수출 영향을 균형있게 고려해야 한다고 밝혔다. 이 총재는 이날 오후 제주시 메종글래드 제주 크리스탈홀에서 열린 'BOK 지역경제 심포지엄...",
       "source": "Hankyung",
-      "crawled_at": "2025-12-02T10:28:33.317107",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "neutral",
-      "sentiment_score": 0.5,
-      "sentiment_confidence": 0.8,
-      "sentiment_reasoning": "중립적 경고"
+      "crawled_at": "2025-12-02T10:28:33.317107"
     },
     {
       "headline": "한미 다음달부터 비관세 장벽 협상",
@@ -1599,13 +910,7 @@
       "published_time": "",
       "summary": "한·미 관세협상 결과를 담은 양해각서(MOU)가 지난 14일 발표됐지만, 제네릭 의약품 관세와 농산물 검역 완화 등 분야에서는 양국 간 추가 협상이 남았다는 분석이 나온다.17일 여한구 산업통상부 통상교섭본부장은 서울 남대문로4가 대한상공회의소에서 통상추진위원회를 열어 한·미 통상 합의 사항을 점검했다. 양국이 최근 합의한 조인트 ...",
       "source": "Hankyung",
-      "crawled_at": "2025-12-02T10:28:35.925400",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "neutral",
-      "sentiment_score": 0.5,
-      "sentiment_confidence": 0.75,
-      "sentiment_reasoning": "협상 소식으로 중립"
+      "crawled_at": "2025-12-02T10:28:35.925400"
     },
     {
       "headline": "美·캐나다 연기금 PEF 투자 늘리는데…한국은 '정치권 눈치'",
@@ -1614,13 +919,7 @@
       "published_time": "",
       "summary": "▶마켓인사이트 11월 17일 오후 4시 40분해외 연기금과 국부펀드들은 사모펀드(PEF) 투자를 대폭 늘리고 있다. 주식·채권 등 전통 자산에 비해 경기 변동에 덜 민감해 포트폴리오의 핵심 자산군으로 삼고 있다. PEF 투자에 제동이 걸린 국내 연...",
       "source": "Hankyung",
-      "crawled_at": "2025-12-02T10:28:35.925584",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "negative",
-      "sentiment_score": 0.4,
-      "sentiment_confidence": 0.8,
-      "sentiment_reasoning": "정치적 우려로 부정적"
+      "crawled_at": "2025-12-02T10:28:35.925584"
     },
     {
       "headline": "'월급' 역대급으로 올랐는데…\"더 힘들다\" 직장인 분노한 이유",
@@ -1629,13 +928,7 @@
       "published_time": "",
       "summary": "일본의 올해 임금인상률이 1992년 이후 34년만에 가장 높은 것으로 집계됐다. 2년 연속 1만엔 이상 임금이 늘면서 '잃어버린 30년' 이전 수준까지 회복했다. 하지만 물가는 이보다 더 큰폭으로 오르면서 실질임금은 오히려 하락했다.17일 한국은행 동경사...",
       "source": "Hankyung",
-      "crawled_at": "2025-12-02T10:28:35.925751",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "negative",
-      "sentiment_score": 0.3,
-      "sentiment_confidence": 0.85,
-      "sentiment_reasoning": "임금 상승에도 불만"
+      "crawled_at": "2025-12-02T10:28:35.925751"
     },
     {
       "headline": "입소스, '2025 리서치 서밋' 세미나",
@@ -1644,13 +937,7 @@
       "published_time": "",
       "summary": "글로벌 시장조사업체 입소스가 지난 14일 서울 중림동 한국경제신문사에서 인공지능(AI)을 활용한 시장 전망 등을 주제로 ‘2025 리서치 서밋’ 세미나(사진)를 열었다. 각계 전문가를 초청해 강연을 듣고 내년 한 해를 관통할 키워드를 정리했다. 입...",
       "source": "Hankyung",
-      "crawled_at": "2025-12-02T10:28:35.925916",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "neutral",
-      "sentiment_score": 0.5,
-      "sentiment_confidence": 0.7,
-      "sentiment_reasoning": "세미나 소식으로 중립"
+      "crawled_at": "2025-12-02T10:28:35.925916"
     },
     {
       "headline": "'빚 떠넘긴다' 오해 받는 LBO…\"적정 차입, 오히려 수익 높여\"",
@@ -1659,13 +946,7 @@
       "published_time": "",
       "summary": "사모펀드(PEF)를 향한 대중적 반감은 레버리지를 일으켜 기업을 인수하는 차입매수(LBO)에서 비롯된다. 통상 PEF는 특수목적법인(SPC)을 세워 인수대금의 상당 부분을 차입한 뒤 이 자금으로 기업 지분 100%를 매입한다. 이때 발생한 차입금은 인수되는 기업이 영업활동으로 벌어들이는 현금 또는 자산을 매각한 돈을 PEF가 배당·유상감자 등의...",
       "source": "Hankyung",
-      "crawled_at": "2025-12-02T10:28:35.926047",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "positive",
-      "sentiment_score": 0.6,
-      "sentiment_confidence": 0.8,
-      "sentiment_reasoning": "수익성 강조로 긍정적"
+      "crawled_at": "2025-12-02T10:28:35.926047"
     },
     {
       "headline": "검찰 수사받는 PEF '수두룩'…자정작용 시급",
@@ -1674,17 +955,7 @@
       "published_time": "",
       "summary": "사모펀드(PEF)를 향한 부정적 인식을 키운 또 하나의 요인은 펀드 외형만 빌린 ‘무늬만 PEF’다. 기업의 체질 개선을 이끌어 기업 가치를 키우기 위해 골몰하기보다 비교적 느슨한 규제가 적용되는 제도를 악용하는 사례가 나타나고 있다.대표적으로 거론되는 곳이 한앤브라더스다. 제도권에 알려지지 않은 이 신생 PEF는 2022년 스톤브릿지...",
       "source": "Hankyung",
-      "crawled_at": "2025-12-02T10:28:35.926175",
-      "tickers": [
-        "086790"
-      ],
-      "ticker_names": [
-        "하나금융지주"
-      ],
-      "sentiment": "negative",
-      "sentiment_score": 0.2,
-      "sentiment_confidence": 0.9,
-      "sentiment_reasoning": "부정적 사건 언급"
+      "crawled_at": "2025-12-02T10:28:35.926175"
     },
     {
       "headline": "달러 뛰자 수입물가도 껑충…9개월 만에 '최대 상승폭'",
@@ -1693,13 +964,7 @@
       "published_time": "",
       "summary": "원·달러 환율이 큰 폭으로 상승하면서 지난달 수입물가가 9개월 만에 가장 큰 폭으로 올랐다. 수출물가는 반도체를 중심으로 상승했다.한국은행이 14일 발표한 ‘수출입물가지수’ 통계에 따르면 올해 10월 기준 수입물가지수(원화 기준 잠정치·2020년 수준 100)는 138.17로, 9월(135.56)보다 1.9% ...",
       "source": "Hankyung",
-      "crawled_at": "2025-12-02T10:28:35.926294",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "negative",
-      "sentiment_score": 0.3,
-      "sentiment_confidence": 0.85,
-      "sentiment_reasoning": "물가 상승으로 부정적"
+      "crawled_at": "2025-12-02T10:28:35.926294"
     },
     {
       "headline": "성장률 회복·부동산 불안…금리인하, 한 번 남은 듯",
@@ -1708,13 +973,7 @@
       "published_time": "",
       "summary": "한국은행이 오는 27일 열리는 금융통화위원회 통화정책방향 회의에서 기준금리를 동결할 것이란 전망이 채권시장에서 힘을 얻고 있다. 올해와 내년 성장률 전망이 상향되고 있는 데다 부동산 및 외환시장 상황 등을 고려할 때 내년에도 한 차례 인하에 그칠 것이란 관측이 지배적이다.JP모간은 13일 보고서를 통해 11월 금리 전망을 인하에서 동결로 바꾼다고 밝혔다. ...",
       "source": "Hankyung",
-      "crawled_at": "2025-12-02T10:28:35.926412",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "neutral",
-      "sentiment_score": 0.5,
-      "sentiment_confidence": 0.8,
-      "sentiment_reasoning": "사실 전달 중심"
+      "crawled_at": "2025-12-02T10:28:35.926412"
     },
     {
       "headline": "쌀 수확량, 예상보다 3.5만톤 적어…쌀값 강세 이어질듯",
@@ -1723,13 +982,7 @@
       "published_time": "",
       "summary": "올해 햅쌀이 예상보다 3만t가량 더 적게 수확된 것으로 나타났다. 쌀값 강세가 당분간 계속될 것이란 관측이 나온다.13일 국가데이터처에 따르면 올해 쌀 생산량은 작년(358만5000t)보다 1.3%(4만5000t) 감소한 353만9000t으로 조사됐다. 지난달 발표된 ...",
       "source": "Hankyung",
-      "crawled_at": "2025-12-02T10:28:35.926555",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "negative",
-      "sentiment_score": 0.4,
-      "sentiment_confidence": 0.75,
-      "sentiment_reasoning": "수확량 감소로 부정적"
+      "crawled_at": "2025-12-02T10:28:35.926555"
     },
     {
       "headline": "너도나도 주식 '빚투'…기타대출 4년3개월 만에 최대 폭 증가",
@@ -1738,13 +991,7 @@
       "published_time": "",
       "summary": "빚을 일으켜 주식 투자를 하는 주식 '빚투'가 늘면서 지난달 가계대출이 큰 폭으로 늘었다. 정부 부동산 대책의 효과로 주택담보대출 증가세는 꺾였지만 신용대출이 포함된 기타대출 증가폭이 4년3개월만에 최대를 기록했다.13일 한국은행이 발표한 '10월...",
       "source": "Hankyung",
-      "crawled_at": "2025-12-02T10:28:35.926699",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "negative",
-      "sentiment_score": 0.3,
-      "sentiment_confidence": 0.85,
-      "sentiment_reasoning": "부정적 투자 경향"
+      "crawled_at": "2025-12-02T10:28:35.926699"
     },
     {
       "headline": "나라살림 적자 100조원 돌파…곳간에 '빨간불'",
@@ -1753,13 +1000,7 @@
       "published_time": "",
       "summary": "올해 9월까지 나라살림 적자 규모가 100조원을 넘어섰다. 코로나19 팬데믹 때 대규모 재정이 투입된 2020년 이후 역대 두 번째로 큰 폭이다.13일 기획재정부가 발표한 '월간 재정동향 11월호'에 따르면 9월 말 기준 총수입은 480조7000억원으로,...",
       "source": "Hankyung",
-      "crawled_at": "2025-12-02T10:28:35.926841",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "negative",
-      "sentiment_score": 0.2,
-      "sentiment_confidence": 0.9,
-      "sentiment_reasoning": "적자 증가로 부정적"
+      "crawled_at": "2025-12-02T10:28:35.926841"
     },
     {
       "headline": "\"당신들이 뭔데 우리 노후를\"…'국민연금'에 폭발한 2030",
@@ -1768,17 +1009,7 @@
       "published_time": "",
       "summary": "\"백번 양보해서 더 내라고 하는 거? 인정한다. 그러면 윗세대는 덜 받을 생각을 해야 하는 거 아닌가. 4050세대가 표가 가장 많으니까 표 받으려고 그러는 거 아니냐.\"'영포티'란 단어로 불거진 세대간 갈등이 가장 극적으로 폭발하는 지점은 바로 국민연금...",
       "source": "Hankyung",
-      "crawled_at": "2025-12-02T10:28:35.926984",
-      "tickers": [
-        "316140"
-      ],
-      "ticker_names": [
-        "우리금융지주"
-      ],
-      "sentiment": "negative",
-      "sentiment_score": 0.3,
-      "sentiment_confidence": 0.8,
-      "sentiment_reasoning": "부정적 감정 표현"
+      "crawled_at": "2025-12-02T10:28:35.926984"
     },
     {
       "headline": "30대 '쉬었음' 33만명…22년 만에 역대 최대",
@@ -1787,13 +1018,7 @@
       "published_time": "",
       "summary": "30대 ‘쉬었음’ 인구가 33만 명을 돌파하며 2003년 관련 통계가 시작된 후 역대 최대치를 기록했다. 청년(15~29세) 고용률은 18개월째 하락했다. 청년들이 선호하는 양질의 일자리가 줄어드는 가운데 경력직 위주 수시 채용 등으로 2030세대의 취업문이 좁아지고 있기 때문으로 분석됐다.12일 국가데이터처가 발표한 ‘10...",
       "source": "Hankyung",
-      "crawled_at": "2025-12-02T10:28:35.927102",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "negative",
-      "sentiment_score": 0.25,
-      "sentiment_confidence": 0.75,
-      "sentiment_reasoning": "실업 증가로 부정적"
+      "crawled_at": "2025-12-02T10:28:35.927102"
     },
     {
       "headline": "\"그 기업 때문에 한국 '10조' 날렸다\"…한은 '뼈아픈' 지적",
@@ -1802,17 +1027,7 @@
       "published_time": "",
       "summary": "이익 없이 빚만 늘고 있는 고위험기업의 퇴출이 제대로 이뤄지지 않은 결과 우리나라 국내총생산(GDP)이 10조원 안팎 증가할 기회를 놓쳤다는 한국은행 분석이 나왔다. 고위험기업의 수명연장을 위한 금융지원보다는 신산업 투자를 촉진할 필요가 있다는 것이 한은의 제언이다.1...",
       "source": "Hankyung",
-      "crawled_at": "2025-12-02T10:28:35.927244",
-      "tickers": [
-        "316140"
-      ],
-      "ticker_names": [
-        "우리금융지주"
-      ],
-      "sentiment": "negative",
-      "sentiment_score": 0.2,
-      "sentiment_confidence": 0.85,
-      "sentiment_reasoning": "손실 언급으로 부정적"
+      "crawled_at": "2025-12-02T10:28:35.927244"
     },
     {
       "headline": "韓銀 \"주택시장 합리적 기대 무너져…금리 내리면 집값만 올라\"",
@@ -1821,13 +1036,7 @@
       "published_time": "",
       "summary": "막연한 집값 상승 기대가 높은 상황에서는 기준금리를 내려도 경기 부양 효과가 제한되고 집값만 더 자극할 수 있다는 한국은행의 분석이 나왔다.11일 한은은 윤진운·이정혁 조사역이 쓴 ‘진단적 기대를 반영한 주택시장 DSGE모형 구축 및 시사점’ 보고서를 통해 이 같은 견해를 밝혔다.보고서는 주택가격전망 CSI(소비자동향지수)...",
       "source": "Hankyung",
-      "crawled_at": "2025-12-02T10:28:35.927362",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "negative",
-      "sentiment_score": 0.3,
-      "sentiment_confidence": 0.8,
-      "sentiment_reasoning": "부정적 전망"
+      "crawled_at": "2025-12-02T10:28:35.927362"
     },
     {
       "headline": "성인 60% \"노후 준비는 국민연금으로\"",
@@ -1836,13 +1045,7 @@
       "published_time": "",
       "summary": "성인 10명 중 6명이 국민연금을 주요 노후 준비 수단으로 삼고 있는 것으로 조사됐다.국가데이터처가 11일 발표한 ‘2025년 사회조사 결과’에 따르면 19세 이상 인구 가운데 “노후를 준비하고 있거나 준비돼 있다”고 응답한 비율은 71.5%였다. 조사가 시작된 2009년 이후 처음으로 70%를 넘어섰다. 이 중 ...",
       "source": "Hankyung",
-      "crawled_at": "2025-12-02T10:28:35.927480",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "positive",
-      "sentiment_score": 0.6,
-      "sentiment_confidence": 0.7,
-      "sentiment_reasoning": "긍정적 인식"
+      "crawled_at": "2025-12-02T10:28:35.927480"
     },
     {
       "headline": "\"물 들어올 때 상장\"…무신사·구다이글로벌 '10兆 대어' 몸풀기",
@@ -1851,17 +1054,7 @@
       "published_time": "",
       "summary": "▶마켓인사이트 11월 11일 오후 5시 10분올해 기업공개(IPO) 시장에선 유독 대어급이 없었다. 2월 상장한 시가총액 5조원대의 LG CNS가 유일했다. 6월 코스피지수가 3000을 넘었을 때만 해도 IPO 시장은 겨울이었다. 주식시장 강세가 얼마나 지속될...",
       "source": "Hankyung",
-      "crawled_at": "2025-12-02T10:28:35.927623",
-      "tickers": [
-        "003550"
-      ],
-      "ticker_names": [
-        "LG"
-      ],
-      "sentiment": "positive",
-      "sentiment_score": 0.7,
-      "sentiment_confidence": 0.75,
-      "sentiment_reasoning": "상장 긍정적"
+      "crawled_at": "2025-12-02T10:28:35.927623"
     },
     {
       "headline": "이지스운용 인수, 한화 vs 흥국 대결",
@@ -1870,13 +1063,7 @@
       "published_time": "",
       "summary": "▶마켓인사이트 11월 11일 오후 4시 41분국내 최대 부동산 자산운용사 이지스자산운용 인수를 놓고 한화생명과 흥국생명이 맞붙었다.11일 금융투자업계에 따르면 이날 낮 12시까지 이뤄진 이지스자산운용 매각 본입찰에 한화생명과 흥국생명이 최종 인수제안서를 제출한 것으로 파악됐다. 최대주주 손화자 씨(지분 12.4%) 등 이지스자산운용 지분 98%가 ...",
       "source": "Hankyung",
-      "crawled_at": "2025-12-02T10:28:35.927741",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "neutral",
-      "sentiment_score": 0.5,
-      "sentiment_confidence": 0.8,
-      "sentiment_reasoning": "사실 전달 중심"
+      "crawled_at": "2025-12-02T10:28:35.927741"
     },
     {
       "headline": "10년 전엔 1위였는데…국가기관 취업 선호하는 청년·청소년, 10년 새 반토막",
@@ -1885,13 +1072,7 @@
       "published_time": "",
       "summary": "청년·청소년 중 가장 근무하고 싶은 직장으로 ‘국가기관’을 꼽은 비율이 10년 새 반토막났다. 대신 월급을 중시하는 문화가 퍼지면서 대기업에 대한 선호가 높아졌다. 국민연금을 노후 준비 수단으로 삼고 있다는 응답은 4년째 정체됐다.국가...",
       "source": "Hankyung",
-      "crawled_at": "2025-12-02T10:28:35.927888",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "negative",
-      "sentiment_score": 0.25,
-      "sentiment_confidence": 0.8,
-      "sentiment_reasoning": "부정적 변화"
+      "crawled_at": "2025-12-02T10:28:35.927888"
     },
     {
       "headline": "한은 \"주택시장 합리적 기대 무너졌다…금리 내리면 집값 급등\"",
@@ -1900,13 +1081,7 @@
       "published_time": "",
       "summary": "한국의 부동산 시장이 합리적 기대에서 벗어난 상태라는 한국은행 분석이 나왔다. 집값이 오를 때는 물론, 내릴 때도 미래엔 집값이 오를 것이란 믿음이 강하게 자리잡고 있다는 있다는 것이다. 한은은 이런 상황에서 기준금리를 인하할 경우 집값이 큰 폭으로 상승하고, 성장률에...",
       "source": "Hankyung",
-      "crawled_at": "2025-12-02T10:28:35.928032",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "negative",
-      "sentiment_score": 0.3,
-      "sentiment_confidence": 0.8,
-      "sentiment_reasoning": "부정적 전망"
+      "crawled_at": "2025-12-02T10:28:35.928032"
     },
     {
       "headline": "미국 상무 “한국 자동차 관세 15%로 11월1일자 소급 인하” 공식 확인",
@@ -1915,13 +1090,7 @@
       "published_time": "",
       "summary": "",
       "source": "MK",
-      "crawled_at": "2025-12-02T10:28:38.030858",
-      "tickers": [],
-      "ticker_names": [],
-      "sentiment": "positive",
-      "sentiment_score": 0.65,
-      "sentiment_confidence": 0.8,
-      "sentiment_reasoning": "긍정적 정책 변화"
+      "crawled_at": "2025-12-02T10:28:38.030858"
     }
   ]
 }

@@ -11,7 +11,7 @@ from crawlers.naver_crawler import NaverFinanceCrawler
 from crawlers.hankyung_crawler import HankyungCrawler
 from crawlers.mk_crawler import MKCrawler
 
-from agents.stockSelectionAgent.stock_matcher import StockMatcher
+from stock_matcher import StockMatcher
 
 class MultiNewsCrawler:
     """여러 뉴스 사이트를 통합 크롤링"""

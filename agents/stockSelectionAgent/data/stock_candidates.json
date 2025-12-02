@@ -1,17 +1,39 @@
 {
-  "timestamp": "2025-12-02T10:04:20.287210",
-  "total_stocks": 9,
+  "timestamp": "2025-12-02T10:30:16.802098",
+  "total_stocks": 10,
   "statistics": {
-    "high_priority": 0,
-    "mid_priority": 1,
-    "low_priority": 8
+    "high_priority": 1,
+    "mid_priority": 3,
+    "low_priority": 6
   },
   "top_candidates": [
     {
       "ticker": "005380",
       "name": "현대차",
       "sector": "자동차",
-      "avg_sentiment": 0.825,
+      "avg_sentiment": 0.875,
+      "news_count": 4,
+      "positive_count": 4,
+      "negative_count": 0,
+      "neutral_count": 0,
+      "positive_ratio": 1.0,
+      "negative_ratio": 0.0,
+      "neutral_ratio": 0.0,
+      "priority": "HIGH",
+      "reasoning": "평균 감성 0.88(긍정적), 총 4개 뉴스, 긍정 4개, 부정 0개",
+      "top_headlines": [
+        "현대차 4% 급등…美 관세 소급 적용 소식에 자동차株 '화색'",
+        "현대차 4% 급등…美 관세 소급 적용 소식에 자동차株 '화색'",
+        "현대차·기아, 韓자동차 관세 인하 소식에 3~4% 강세",
+        "현대차·기아, 韓자동차 관세 인하 소식에 3~4% 강세"
+      ],
+      "final_score": 0.9924999999999999
+    },
+    {
+      "ticker": "000270",
+      "name": "기아",
+      "sector": "자동차",
+      "avg_sentiment": 0.85,
       "news_count": 2,
       "positive_count": 2,
       "negative_count": 0,
@@ -20,18 +42,41 @@
       "negative_ratio": 0.0,
       "neutral_ratio": 0.0,
       "priority": "MID",
-      "reasoning": "평균 감성 0.82(긍정적), 총 2개 뉴스, 긍정 2개, 부정 0개",
+      "reasoning": "평균 감성 0.85(긍정적), 총 2개 뉴스, 긍정 2개, 부정 0개",
       "top_headlines": [
-        "현대차, 자동차 관세 소급인하 소식에 4% 강세[특징주]",
-        "현대차證 “SK스퀘어, 기업가치 제고 계획에…목표가 44% ↑”"
+        "현대차·기아, 韓자동차 관세 인하 소식에 3~4% 강세",
+        "현대차·기아, 韓자동차 관세 인하 소식에 3~4% 강세"
       ],
-      "final_score": 0.8174999999999999
+      "final_score": 0.835
+    },
+    {
+      "ticker": "086790",
+      "name": "하나금융지주",
+      "sector": "금융",
+      "avg_sentiment": 0.562,
+      "news_count": 8,
+      "positive_count": 5,
+      "negative_count": 3,
+      "neutral_count": 0,
+      "positive_ratio": 0.625,
+      "negative_ratio": 0.375,
+      "neutral_ratio": 0.0,
+      "priority": "MID",
+      "reasoning": "평균 감성 0.56(중립적), 총 8개 뉴스, 긍정 5개, 부정 3개",
+      "top_headlines": [
+        "하나증권, 초고액자산가 프리미엄 서비스 전담 센터 오픈",
+        "하나증권, 초고액자산가 고객 전담할 'THE 센터필드 W' 오픈",
+        "하나증권, 초고액 자산가 전담센터 'THE 센터필드 W' 개점",
+        "하나증권, 초고액자산가 고객 전담할 'THE 센터필드 W' 오픈",
+        "하나증권, 초고액 자산가 전담센터 'THE 센터필드 W' 개점"
+      ],
+      "final_score": 0.7534000000000001
     },
     {
       "ticker": "034730",
       "name": "SK",
       "sector": "SK계열",
-      "avg_sentiment": 0.8,
+      "avg_sentiment": 0.85,
       "news_count": 1,
       "positive_count": 1,
       "negative_count": 0,
@@ -40,55 +85,17 @@
       "negative_ratio": 0.0,
       "neutral_ratio": 0.0,
       "priority": "LOW",
-      "reasoning": "평균 감성 0.80(긍정적), 총 1개 뉴스, 긍정 1개, 부정 0개",
+      "reasoning": "평균 감성 0.85(긍정적), 총 1개 뉴스, 긍정 1개, 부정 0개",
       "top_headlines": [
-        "현대차證 “SK스퀘어, 기업가치 제고 계획에…목표가 44% ↑”"
+        "'55만닉스 탈환' SK하이닉스, 3% 강세…삼성전자도 1%↑[핫종목]"
       ],
-      "final_score": 0.6799999999999999
-    },
-    {
-      "ticker": "009540",
-      "name": "한국조선해양",
-      "sector": "조선",
-      "avg_sentiment": 0.8,
-      "news_count": 1,
-      "positive_count": 1,
-      "negative_count": 0,
-      "neutral_count": 0,
-      "positive_ratio": 1.0,
-      "negative_ratio": 0.0,
-      "neutral_ratio": 0.0,
-      "priority": "LOW",
-      "reasoning": "평균 감성 0.80(긍정적), 총 1개 뉴스, 긍정 1개, 부정 0개",
-      "top_headlines": [
-        "\"내년부터 MASGA 주인공\"HD현대중공업 목표가↑-iM"
-      ],
-      "final_score": 0.6799999999999999
-    },
-    {
-      "ticker": "267250",
-      "name": "현대중공업지주",
-      "sector": "중공업",
-      "avg_sentiment": 0.8,
-      "news_count": 1,
-      "positive_count": 1,
-      "negative_count": 0,
-      "neutral_count": 0,
-      "positive_ratio": 1.0,
-      "negative_ratio": 0.0,
-      "neutral_ratio": 0.0,
-      "priority": "LOW",
-      "reasoning": "평균 감성 0.80(긍정적), 총 1개 뉴스, 긍정 1개, 부정 0개",
-      "top_headlines": [
-        "\"내년부터 MASGA 주인공\"HD현대중공업 목표가↑-iM"
-      ],
-      "final_score": 0.6799999999999999
+      "final_score": 0.715
     },
     {
       "ticker": "005930",
       "name": "삼성전자",
       "sector": "반도체/전자",
-      "avg_sentiment": 0.8,
+      "avg_sentiment": 0.85,
       "news_count": 1,
       "positive_count": 1,
       "negative_count": 0,
@@ -97,17 +104,17 @@
       "negative_ratio": 0.0,
       "neutral_ratio": 0.0,
       "priority": "LOW",
-      "reasoning": "평균 감성 0.80(긍정적), 총 1개 뉴스, 긍정 1개, 부정 0개",
+      "reasoning": "평균 감성 0.85(긍정적), 총 1개 뉴스, 긍정 1개, 부정 0개",
       "top_headlines": [
-        "다올證 “삼성바이오로직스, 내년부터 성장 가속화… 목표가 230만원”"
+        "'55만닉스 탈환' SK하이닉스, 3% 강세…삼성전자도 1%↑[핫종목]"
       ],
-      "final_score": 0.6799999999999999
+      "final_score": 0.715
     },
     {
-      "ticker": "207940",
-      "name": "삼성바이오로직스",
-      "sector": "바이오",
-      "avg_sentiment": 0.8,
+      "ticker": "000660",
+      "name": "SK하이닉스",
+      "sector": "반도체/전자",
+      "avg_sentiment": 0.85,
       "news_count": 1,
       "positive_count": 1,
       "negative_count": 0,
@@ -116,11 +123,32 @@
       "negative_ratio": 0.0,
       "neutral_ratio": 0.0,
       "priority": "LOW",
-      "reasoning": "평균 감성 0.80(긍정적), 총 1개 뉴스, 긍정 1개, 부정 0개",
+      "reasoning": "평균 감성 0.85(긍정적), 총 1개 뉴스, 긍정 1개, 부정 0개",
       "top_headlines": [
-        "다올證 “삼성바이오로직스, 내년부터 성장 가속화… 목표가 230만원”"
+        "'55만닉스 탈환' SK하이닉스, 3% 강세…삼성전자도 1%↑[핫종목]"
       ],
-      "final_score": 0.6799999999999999
+      "final_score": 0.715
+    },
+    {
+      "ticker": "006800",
+      "name": "미래에셋증권",
+      "sector": "금융",
+      "avg_sentiment": 0.583,
+      "news_count": 3,
+      "positive_count": 1,
+      "negative_count": 0,
+      "neutral_count": 2,
+      "positive_ratio": 0.333,
+      "negative_ratio": 0.0,
+      "neutral_ratio": 0.667,
+      "priority": "MID",
+      "reasoning": "평균 감성 0.58(중립적), 총 3개 뉴스, 긍정 1개, 부정 0개",
+      "top_headlines": [
+        "미래에셋증권, '미래에셋 CD금리 플러스' ETN 신규 상장",
+        "미래에셋, 'TIGER TOP10' → 'TIGER 코리아TOP10' 명칭 변경",
+        "미래에셋, 'TIGER TOP10'→'TIGER 코리아TOP10' 명칭 바꿔"
+      ],
+      "final_score": 0.6680999999999999
     },
     {
       "ticker": "003550",
@@ -145,53 +173,137 @@
       "ticker": "316140",
       "name": "우리금융지주",
       "sector": "금융",
-      "avg_sentiment": 0.412,
+      "avg_sentiment": 0.438,
       "news_count": 8,
-      "positive_count": 2,
+      "positive_count": 3,
       "negative_count": 5,
-      "neutral_count": 1,
-      "positive_ratio": 0.25,
+      "neutral_count": 0,
+      "positive_ratio": 0.375,
       "negative_ratio": 0.625,
-      "neutral_ratio": 0.125,
+      "neutral_ratio": 0.0,
       "priority": "LOW",
-      "reasoning": "평균 감성 0.41(중립적), 총 8개 뉴스, 긍정 2개, 부정 5개",
+      "reasoning": "평균 감성 0.44(중립적), 총 8개 뉴스, 긍정 3개, 부정 5개",
       "top_headlines": [
         "행복을 더하는 기부, 기부로 바꾸는 내일",
+        "[게시판] 우리카드, 디지털 정기 결제 캐시백 이벤트",
         "이창용 총재 \"버블 있어도 AI붐은 계속…반도체 강국 韓은 안전\"",
-        "임종룡 우리금융 회장 연임할까?… 차기회장 후보군 4명 압축",
         "치솟은 환율에 韓 '달러 GDP' 올해 뒷걸음질",
         "기혼여성 7명 중 1명 '경력단절'"
       ],
-      "final_score": 0.5484
+      "final_score": 0.5666
     },
     {
-      "ticker": "086790",
-      "name": "하나금융지주",
+      "ticker": "105560",
+      "name": "KB금융",
       "sector": "금융",
-      "avg_sentiment": 0.233,
-      "news_count": 3,
+      "avg_sentiment": 0.5,
+      "news_count": 1,
       "positive_count": 0,
-      "negative_count": 3,
-      "neutral_count": 0,
+      "negative_count": 0,
+      "neutral_count": 1,
       "positive_ratio": 0.0,
-      "negative_ratio": 1.0,
-      "neutral_ratio": 0.0,
+      "negative_ratio": 0.0,
+      "neutral_ratio": 1.0,
       "priority": "LOW",
-      "reasoning": "평균 감성 0.23(부정적), 총 3개 뉴스, 긍정 0개, 부정 3개",
+      "reasoning": "평균 감성 0.50(중립적), 총 1개 뉴스, 긍정 0개, 부정 0개",
       "top_headlines": [
-        "면세업계 고환율 '직격탄'…직원조차 \"백화점 가세요\"",
-        "코스피 하락, 환율 7개월 만에 최고치",
-        "검찰 수사받는 PEF '수두룩'…자정작용 시급"
+        "KB증권, 4분기 '소비자보호의 날' 행사…5대 뉴스 선정"
       ],
-      "final_score": 0.3231
+      "final_score": 0.47
     }
   ],
   "all_stocks": {
-    "005380": {
-      "ticker": "005380",
-      "name": "현대차",
+    "006800": {
+      "ticker": "006800",
+      "name": "미래에셋증권",
+      "sector": "금융",
+      "avg_sentiment": 0.583,
+      "news_count": 3,
+      "positive_count": 1,
+      "negative_count": 0,
+      "neutral_count": 2,
+      "positive_ratio": 0.333,
+      "negative_ratio": 0.0,
+      "neutral_ratio": 0.667,
+      "priority": "MID",
+      "reasoning": "평균 감성 0.58(중립적), 총 3개 뉴스, 긍정 1개, 부정 0개",
+      "top_headlines": [
+        "미래에셋증권, '미래에셋 CD금리 플러스' ETN 신규 상장",
+        "미래에셋, 'TIGER TOP10' → 'TIGER 코리아TOP10' 명칭 변경",
+        "미래에셋, 'TIGER TOP10'→'TIGER 코리아TOP10' 명칭 바꿔"
+      ],
+      "final_score": 0.6680999999999999
+    },
+    "316140": {
+      "ticker": "316140",
+      "name": "우리금융지주",
+      "sector": "금융",
+      "avg_sentiment": 0.438,
+      "news_count": 8,
+      "positive_count": 3,
+      "negative_count": 5,
+      "neutral_count": 0,
+      "positive_ratio": 0.375,
+      "negative_ratio": 0.625,
+      "neutral_ratio": 0.0,
+      "priority": "LOW",
+      "reasoning": "평균 감성 0.44(중립적), 총 8개 뉴스, 긍정 3개, 부정 5개",
+      "top_headlines": [
+        "행복을 더하는 기부, 기부로 바꾸는 내일",
+        "[게시판] 우리카드, 디지털 정기 결제 캐시백 이벤트",
+        "이창용 총재 \"버블 있어도 AI붐은 계속…반도체 강국 韓은 안전\"",
+        "치솟은 환율에 韓 '달러 GDP' 올해 뒷걸음질",
+        "기혼여성 7명 중 1명 '경력단절'"
+      ],
+      "final_score": 0.5666
+    },
+    "086790": {
+      "ticker": "086790",
+      "name": "하나금융지주",
+      "sector": "금융",
+      "avg_sentiment": 0.562,
+      "news_count": 8,
+      "positive_count": 5,
+      "negative_count": 3,
+      "neutral_count": 0,
+      "positive_ratio": 0.625,
+      "negative_ratio": 0.375,
+      "neutral_ratio": 0.0,
+      "priority": "MID",
+      "reasoning": "평균 감성 0.56(중립적), 총 8개 뉴스, 긍정 5개, 부정 3개",
+      "top_headlines": [
+        "하나증권, 초고액자산가 프리미엄 서비스 전담 센터 오픈",
+        "하나증권, 초고액자산가 고객 전담할 'THE 센터필드 W' 오픈",
+        "하나증권, 초고액 자산가 전담센터 'THE 센터필드 W' 개점",
+        "하나증권, 초고액자산가 고객 전담할 'THE 센터필드 W' 오픈",
+        "하나증권, 초고액 자산가 전담센터 'THE 센터필드 W' 개점"
+      ],
+      "final_score": 0.7534000000000001
+    },
+    "105560": {
+      "ticker": "105560",
+      "name": "KB금융",
+      "sector": "금융",
+      "avg_sentiment": 0.5,
+      "news_count": 1,
+      "positive_count": 0,
+      "negative_count": 0,
+      "neutral_count": 1,
+      "positive_ratio": 0.0,
+      "negative_ratio": 0.0,
+      "neutral_ratio": 1.0,
+      "priority": "LOW",
+      "reasoning": "평균 감성 0.50(중립적), 총 1개 뉴스, 긍정 0개, 부정 0개",
+      "top_headlines": [
+        "KB증권, 4분기 '소비자보호의 날' 행사…5대 뉴스 선정"
+      ],
+      "final_score": 0.47
+    },
+    "000270": {
+      "ticker": "000270",
+      "name": "기아",
       "sector": "자동차",
-      "avg_sentiment": 0.825,
+      "avg_sentiment": 0.85,
       "news_count": 2,
       "positive_count": 2,
       "negative_count": 0,
@@ -200,18 +312,40 @@
       "negative_ratio": 0.0,
       "neutral_ratio": 0.0,
       "priority": "MID",
-      "reasoning": "평균 감성 0.82(긍정적), 총 2개 뉴스, 긍정 2개, 부정 0개",
+      "reasoning": "평균 감성 0.85(긍정적), 총 2개 뉴스, 긍정 2개, 부정 0개",
       "top_headlines": [
-        "현대차, 자동차 관세 소급인하 소식에 4% 강세[특징주]",
-        "현대차證 “SK스퀘어, 기업가치 제고 계획에…목표가 44% ↑”"
+        "현대차·기아, 韓자동차 관세 인하 소식에 3~4% 강세",
+        "현대차·기아, 韓자동차 관세 인하 소식에 3~4% 강세"
       ],
-      "final_score": 0.8174999999999999
+      "final_score": 0.835
+    },
+    "005380": {
+      "ticker": "005380",
+      "name": "현대차",
+      "sector": "자동차",
+      "avg_sentiment": 0.875,
+      "news_count": 4,
+      "positive_count": 4,
+      "negative_count": 0,
+      "neutral_count": 0,
+      "positive_ratio": 1.0,
+      "negative_ratio": 0.0,
+      "neutral_ratio": 0.0,
+      "priority": "HIGH",
+      "reasoning": "평균 감성 0.88(긍정적), 총 4개 뉴스, 긍정 4개, 부정 0개",
+      "top_headlines": [
+        "현대차 4% 급등…美 관세 소급 적용 소식에 자동차株 '화색'",
+        "현대차 4% 급등…美 관세 소급 적용 소식에 자동차株 '화색'",
+        "현대차·기아, 韓자동차 관세 인하 소식에 3~4% 강세",
+        "현대차·기아, 韓자동차 관세 인하 소식에 3~4% 강세"
+      ],
+      "final_score": 0.9924999999999999
     },
     "034730": {
       "ticker": "034730",
       "name": "SK",
       "sector": "SK계열",
-      "avg_sentiment": 0.8,
+      "avg_sentiment": 0.85,
       "news_count": 1,
       "positive_count": 1,
       "negative_count": 0,
@@ -220,78 +354,17 @@
       "negative_ratio": 0.0,
       "neutral_ratio": 0.0,
       "priority": "LOW",
-      "reasoning": "평균 감성 0.80(긍정적), 총 1개 뉴스, 긍정 1개, 부정 0개",
+      "reasoning": "평균 감성 0.85(긍정적), 총 1개 뉴스, 긍정 1개, 부정 0개",
       "top_headlines": [
-        "현대차證 “SK스퀘어, 기업가치 제고 계획에…목표가 44% ↑”"
+        "'55만닉스 탈환' SK하이닉스, 3% 강세…삼성전자도 1%↑[핫종목]"
       ],
-      "final_score": 0.6799999999999999
-    },
-    "009540": {
-      "ticker": "009540",
-      "name": "한국조선해양",
-      "sector": "조선",
-      "avg_sentiment": 0.8,
-      "news_count": 1,
-      "positive_count": 1,
-      "negative_count": 0,
-      "neutral_count": 0,
-      "positive_ratio": 1.0,
-      "negative_ratio": 0.0,
-      "neutral_ratio": 0.0,
-      "priority": "LOW",
-      "reasoning": "평균 감성 0.80(긍정적), 총 1개 뉴스, 긍정 1개, 부정 0개",
-      "top_headlines": [
-        "\"내년부터 MASGA 주인공\"HD현대중공업 목표가↑-iM"
-      ],
-      "final_score": 0.6799999999999999
-    },
-    "267250": {
-      "ticker": "267250",
-      "name": "현대중공업지주",
-      "sector": "중공업",
-      "avg_sentiment": 0.8,
-      "news_count": 1,
-      "positive_count": 1,
-      "negative_count": 0,
-      "neutral_count": 0,
-      "positive_ratio": 1.0,
-      "negative_ratio": 0.0,
-      "neutral_ratio": 0.0,
-      "priority": "LOW",
-      "reasoning": "평균 감성 0.80(긍정적), 총 1개 뉴스, 긍정 1개, 부정 0개",
-      "top_headlines": [
-        "\"내년부터 MASGA 주인공\"HD현대중공업 목표가↑-iM"
-      ],
-      "final_score": 0.6799999999999999
-    },
-    "316140": {
-      "ticker": "316140",
-      "name": "우리금융지주",
-      "sector": "금융",
-      "avg_sentiment": 0.412,
-      "news_count": 8,
-      "positive_count": 2,
-      "negative_count": 5,
-      "neutral_count": 1,
-      "positive_ratio": 0.25,
-      "negative_ratio": 0.625,
-      "neutral_ratio": 0.125,
-      "priority": "LOW",
-      "reasoning": "평균 감성 0.41(중립적), 총 8개 뉴스, 긍정 2개, 부정 5개",
-      "top_headlines": [
-        "행복을 더하는 기부, 기부로 바꾸는 내일",
-        "이창용 총재 \"버블 있어도 AI붐은 계속…반도체 강국 韓은 안전\"",
-        "임종룡 우리금융 회장 연임할까?… 차기회장 후보군 4명 압축",
-        "치솟은 환율에 韓 '달러 GDP' 올해 뒷걸음질",
-        "기혼여성 7명 중 1명 '경력단절'"
-      ],
-      "final_score": 0.5484
+      "final_score": 0.715
     },
     "005930": {
       "ticker": "005930",
       "name": "삼성전자",
       "sector": "반도체/전자",
-      "avg_sentiment": 0.8,
+      "avg_sentiment": 0.85,
       "news_count": 1,
       "positive_count": 1,
       "negative_count": 0,
@@ -300,17 +373,17 @@
       "negative_ratio": 0.0,
       "neutral_ratio": 0.0,
       "priority": "LOW",
-      "reasoning": "평균 감성 0.80(긍정적), 총 1개 뉴스, 긍정 1개, 부정 0개",
+      "reasoning": "평균 감성 0.85(긍정적), 총 1개 뉴스, 긍정 1개, 부정 0개",
       "top_headlines": [
-        "다올證 “삼성바이오로직스, 내년부터 성장 가속화… 목표가 230만원”"
+        "'55만닉스 탈환' SK하이닉스, 3% 강세…삼성전자도 1%↑[핫종목]"
       ],
-      "final_score": 0.6799999999999999
+      "final_score": 0.715
     },
-    "207940": {
-      "ticker": "207940",
-      "name": "삼성바이오로직스",
-      "sector": "바이오",
-      "avg_sentiment": 0.8,
+    "000660": {
+      "ticker": "000660",
+      "name": "SK하이닉스",
+      "sector": "반도체/전자",
+      "avg_sentiment": 0.85,
       "news_count": 1,
       "positive_count": 1,
       "negative_count": 0,
@@ -319,32 +392,11 @@
       "negative_ratio": 0.0,
       "neutral_ratio": 0.0,
       "priority": "LOW",
-      "reasoning": "평균 감성 0.80(긍정적), 총 1개 뉴스, 긍정 1개, 부정 0개",
+      "reasoning": "평균 감성 0.85(긍정적), 총 1개 뉴스, 긍정 1개, 부정 0개",
       "top_headlines": [
-        "다올證 “삼성바이오로직스, 내년부터 성장 가속화… 목표가 230만원”"
+        "'55만닉스 탈환' SK하이닉스, 3% 강세…삼성전자도 1%↑[핫종목]"
       ],
-      "final_score": 0.6799999999999999
-    },
-    "086790": {
-      "ticker": "086790",
-      "name": "하나금융지주",
-      "sector": "금융",
-      "avg_sentiment": 0.233,
-      "news_count": 3,
-      "positive_count": 0,
-      "negative_count": 3,
-      "neutral_count": 0,
-      "positive_ratio": 0.0,
-      "negative_ratio": 1.0,
-      "neutral_ratio": 0.0,
-      "priority": "LOW",
-      "reasoning": "평균 감성 0.23(부정적), 총 3개 뉴스, 긍정 0개, 부정 3개",
-      "top_headlines": [
-        "면세업계 고환율 '직격탄'…직원조차 \"백화점 가세요\"",
-        "코스피 하락, 환율 7개월 만에 최고치",
-        "검찰 수사받는 PEF '수두룩'…자정작용 시급"
-      ],
-      "final_score": 0.3231
+      "final_score": 0.715
     },
     "003550": {
       "ticker": "003550",
