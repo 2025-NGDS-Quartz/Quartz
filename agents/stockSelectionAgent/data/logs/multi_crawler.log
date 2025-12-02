@@ -115,3 +115,43 @@
 2025-12-02 09:17:17,572 [INFO] __main__: 
 ⏱️  Completed in 20.48 seconds
 2025-12-02 09:17:17,572 [INFO] __main__: 📈 Total news collected: 119
+2025-12-02 09:26:03,460 [INFO] __main__: Crawling from naver...
+2025-12-02 09:26:03,460 [INFO] crawlers.base_crawler.NaverFinance: Crawling NaverFinance page 1: https://finance.naver.com/news/news_list.naver?mode=LSS2D&section_id=101&section_id2=258&page=1
+2025-12-02 09:26:03,667 [INFO] crawlers.base_crawler.NaverFinance: Parsed 20 unique news items from NaverFinance
+2025-12-02 09:26:03,667 [INFO] crawlers.base_crawler.NaverFinance: Waiting 2.36 seconds...
+2025-12-02 09:26:06,028 [INFO] crawlers.base_crawler.NaverFinance: Crawling NaverFinance page 2: https://finance.naver.com/news/news_list.naver?mode=LSS2D&section_id=101&section_id2=258&page=2
+2025-12-02 09:26:06,162 [INFO] crawlers.base_crawler.NaverFinance: Parsed 20 unique news items from NaverFinance
+2025-12-02 09:26:06,162 [INFO] crawlers.base_crawler.NaverFinance: Waiting 2.69 seconds...
+2025-12-02 09:26:08,854 [INFO] crawlers.base_crawler.NaverFinance: Crawling NaverFinance page 3: https://finance.naver.com/news/news_list.naver?mode=LSS2D&section_id=101&section_id2=258&page=3
+2025-12-02 09:26:08,947 [INFO] crawlers.base_crawler.NaverFinance: Parsed 15 unique news items from NaverFinance
+2025-12-02 09:26:08,947 [INFO] __main__: ✅ naver: 55 news
+2025-12-02 09:26:10,953 [INFO] __main__: Crawling from hankyung...
+2025-12-02 09:26:10,953 [INFO] crawlers.base_crawler.Hankyung: Crawling Hankyung page 1: https://www.hankyung.com/economy/macro?page=1
+2025-12-02 09:26:11,427 [INFO] crawlers.base_crawler.Hankyung: Parsed 20 unique news items from Hankyung
+2025-12-02 09:26:11,427 [INFO] crawlers.base_crawler.Hankyung: Waiting 2.29 seconds...
+2025-12-02 09:26:13,724 [INFO] crawlers.base_crawler.Hankyung: Crawling Hankyung page 2: https://www.hankyung.com/economy/macro?page=2
+2025-12-02 09:26:14,025 [INFO] crawlers.base_crawler.Hankyung: Parsed 20 unique news items from Hankyung
+2025-12-02 09:26:14,025 [INFO] crawlers.base_crawler.Hankyung: Waiting 2.62 seconds...
+2025-12-02 09:26:16,649 [INFO] crawlers.base_crawler.Hankyung: Crawling Hankyung page 3: https://www.hankyung.com/economy/macro?page=3
+2025-12-02 09:26:16,877 [INFO] crawlers.base_crawler.Hankyung: Parsed 20 unique news items from Hankyung
+2025-12-02 09:26:16,877 [INFO] __main__: ✅ hankyung: 60 news
+2025-12-02 09:26:18,882 [INFO] __main__: Crawling from mk...
+2025-12-02 09:26:18,882 [INFO] crawlers.base_crawler.MK: Crawling MK page 1: https://www.mk.co.kr/news/economy/?page=1
+2025-12-02 09:26:20,058 [INFO] crawlers.base_crawler.MK: Parsed 1 unique news items from MK
+2025-12-02 09:26:20,058 [INFO] crawlers.base_crawler.MK: Waiting 1.74 seconds...
+2025-12-02 09:26:21,807 [INFO] crawlers.base_crawler.MK: Crawling MK page 2: https://www.mk.co.kr/news/economy/?page=2
+2025-12-02 09:26:22,014 [INFO] crawlers.base_crawler.MK: Parsed 0 unique news items from MK
+2025-12-02 09:26:22,014 [INFO] crawlers.base_crawler.MK: Waiting 2.90 seconds...
+2025-12-02 09:26:24,915 [INFO] crawlers.base_crawler.MK: Crawling MK page 3: https://www.mk.co.kr/news/economy/?page=3
+2025-12-02 09:26:24,967 [INFO] crawlers.base_crawler.MK: Parsed 0 unique news items from MK
+2025-12-02 09:26:24,967 [INFO] __main__: ✅ mk: 1 news
+2025-12-02 09:26:26,977 [INFO] __main__: 
+💾 Saved 116 news to data/news_raw/20251202_09.json
+2025-12-02 09:26:26,977 [INFO] __main__: 📊 Source breakdown: {'NaverFinance': 55, 'Hankyung': 60, 'MK': 1}
+2025-12-02 09:26:26,977 [INFO] __main__: 
+⏱️  Completed in 23.52 seconds
+2025-12-02 09:26:26,977 [INFO] __main__: 📈 Total news collected: 116
+2025-12-02 09:26:39,095 [INFO] __main__: Crawling from naver...
+2025-12-02 09:26:39,096 [INFO] crawlers.base_crawler.NaverFinance: Crawling NaverFinance page 1: https://finance.naver.com/news/news_list.naver?mode=LSS2D&section_id=101&section_id2=258&page=1
+2025-12-02 09:26:39,235 [INFO] crawlers.base_crawler.NaverFinance: Parsed 20 unique news items from NaverFinance
+2025-12-02 09:26:39,235 [INFO] crawlers.base_crawler.NaverFinance: Waiting 2.37 seconds...
