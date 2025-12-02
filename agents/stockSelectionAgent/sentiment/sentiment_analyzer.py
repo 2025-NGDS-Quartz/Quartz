@@ -17,7 +17,7 @@ class SentimentAnalyzer:
     """GPT 기반 뉴스 감성 분석"""
     
     def __init__(self, batch_size: int = 20):
-        self.client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
+        self.client = OpenAI(api_key=os.getenv('GPT_API_KEY'))
         self.batch_size = batch_size
         self.cache_file = Path("data/sentiment_cache.json")
         self.cache = self._load_cache()
