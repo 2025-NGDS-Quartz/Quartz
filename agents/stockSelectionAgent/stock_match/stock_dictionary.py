@@ -1,20 +1,23 @@
+# stock_dictionary.py
+
 from typing import Dict, List, Set
 import json
 from pathlib import Path
 
 class StockDictionary:
-    """한국 주식 종목 사전"""
+    """한국 주식 종목 사전 (확장 버전)"""
     
     def __init__(self):
         self.ticker_to_name: Dict[str, str] = {}
         self.name_to_ticker: Dict[str, str] = {}
-        self.keywords: Dict[str, List[str]] = {}  # 종목별 키워드
+        self.keywords: Dict[str, List[str]] = {}
+        self.sectors: Dict[str, str] = {}  # 종목별 섹터
         self._load_stock_data()
     
     def _load_stock_data(self):
-        """종목 데이터 로드"""
-        # 주요 50개 종목 (시가총액 상위)
+        """종목 데이터 로드 (100개 이상)"""
         stocks = {
+            # ==================== 반도체/전자 ====================
             '005930': {
                 'name': '삼성전자',
                 'keywords': ['삼성전자', '삼성', 'Samsung', '삼성 전자'],
@@ -252,7 +255,7 @@ class StockDictionary:
             },
             '316140': {
                 'name': '우리금융지주',
-                'keywords': ['우리금융지주', '우리은행', '우리금융'],
+                'keywords': ['우리금융지주', '우리은행', '우리금융', '우리'],
                 'sector': '금융'
             },
             '032830': {
@@ -471,15 +474,18 @@ class StockDictionary:
             },
         }
         
+        # 데이터 로드
         for ticker, info in stocks.items():
             self.ticker_to_name[ticker] = info['name']
             self.name_to_ticker[info['name']] = ticker
             self.keywords[ticker] = info['keywords']
+            self.sectors[ticker] = info.get('sector', 'Unknown')
     
     def find_tickers(self, text: str) -> List[str]:
         """텍스트에서 종목 티커 찾기"""
         found_tickers = set()
         
+        # 키워드 매칭
         for ticker, keywords in self.keywords.items():
             for keyword in keywords:
                 if keyword in text:
@@ -496,16 +502,45 @@ class StockDictionary:
         """종목명으로 티커 조회"""
         return self.name_to_ticker.get(name, "")
     
+    def get_sector(self, ticker: str) -> str:
+        """티커로 섹터 조회"""
+        return self.sectors.get(ticker, "Unknown")
+    
+    def get_tickers_by_sector(self, sector: str) -> List[str]:
+        """섹터별 종목 리스트"""
+        return [
+            ticker for ticker, sec in self.sectors.items() 
+            if sec == sector
+        ]
+    
+    def get_all_sectors(self) -> List[str]:
+        """모든 섹터 리스트"""
+        return list(set(self.sectors.values()))
+    
+    def get_statistics(self) -> Dict:
+        """통계 정보"""
+        return {
+            'total_stocks': len(self.ticker_to_name),
+            'total_sectors': len(set(self.sectors.values())),
+            'sectors': {
+                sector: len(self.get_tickers_by_sector(sector))
+                for sector in self.get_all_sectors()
+            }
+        }
+    
     def save_to_file(self, filepath: str = "data/stock_dictionary.json"):
         """사전을 파일로 저장"""
         data = {
             'ticker_to_name': self.ticker_to_name,
-            'keywords': self.keywords
+            'keywords': self.keywords,
+            'sectors': self.sectors
         }
         
         Path(filepath).parent.mkdir(parents=True, exist_ok=True)
         with open(filepath, 'w', encoding='utf-8') as f:
             json.dump(data, f, ensure_ascii=False, indent=2)
+        
+        print(f"✅ Saved to {filepath}")
     
     def load_from_file(self, filepath: str = "data/stock_dictionary.json"):
         """파일에서 사전 로드"""
@@ -514,28 +549,54 @@ class StockDictionary:
         
         self.ticker_to_name = data['ticker_to_name']
         self.keywords = data['keywords']
+        self.sectors = data.get('sectors', {})
         
         # name_to_ticker 재생성
         self.name_to_ticker = {
             name: ticker for ticker, name in self.ticker_to_name.items()
         }
+        
+        print(f"✅ Loaded from {filepath}")
 
 
-# 테스트
+# 테스트 및 통계
 if __name__ == "__main__":
     dictionary = StockDictionary()
     
-    # 테스트
+    # 통계 출력
+    stats = dictionary.get_statistics()
+    print("\n📊 종목 사전 통계")
+    print("=" * 50)
+    print(f"총 종목 수: {stats['total_stocks']}개")
+    print(f"총 섹터 수: {stats['total_sectors']}개")
+    print("\n섹터별 종목 수:")
+    for sector, count in sorted(stats['sectors'].items(), key=lambda x: -x[1]):
+        print(f"  {sector}: {count}개")
+    
+    # 테스트 헤드라인
+    print("\n\n🧪 테스트")
+    print("=" * 50)
     headlines = [
-        "삼성전자, 3분기 실적 발표",
-        "SK하이닉스·삼성전자 반도체 수출 증가",
-        "네이버, AI 챗봇 서비스 출시",
-        "현대차·기아, 전기차 판매 호조"
+        "삼성전자·SK하이닉스, 반도체 수출 증가",
+        "네이버·카카오, AI 챗봇 경쟁 가속화",
+        "현대차·기아, 전기차 판매 호조",
+        "셀트리온, 바이오시밀러 미국 시장 진출",
+        "POSCO, 2차전지 소재 사업 확대",
+        "KB금융·신한지주, 디지털 금융 투자 확대",
+        "LG에너지솔루션, 북미 공장 증설",
+        "하이브, BTS 컴백 앨범 발표"
     ]
     
     for headline in headlines:
         tickers = dictionary.find_tickers(headline)
         print(f"\n헤드라인: {headline}")
-        print(f"관련 종목: {tickers}")
+        print(f"관련 종목 ({len(tickers)}개):")
         for ticker in tickers:
-            print(f"  - {ticker}: {dictionary.get_name(ticker)}")
+            name = dictionary.get_name(ticker)
+            sector = dictionary.get_sector(ticker)
+            print(f"  - {ticker}: {name} ({sector})")
+    
+    # 파일로 저장
+    print("\n\n💾 저장 중...")
+    dictionary.save_to_file()
+    print("✅ 완료!")

@@ -1,20 +1,23 @@
+# news_pipeline.py (완전 버전)
+
 import json
 import logging
 from pathlib import Path
-from typing import List, Dict
-from datetime import datetime
 from typing import List, Dict, Optional
+from datetime import datetime
 
 from stock_matcher import StockMatcher
 from sentiment.sentiment_analyzer import SentimentAnalyzer
+from stock_aggregator import StockAggregator
 
 class NewsPipeline:
-    """뉴스 크롤링 → 종목 매칭 → 감성 분석 통합 파이프라인"""
+    """뉴스 크롤링 → 종목 매칭 → 감성 분석 → 종목별 집계 통합 파이프라인"""
     
     def __init__(self):
         self.setup_logging()
         self.stock_matcher = StockMatcher()
         self.sentiment_analyzer = SentimentAnalyzer(batch_size=20)
+        self.aggregator = StockAggregator()
         self.logger = logging.getLogger(__name__)
     
     def setup_logging(self):
@@ -126,11 +129,22 @@ class NewsPipeline:
             # 1. 뉴스 로드
             news_items = self.load_news_file(input_file)
             
-            # 2. 처리
+            # 2. 처리 (종목 매칭 + 감성 분석)
             processed_news = self.process_news(news_items)
             
             # 3. 저장
             output_path = self.save_processed_news(processed_news, output_file)
+            
+            # ✅ 4. 종목별 집계 (새로 추가)
+            self.logger.info("\n" + "="*60)
+            self.logger.info("📊 Step 3: Stock Aggregation")
+            self.logger.info("="*60)
+            
+            aggregated = self.aggregator.aggregate_by_stock(processed_news)
+            candidate_path = self.aggregator.save_candidates(aggregated)
+            
+            # 상위 10개 출력
+            self.aggregator.print_summary(aggregated, top_n=10)
             
             # 완료
             elapsed = (datetime.now() - start_time).total_seconds()
@@ -138,6 +152,9 @@ class NewsPipeline:
             self.logger.info("\n" + "✅ "*30)
             self.logger.info(f"PIPELINE COMPLETED in {elapsed:.2f}s")
             self.logger.info("✅ "*30)
+            self.logger.info(f"\n📁 Outputs:")
+            self.logger.info(f"  - Processed news: {output_path}")
+            self.logger.info(f"  - Stock candidates: {candidate_path}")
             
             return output_path
             
@@ -167,30 +184,6 @@ def main():
     output_path = pipeline.run(str(latest_file))
     
     print(f"\n✅ Done!")
-    print(f"📁 Output: {output_path}")
-    
-    # 결과 미리보기
-    print("\n" + "="*60)
-    print("📊 Preview of processed news:")
-    print("="*60)
-    
-    with open(output_path, 'r', encoding='utf-8') as f:
-        data = json.load(f)
-    
-    # 처음 5개만 출력
-    for i, item in enumerate(data['news'][:5], 1):
-        sentiment_emoji = {
-            'positive': '😊',
-            'negative': '😞',
-            'neutral': '😐'
-        }
-        emoji = sentiment_emoji.get(item.get('sentiment', 'neutral'), '❓')
-        
-        print(f"\n[{i}] {emoji} {item.get('sentiment', 'N/A').upper()}")
-        print(f"헤드라인: {item['headline'][:50]}...")
-        print(f"관련 종목: {item.get('ticker_names', [])}")
-        print(f"감성 점수: {item.get('sentiment_score', 0):.2f}")
-        print(f"신뢰도: {item.get('sentiment_confidence', 0):.2f}")
 
 
 if __name__ == "__main__":
