@@ -1,10 +1,21 @@
+import os
 import json
 import logging
 from pathlib import Path
-from typing import List, Dict
+from typing import List, Dict, Optional
 from datetime import datetime
 from collections import defaultdict
+
+import boto3
+from botocore.exceptions import ClientError
+
 from stock_match.stock_dictionary import StockDictionary
+
+# AWS S3 설정
+AWS_REGION = os.getenv("AWS_REGION", "ap-northeast-2")
+S3_BUCKET_NAME = os.getenv("S3_BUCKET_NAME", "quartz-bucket")
+S3_CANDIDATES_KEY = "select-ticker/stock_candidates.json"
+
 
 class StockAggregator:
     """종목별 뉴스 집계 및 분석"""
@@ -117,36 +128,55 @@ class StockAggregator:
         
         return reasoning
     
-    def get_top_stocks(self, aggregated: Dict[str, Dict], top_n: int = 20) -> List[Dict]:
-        """상위 N개 종목 선정"""
-        # 우선순위 점수 계산
-        def calculate_score(stock_data: Dict) -> float:
-            priority_weight = {'HIGH': 3.0, 'MID': 2.0, 'LOW': 1.0}
+    def get_top_stocks(self, aggregated: Dict[str, Dict], top_n: int = 5) -> List[Dict]:
+        """
+        상위 N개 종목 선정 (중요도 기반 필터링)
+        
+        중요도 점수 계산:
+        - 시총 등급 가중치: 25% (LARGE=1.0, MID=0.6, SMALL=0.3)
+        - 감성 점수: 40%
+        - 뉴스 개수 (언론 언급): 25%
+        - 우선순위: 10%
+        """
+        def calculate_importance_score(stock_data: Dict) -> float:
+            ticker = stock_data['ticker']
             
-            score = stock_data['avg_sentiment'] * 0.7  # 감성 점수 70%
-            score += (stock_data['news_count'] / 10) * 0.2  # 뉴스 개수 20%
-            score += priority_weight[stock_data['priority']] * 0.1  # 우선순위 10%
+            # 시총 가중치 (25%)
+            market_cap_weight = self.dictionary.get_market_cap_weight(ticker)
+            
+            # 우선순위 가중치
+            priority_weight = {'HIGH': 1.0, 'MID': 0.6, 'LOW': 0.3}
+            
+            # 뉴스 개수 정규화 (최대 10개 기준)
+            news_score = min(stock_data['news_count'] / 10, 1.0)
+            
+            # 최종 점수 계산
+            score = market_cap_weight * 0.25  # 시총 25%
+            score += stock_data['avg_sentiment'] * 0.40  # 감성 40%
+            score += news_score * 0.25  # 뉴스 개수 25%
+            score += priority_weight.get(stock_data['priority'], 0.3) * 0.10  # 우선순위 10%
             
             return score
         
         # 점수 계산 및 정렬
         stock_list = list(aggregated.values())
         for stock in stock_list:
-            stock['final_score'] = calculate_score(stock)
+            stock['final_score'] = calculate_importance_score(stock)
+            stock['market_cap_tier'] = self.dictionary.get_market_cap_tier(stock['ticker'])
         
-        # 상위 N개 선정
+        # 상위 N개 선정 (기본 5개)
         top_stocks = sorted(stock_list, key=lambda x: x['final_score'], reverse=True)[:top_n]
         
         return top_stocks
     
     def save_candidates(self, aggregated: Dict[str, Dict], 
                        output_file: str = "data/stock_candidates.json") -> str:
-        """거래 후보 종목 저장"""
+        """거래 후보 종목 저장 (로컬 + S3)"""
         output_path = Path(output_file)
         output_path.parent.mkdir(parents=True, exist_ok=True)
         
-        # 상위 종목 선정
-        top_stocks = self.get_top_stocks(aggregated, top_n=20)
+        # 상위 종목 선정 (중요도 기반, 최대 5개)
+        top_stocks = self.get_top_stocks(aggregated, top_n=5)
         
         # 통계
         total_stocks = len(aggregated)
@@ -166,35 +196,64 @@ class StockAggregator:
             'all_stocks': aggregated
         }
         
+        # 로컬 저장
         with open(output_path, 'w', encoding='utf-8') as f:
             json.dump(data, f, ensure_ascii=False, indent=2)
         
         self.logger.info(f"💾 Saved {len(top_stocks)} top candidates to {output_path}")
+        
+        # S3 업로드
+        self._upload_to_s3(data)
+        
         return str(output_path)
     
-    def print_summary(self, aggregated: Dict[str, Dict], top_n: int = 10):
-        """결과 요약 출력"""
+    def _upload_to_s3(self, data: Dict) -> bool:
+        """S3에 후보 종목 데이터 업로드"""
+        try:
+            s3_client = boto3.client('s3', region_name=AWS_REGION)
+            
+            json_content = json.dumps(data, ensure_ascii=False, indent=2)
+            
+            s3_client.put_object(
+                Bucket=S3_BUCKET_NAME,
+                Key=S3_CANDIDATES_KEY,
+                Body=json_content.encode('utf-8'),
+                ContentType="application/json"
+            )
+            
+            self.logger.info(f"☁️ Uploaded candidates to S3: s3://{S3_BUCKET_NAME}/{S3_CANDIDATES_KEY}")
+            return True
+            
+        except ClientError as e:
+            self.logger.error(f"Failed to upload to S3: {e}")
+            return False
+        except Exception as e:
+            self.logger.error(f"S3 upload error: {e}")
+            return False
+    
+    def print_summary(self, aggregated: Dict[str, Dict], top_n: int = 5):
+        """결과 요약 출력 (중요도 기반 상위 종목)"""
         top_stocks = self.get_top_stocks(aggregated, top_n=top_n)
         
         print("\n" + "="*80)
-        print(f"📊 TOP {top_n} STOCK CANDIDATES")
+        print(f"📊 TOP {top_n} STOCK CANDIDATES (Importance-Based)")
         print("="*80)
         
+        market_cap_emoji = {'LARGE': '🏢', 'MID': '🏠', 'SMALL': '🏚️'}
+        priority_emoji = {'HIGH': '🔥', 'MID': '⚡', 'LOW': '💡'}
+        
         for i, stock in enumerate(top_stocks, 1):
-            priority_emoji = {
-                'HIGH': '🔥',
-                'MID': '⚡',
-                'LOW': '💡'
-            }
-            emoji = priority_emoji.get(stock['priority'], '❓')
+            p_emoji = priority_emoji.get(stock['priority'], '❓')
+            m_emoji = market_cap_emoji.get(stock.get('market_cap_tier', 'SMALL'), '❓')
             
-            print(f"\n[{i}] {emoji} {stock['priority']} - {stock['ticker']}: {stock['name']}")
+            print(f"\n[{i}] {p_emoji} {stock['priority']} | {m_emoji} {stock.get('market_cap_tier', 'N/A')} - {stock['ticker']}: {stock['name']}")
             print(f"    섹터: {stock['sector']}")
             print(f"    평균 감성: {stock['avg_sentiment']:.3f} (뉴스 {stock['news_count']}개)")
             print(f"    긍정/부정: {stock['positive_count']}개 / {stock['negative_count']}개")
-            print(f"    최종 점수: {stock['final_score']:.3f}")
+            print(f"    중요도 점수: {stock['final_score']:.3f}")
             print(f"    이유: {stock['reasoning']}")
-            print(f"    대표 헤드라인: {stock['top_headlines'][0][:60]}...")
+            if stock['top_headlines']:
+                print(f"    대표 헤드라인: {stock['top_headlines'][0][:60]}...")
 
 
 # 테스트

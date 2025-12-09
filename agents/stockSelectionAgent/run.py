@@ -18,16 +18,16 @@ def run_scheduler():
 
 def run_api():
     """API 서버 실행"""
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=8002)
 
 if __name__ == "__main__":
-    print("\n" + "🚀 "*30)
-    print("STARTING ALL SERVICES")
-    print("🚀 "*30)
-    print("\n1. API Server: http://localhost:8000")
-    print("2. Scheduler: Running in background")
-    print("\n💡 Press Ctrl+C to stop all services\n")
-    print("="*80 + "\n")
+    print("\n" + "="*60)
+    print("STARTING STOCK SELECTION AGENT")
+    print("="*60)
+    print("\n1. API Server: http://localhost:8002")
+    print("2. Scheduler: Running in background (hourly)")
+    print("\nPress Ctrl+C to stop all services\n")
+    print("="*60 + "\n")
     
     # 스케줄러를 별도 스레드로 실행
     scheduler_thread = threading.Thread(target=run_scheduler, daemon=True)

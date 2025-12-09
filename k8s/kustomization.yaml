@@ -5,7 +5,16 @@ namespace: quartz
 
 resources:
   - namespace.yaml
+  - configmap.yaml
+  - secret.yaml
+  - auth-agent.yaml
+  - macro-agent.yaml
+  - ticker-selector.yaml
   - technical-agent.yaml
   - trading-agent.yaml
   - portfolio-manager.yaml
+
+commonLabels:
+  app.kubernetes.io/part-of: quartz
+  app.kubernetes.io/managed-by: kustomize
 

@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: quartz-config
+  namespace: quartz
+data:
+  IS_PRODUCTION: "true"
+  AWS_REGION: "ap-northeast-2"
+  S3_BUCKET_NAME: "quartz-bucket"
+  MIN_ORDER_KRW: "100000"
+  MAX_SINGLE_TICKER_WEIGHT: "0.2"
+  MAX_TURNOVER_RATIO: "0.3"
+  MAX_BUY_CANDIDATES: "3"
+  MAX_SELL_CANDIDATES: "3"
+  # 에이전트 URL (k3s 내부 DNS)
+  AUTH_AGENT_URL: "http://auth-agent:8006"
+  MACRO_AGENT_URL: "http://macro-agent:8001"
+  TICKER_SELECTOR_URL: "http://ticker-selector:8002"
+  TECHNICAL_AGENT_URL: "http://technical-agent:8003"
+  TRADING_AGENT_WS_URL: "ws://trading-agent:8005/ws/orders"
+

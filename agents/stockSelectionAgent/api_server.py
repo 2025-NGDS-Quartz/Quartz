@@ -1,15 +1,37 @@
-from fastapi import FastAPI, HTTPException
-from fastapi.responses import JSONResponse
-from pathlib import Path
+import os
 import json
 import logging
+from pathlib import Path
 from datetime import datetime
 from typing import Optional, List, Dict
+
+import boto3
+from botocore.exceptions import ClientError
+from fastapi import FastAPI, HTTPException
+from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 
 # 로깅 설정
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(
+    level=logging.INFO,
+    format='{"timestamp": "%(asctime)s", "level": "%(levelname)s", "agent": "ticker-selector", "message": "%(message)s"}'
+)
 logger = logging.getLogger(__name__)
+
+# AWS S3 설정
+AWS_REGION = os.getenv("AWS_REGION", "ap-northeast-2")
+S3_BUCKET_NAME = os.getenv("S3_BUCKET_NAME", "quartz-bucket")
+S3_CANDIDATES_KEY = "select-ticker/stock_candidates.json"
+
+# S3 클라이언트 (지연 초기화)
+_s3_client = None
+
+def get_s3_client():
+    """S3 클라이언트 반환 (싱글톤)"""
+    global _s3_client
+    if _s3_client is None:
+        _s3_client = boto3.client('s3', region_name=AWS_REGION)
+    return _s3_client
 
 app = FastAPI(
     title="Stock Selection Agent API",
@@ -36,6 +58,7 @@ class StockCandidate(BaseModel):
     reasoning: str
     top_headlines: List[str]
     final_score: Optional[float] = None
+    market_cap_tier: Optional[str] = None  # 시총 등급 (LARGE/MID/SMALL)
 
 class CandidatesResponse(BaseModel):
     """후보 종목 응답 모델"""
@@ -43,6 +66,11 @@ class CandidatesResponse(BaseModel):
     total_stocks: int
     statistics: Dict
     top_candidates: List[StockCandidate]
+
+class CandidatesRequest(BaseModel):
+    """후보 종목 요청 모델"""
+    top_n: int = 5
+
 
 class MacroReportRequest(BaseModel):
     """거시경제 보고서 요청 모델 (향후 확장)"""
@@ -57,38 +85,75 @@ class HealthResponse(BaseModel):
 
 # ==================== 유틸리티 함수 ====================
 
-def get_latest_candidates_file() -> Optional[Path]:
-    """최신 stock_candidates.json 파일 찾기"""
+def load_candidates_from_s3() -> Optional[Dict]:
+    """S3에서 후보 종목 데이터 로드"""
+    try:
+        s3_client = get_s3_client()
+        response = s3_client.get_object(Bucket=S3_BUCKET_NAME, Key=S3_CANDIDATES_KEY)
+        content = response['Body'].read().decode('utf-8')
+        data = json.loads(content)
+        logger.info(f"Loaded candidates from S3: s3://{S3_BUCKET_NAME}/{S3_CANDIDATES_KEY}")
+        return data
+    except ClientError as e:
+        if e.response['Error']['Code'] == 'NoSuchKey':
+            logger.warning(f"S3 key not found: {S3_CANDIDATES_KEY}")
+            return None
+        logger.error(f"S3 load error: {e}")
+        return None
+    except Exception as e:
+        logger.error(f"Error loading from S3: {e}")
+        return None
+
+
+def load_candidates_from_local() -> Optional[Dict]:
+    """로컬 파일에서 후보 종목 데이터 로드 (폴백용)"""
     candidates_file = Path("data/stock_candidates.json")
     
-    if candidates_file.exists():
-        return candidates_file
-    
-    return None
-
-def load_candidates_data() -> Dict:
-    """후보 종목 데이터 로드"""
-    file_path = get_latest_candidates_file()
-    
-    if not file_path:
-        raise HTTPException(
-            status_code=404,
-            detail="Stock candidates file not found. Please run the pipeline first."
-        )
+    if not candidates_file.exists():
+        return None
     
     try:
-        with open(file_path, 'r', encoding='utf-8') as f:
+        with open(candidates_file, 'r', encoding='utf-8') as f:
             data = json.load(f)
-        
-        logger.info(f"Loaded candidates from {file_path}")
+        logger.info(f"Loaded candidates from local: {candidates_file}")
         return data
-    
     except Exception as e:
-        logger.error(f"Error loading candidates: {e}")
+        logger.error(f"Error loading from local: {e}")
+        return None
+
+
+def load_candidates_data() -> Dict:
+    """후보 종목 데이터 로드 (S3 우선, 로컬 폴백)"""
+    # 1. S3에서 먼저 시도
+    data = load_candidates_from_s3()
+    
+    # 2. S3 실패 시 로컬 폴백
+    if data is None:
+        logger.info("Falling back to local file...")
+        data = load_candidates_from_local()
+    
+    # 3. 둘 다 실패
+    if data is None:
         raise HTTPException(
-            status_code=500,
-            detail=f"Error loading candidates: {str(e)}"
+            status_code=404,
+            detail="Stock candidates not found. Please run the pipeline first."
         )
+    
+    return data
+
+
+def check_data_available() -> bool:
+    """데이터 가용성 확인 (S3 또는 로컬)"""
+    # S3 확인
+    try:
+        s3_client = get_s3_client()
+        s3_client.head_object(Bucket=S3_BUCKET_NAME, Key=S3_CANDIDATES_KEY)
+        return True
+    except:
+        pass
+    
+    # 로컬 확인
+    return Path("data/stock_candidates.json").exists()
 
 # ==================== API 엔드포인트 ====================
 
@@ -108,30 +173,54 @@ async def root():
 
 @app.get("/health", response_model=HealthResponse, tags=["Health"])
 async def health_check():
-    """헬스체크"""
-    file_path = get_latest_candidates_file()
-    last_update = None
-    
-    if file_path and file_path.exists():
-        last_update = datetime.fromtimestamp(file_path.stat().st_mtime).isoformat()
+    """헬스체크 (레거시)"""
+    data_available = check_data_available()
     
     return HealthResponse(
         status="healthy",
         timestamp=datetime.now().isoformat(),
-        last_update=last_update
+        last_update=None
     )
 
-@app.post("/api/candidates", response_model=CandidatesResponse, tags=["Stock Selection"])
-async def get_stock_candidates(top_n: int = 20):
-    """
-    거래 후보 종목 리스트 반환
+
+@app.get("/health/live", tags=["Health"])
+async def liveness_probe():
+    """Kubernetes Liveness Probe"""
+    return {"status": "ok"}
+
+
+@app.get("/health/ready", tags=["Health"])
+async def readiness_probe():
+    """Kubernetes Readiness Probe - 데이터 가용성 확인 (S3 또는 로컬)"""
+    data_available = check_data_available()
     
-    - **top_n**: 반환할 상위 종목 개수 (기본: 20)
+    # 후보 파일이 없어도 서비스는 준비됨 (파이프라인이 실행되면 생성됨)
+    return {
+        "status": "ok",
+        "data_available": data_available,
+        "storage": "s3" if data_available else "none"
+    }
+
+@app.post("/api/candidates", response_model=CandidatesResponse, tags=["Stock Selection"])
+async def get_stock_candidates(request: CandidatesRequest = CandidatesRequest()):
+    """
+    거래 후보 종목 리스트 반환 (중요도 기반)
+    
+    Request Body:
+    - **top_n**: 반환할 상위 종목 개수 (기본: 5, 최대: 10)
+    
+    중요도 점수 기준:
+    - 시총 등급 (LARGE/MID/SMALL): 25%
+    - 감성 분석 점수: 40%
+    - 뉴스 언급 횟수: 25%
+    - 우선순위: 10%
     
     Returns:
-        최신 거래 후보 종목 리스트
+        최신 거래 후보 종목 리스트 (중요도 순)
     """
-    logger.info(f"Received request for top {top_n} candidates")
+    # 최대 10개로 제한
+    top_n = min(request.top_n, 10)
+    logger.info(f"Received request for top {top_n} candidates (importance-based)")
     
     try:
         # 데이터 로드
@@ -228,10 +317,10 @@ if __name__ == "__main__":
     import uvicorn
     
     print("\n" + "="*60)
-    print("🚀 Stock Selection Agent API Server")
+    print("Stock Selection Agent API Server")
     print("="*60)
-    print("📍 Server: http://localhost:8000")
-    print("📖 Docs: http://localhost:8000/docs")
+    print("Server: http://localhost:8002")
+    print("Docs: http://localhost:8002/docs")
     print("="*60 + "\n")
     
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=8002)

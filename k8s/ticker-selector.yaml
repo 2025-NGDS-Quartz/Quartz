@@ -1,25 +1,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: trading-agent
+  name: ticker-selector
   namespace: quartz
   labels:
-    app: trading-agent
+    app: ticker-selector
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: trading-agent
+      app: ticker-selector
   template:
     metadata:
       labels:
-        app: trading-agent
+        app: ticker-selector
     spec:
       containers:
-      - name: trading-agent
-        image: quartz/trading-agent:latest
+      - name: ticker-selector
+        image: quartz/ticker-selector:latest
         ports:
-        - containerPort: 8005
+        - containerPort: 8002
         envFrom:
         - configMapRef:
             name: quartz-config
@@ -35,35 +35,42 @@ spec:
         livenessProbe:
           httpGet:
             path: /health/live
-            port: 8005
+            port: 8002
           initialDelaySeconds: 10
           periodSeconds: 30
           failureThreshold: 3
         readinessProbe:
           httpGet:
             path: /health/ready
-            port: 8005
+            port: 8002
           initialDelaySeconds: 5
           periodSeconds: 10
           failureThreshold: 3
         startupProbe:
           httpGet:
             path: /health/live
-            port: 8005
+            port: 8002
           initialDelaySeconds: 5
           periodSeconds: 5
           failureThreshold: 30
+        volumeMounts:
+        - name: data-volume
+          mountPath: /app/data
+      volumes:
+      # 임시 캐시/로그용 (주요 데이터는 S3에 저장됨)
+      - name: data-volume
+        emptyDir: {}
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: trading-agent
+  name: ticker-selector
   namespace: quartz
 spec:
   selector:
-    app: trading-agent
+    app: ticker-selector
   ports:
-  - port: 8005
-    targetPort: 8005
+  - port: 8002
+    targetPort: 8002
   type: ClusterIP
 

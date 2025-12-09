@@ -1,25 +1,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: trading-agent
+  name: auth-agent
   namespace: quartz
   labels:
-    app: trading-agent
+    app: auth-agent
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: trading-agent
+      app: auth-agent
   template:
     metadata:
       labels:
-        app: trading-agent
+        app: auth-agent
     spec:
       containers:
-      - name: trading-agent
-        image: quartz/trading-agent:latest
+      - name: auth-agent
+        image: quartz/auth-agent:latest
         ports:
-        - containerPort: 8005
+        - containerPort: 8006
         envFrom:
         - configMapRef:
             name: quartz-config
@@ -27,29 +27,29 @@ spec:
             name: quartz-secrets
         resources:
           requests:
-            cpu: "100m"
-            memory: "128Mi"
+            cpu: "50m"
+            memory: "64Mi"
           limits:
-            cpu: "300m"
-            memory: "256Mi"
+            cpu: "200m"
+            memory: "128Mi"
         livenessProbe:
           httpGet:
             path: /health/live
-            port: 8005
+            port: 8006
           initialDelaySeconds: 10
           periodSeconds: 30
           failureThreshold: 3
         readinessProbe:
           httpGet:
             path: /health/ready
-            port: 8005
+            port: 8006
           initialDelaySeconds: 5
           periodSeconds: 10
           failureThreshold: 3
         startupProbe:
           httpGet:
             path: /health/live
-            port: 8005
+            port: 8006
           initialDelaySeconds: 5
           periodSeconds: 5
           failureThreshold: 30
@@ -57,13 +57,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: trading-agent
+  name: auth-agent
   namespace: quartz
 spec:
   selector:
-    app: trading-agent
+    app: auth-agent
   ports:
-  - port: 8005
-    targetPort: 8005
+  - port: 8006
+    targetPort: 8006
   type: ClusterIP
 

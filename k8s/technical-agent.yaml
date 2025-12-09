@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: technical-agent
+  namespace: quartz
   labels:
     app: technical-agent
 spec:
@@ -15,60 +16,54 @@ spec:
         app: technical-agent
     spec:
       containers:
-        - name: technical-agent
-          image: quartz/technical-agent:latest
-          imagePullPolicy: IfNotPresent
-          ports:
-            - containerPort: 8000
-          env:
-            - name: TECH_AGENT_TICKER
-              value: "SPY"
-            - name: TECH_AGENT_MACD_FAST
-              value: "14"
-            - name: TECH_AGENT_MACD_SLOW
-              value: "28"
-            - name: TECH_AGENT_MACD_SIGNAL
-              value: "9"
-            - name: TECH_AGENT_RSI_WINDOW
-              value: "14"
-            - name: TECH_AGENT_BOLL_WINDOW
-              value: "20"
-            - name: TECH_AGENT_BOLL_STD
-              value: "2.0"
-            - name: TECH_AGENT_MA_TAIL
-              value: "60"
-          resources:
-            requests:
-              memory: "256Mi"
-              cpu: "100m"
-            limits:
-              memory: "512Mi"
-              cpu: "500m"
-          livenessProbe:
-            httpGet:
-              path: /docs
-              port: 8000
-            initialDelaySeconds: 10
-            periodSeconds: 30
-          readinessProbe:
-            httpGet:
-              path: /docs
-              port: 8000
-            initialDelaySeconds: 5
-            periodSeconds: 10
+      - name: technical-agent
+        image: quartz/technical-agent:latest
+        ports:
+        - containerPort: 8003
+        envFrom:
+        - configMapRef:
+            name: quartz-config
+        - secretRef:
+            name: quartz-secrets
+        resources:
+          requests:
+            cpu: "200m"
+            memory: "256Mi"
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+        livenessProbe:
+          httpGet:
+            path: /health/live
+            port: 8003
+          initialDelaySeconds: 10
+          periodSeconds: 30
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /health/ready
+            port: 8003
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          failureThreshold: 3
+        startupProbe:
+          httpGet:
+            path: /health/live
+            port: 8003
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          failureThreshold: 30
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: technical-agent
-  labels:
-    app: technical-agent
+  namespace: quartz
 spec:
-  type: ClusterIP
   selector:
     app: technical-agent
   ports:
-    - port: 8000
-      targetPort: 8000
-      protocol: TCP
+  - port: 8003
+    targetPort: 8003
+  type: ClusterIP
 
