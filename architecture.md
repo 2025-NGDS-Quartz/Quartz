@@ -83,7 +83,7 @@
 ### 3.0 에이전트 간 호출 관계, 전체 아키텍처
 
 - 모든 에이전트는 k3s를 통해 한 인스턴스 내에서 동작. 각 인스턴스 별로 별도의 이미지로 빌드, 각 포드 간의 통신을 통해 작업이 이뤄짐
-- 거시경제에이전트는 12시간에 한번씩 gemini search grounded api 를 사용해서 뉴스 감성분석 진행, 거시경제 보고서 작성 후 긍정적 관점의 보고서, 부정적 관점의 보고서를 각각 하나씩 S3 버킷에 올림. Report_Negative_{YYYYMMDDhhmmss}.md, Report_Positive_{YYYYMMDDhhmmss}.md 두가지
+- 거시경제에이전트는 12시간에 한번씩 gemini search grounded api 를 사용해서 뉴스 감성분석 진행, 거시경제 보고서 작성 후 긍정적 관점의 보고서, 부정적 관점의 보고서를 각각 하나씩 S3 버킷에 올림. `macro-analysis/Report_Negative_{YYYYMMDDhhmmss}.md`, `macro-analysis/Report_Positive_{YYYYMMDDhhmmss}.md` 두가지
 - 거래종목 선택 에이전트는 뉴스 감성 분석을 통해 거래할 후보 종목들을 선정해서 파일로 정리(파일은 백업없이 갱신, 요청이 들어오면 파일의 내용을 읽어서 반환)
 - 포트폴리오 에이전트는 거시경제에이전트에게 GET으로 거시경제 분위기를, 거래종목 선택 에이전트에게 POST로 후보 종목을 받는다. (30분에 한번)
 - 포트폴리오 에이전트는 받은 종목들의 ticker를 기술적 분석 에이전트와 기업분석 에이전트에 POST 요청으로 전달해서 각 종목 별 기술분석과 기업분석을 진행하고 결과를 반환받음
@@ -179,8 +179,9 @@
 - **S3 업로드**
   - 버킷: `quartz-bucket`
   - 리전: `ap-northeast-2`
-  - 전체 보고서: `Report_Positive_{YYYYMMDD_hhmmss}.md`, `Report_Negative_{YYYYMMDD_hhmmss}.md`
-  - 요약 보고서: `Report_Positive_{YYYYMMDD_hhmmss}_short.md`, `Report_Negative_{YYYYMMDD_hhmmss}_short.md` (10문장 이내)
+  - 폴더: `macro-analysis/`
+  - 전체 보고서: `macro-analysis/Report_Positive_{YYYYMMDD_hhmmss}.md`, `macro-analysis/Report_Negative_{YYYYMMDD_hhmmss}.md`
+  - 요약 보고서: `macro-analysis/Report_Positive_{YYYYMMDD_hhmmss}_short.md`, `macro-analysis/Report_Negative_{YYYYMMDD_hhmmss}_short.md` (10문장 이내)
   - **다른 에이전트에서는 `_short` 요약 버전을 사용**
 
 - **환경 변수**
@@ -1313,7 +1314,7 @@ startupProbe:
 
 | 데이터 | S3 경로 | 보관 주기 |
 |-------|--------|----------|
-| 거시경제 보고서 | `Report_{Positive\|Negative}_{timestamp}.md`, `Report_{Positive\|Negative}_{timestamp}_short.md` | 7일 |
+| 거시경제 보고서 | `macro-analysis/Report_{Positive\|Negative}_{timestamp}.md`, `macro-analysis/Report_{Positive\|Negative}_{timestamp}_short.md` | 7일 |
 | 선정 종목 | `select-ticker/stock_candidates.json` | 갱신 (단일 파일) |
 | 기술분석 결과 | `technical-analysis/{ticker}_{timestamp}.json` | 1일 |
 | 포트폴리오 결정 | `portfolio-decisions/decision_{timestamp}.json` | 30일 |

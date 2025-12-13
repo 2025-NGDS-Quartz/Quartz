@@ -505,11 +505,14 @@ void run_analysis() {
     string timestamp = getCurrentTimestamp();
     cout << "   Timestamp: " << timestamp << endl;
 
+    // S3 폴더 경로
+    const string s3_folder = "macro-analysis/";
+
     // 긍정 보고서
     cout << "   - Generating Positive Report..." << endl;
     string pos_report = generateGeminiReport(csv_data, "positive", gemini_key);
     if (!pos_report.empty()) {
-        string fname = "Report_Positive_" + timestamp + ".md";
+        string fname = s3_folder + "Report_Positive_" + timestamp + ".md";
         if (uploader.uploadFile(bucket_name, fname, pos_report)) {
             cout << "   [Success] Uploaded: " << fname << endl;
         }
@@ -517,7 +520,7 @@ void run_analysis() {
         cout << "   - Generating Positive Summary..." << endl;
         string pos_summary = summarizeReport(pos_report, "positive", gemini_key);
         if (!pos_summary.empty()) {
-            string fname_short = "Report_Positive_" + timestamp + "_short.md";
+            string fname_short = s3_folder + "Report_Positive_" + timestamp + "_short.md";
             if (uploader.uploadFile(bucket_name, fname_short, pos_summary)) {
                 cout << "   [Success] Uploaded: " << fname_short << endl;
             }
@@ -528,7 +531,7 @@ void run_analysis() {
     cout << "   - Generating Negative Report..." << endl;
     string neg_report = generateGeminiReport(csv_data, "negative", gemini_key);
     if (!neg_report.empty()) {
-        string fname = "Report_Negative_" + timestamp + ".md";
+        string fname = s3_folder + "Report_Negative_" + timestamp + ".md";
         if (uploader.uploadFile(bucket_name, fname, neg_report)) {
             cout << "   [Success] Uploaded: " << fname << endl;
         }
@@ -536,7 +539,7 @@ void run_analysis() {
         cout << "   - Generating Negative Summary..." << endl;
         string neg_summary = summarizeReport(neg_report, "negative", gemini_key);
         if (!neg_summary.empty()) {
-            string fname_short = "Report_Negative_" + timestamp + "_short.md";
+            string fname_short = s3_folder + "Report_Negative_" + timestamp + "_short.md";
             if (uploader.uploadFile(bucket_name, fname_short, neg_summary)) {
                 cout << "   [Success] Uploaded: " << fname_short << endl;
             }

@@ -127,16 +127,19 @@ async def refresh_cache():
     """S3에서 최신 보고서를 읽어 캐시 갱신"""
     global _cache
     
+    # S3 폴더 경로
+    S3_FOLDER = "macro-analysis/"
+    
     try:
         # 긍정 보고서 조회
-        pos_key = get_latest_report_key("Report_Positive_")
+        pos_key = get_latest_report_key(f"{S3_FOLDER}Report_Positive_")
         if pos_key:
             pos_content = read_s3_file(pos_key)
             if pos_content:
                 _cache["positive_summary"] = pos_content
         
         # 부정 보고서 조회
-        neg_key = get_latest_report_key("Report_Negative_")
+        neg_key = get_latest_report_key(f"{S3_FOLDER}Report_Negative_")
         if neg_key:
             neg_content = read_s3_file(neg_key)
             if neg_content:
