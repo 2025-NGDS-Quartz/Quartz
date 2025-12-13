@@ -177,17 +177,31 @@ async def run_cpp_analysis():
         
         stdout, stderr = await process.communicate()
         
+        # stdout 출력 (C++ 프로그램의 진행 상황)
+        if stdout:
+            stdout_text = stdout.decode('utf-8', errors='replace')
+            for line in stdout_text.strip().split('\n'):
+                if line.strip():
+                    logger.info(f"[C++] {line}")
+        
+        # stderr 출력 (에러 메시지)
+        if stderr:
+            stderr_text = stderr.decode('utf-8', errors='replace')
+            for line in stderr_text.strip().split('\n'):
+                if line.strip():
+                    logger.error(f"[C++ ERROR] {line}")
+        
         if process.returncode == 0:
             logger.info("C++ macro analysis completed successfully")
         else:
-            logger.error(f"C++ macro analysis failed: {stderr.decode()}")
+            logger.error(f"C++ macro analysis failed with return code: {process.returncode}")
             
     except Exception as e:
         logger.error(f"Error running C++ analysis: {e}")
 
 
 async def analysis_scheduler():
-    """1시간마다 C++ 분석 실행 및 캐시 갱신"""
+    """12시간마다 C++ 분석 실행 및 캐시 갱신"""
     while True:
         try:
             # C++ 분석 실행
@@ -202,8 +216,8 @@ async def analysis_scheduler():
         except Exception as e:
             logger.error(f"Error in analysis scheduler: {e}")
         
-        # 1시간 대기
-        await asyncio.sleep(3600)
+        # 12시간 대기 (43200초)
+        await asyncio.sleep(43200)
 
 
 @app.on_event("startup")
