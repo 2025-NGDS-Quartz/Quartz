@@ -5,50 +5,72 @@ set -e
 
 REGISTRY=${REGISTRY:-"quartz"}
 TAG=${TAG:-"latest"}
+IMPORT_TO_K3S=${IMPORT_TO_K3S:-"true"}
 
-echo "Building Quartz agent images..."
-
-# Auth Agent
-echo "Building auth-agent..."
-docker build -f agents/authAgent/Dockerfile -t ${REGISTRY}/auth-agent:${TAG} .
-
-# Macro Agent (C++ + Python)
-echo "Building macro-agent..."
-docker build -f agents/macroAnalysisAgent/Dockerfile -t ${REGISTRY}/macro-agent:${TAG} .
-
-# Ticker Selector
-echo "Building ticker-selector..."
-docker build -f agents/stockSelectionAgent/Dockerfile -t ${REGISTRY}/ticker-selector:${TAG} .
-
-# Technical Agent
-echo "Building technical-agent..."
-docker build -f agents/technicalAgent/Dockerfile -t ${REGISTRY}/technical-agent:${TAG} .
-
-# Trading Agent
-echo "Building trading-agent..."
-docker build -f agents/tradingAgent/Dockerfile -t ${REGISTRY}/trading-agent:${TAG} .
-
-# Portfolio Manager
-echo "Building portfolio-manager..."
-docker build -f agents/portfolioManager/Dockerfile -t ${REGISTRY}/portfolio-manager:${TAG} .
-
-# Frontend
-echo "Building frontend..."
-docker build -f frontend/Dockerfile -t ${REGISTRY}/frontend:${TAG} frontend/
-
-# API Proxy
-echo "Building api-proxy..."
-docker build -f frontend/api-proxy/Dockerfile -t ${REGISTRY}/api-proxy:${TAG} frontend/api-proxy/
-
-echo "All images built successfully!"
+echo "=============================================="
+echo "  Quartz Docker 이미지 빌드"
+echo "=============================================="
 echo ""
-echo "To push images to registry:"
-echo "  docker push ${REGISTRY}/auth-agent:${TAG}"
-echo "  docker push ${REGISTRY}/macro-agent:${TAG}"
-echo "  docker push ${REGISTRY}/ticker-selector:${TAG}"
-echo "  docker push ${REGISTRY}/technical-agent:${TAG}"
-echo "  docker push ${REGISTRY}/trading-agent:${TAG}"
-echo "  docker push ${REGISTRY}/portfolio-manager:${TAG}"
-echo "  docker push ${REGISTRY}/frontend:${TAG}"
-echo "  docker push ${REGISTRY}/api-proxy:${TAG}"
+
+# 이미지 목록
+IMAGES=(
+    "auth-agent:agents/authAgent/Dockerfile:."
+    "macro-agent:agents/macroAnalysisAgent/Dockerfile:."
+    "ticker-selector:agents/stockSelectionAgent/Dockerfile:."
+    "technical-agent:agents/technicalAgent/Dockerfile:."
+    "trading-agent:agents/tradingAgent/Dockerfile:."
+    "portfolio-manager:agents/portfolioManager/Dockerfile:."
+    "frontend:frontend/Dockerfile:frontend/"
+    "api-proxy:frontend/api-proxy/Dockerfile:frontend/api-proxy/"
+)
+
+TOTAL=${#IMAGES[@]}
+COUNT=0
+
+for IMAGE_INFO in "${IMAGES[@]}"; do
+    IFS=':' read -r NAME DOCKERFILE CONTEXT <<< "$IMAGE_INFO"
+    COUNT=$((COUNT + 1))
+    
+    echo "[${COUNT}/${TOTAL}] Building ${NAME}..."
+    docker build -f ${DOCKERFILE} -t ${REGISTRY}/${NAME}:${TAG} ${CONTEXT}
+done
+
+echo ""
+echo "All images built successfully!"
+
+# k3s에 이미지 import (k3s가 설치된 경우)
+if [ "$IMPORT_TO_K3S" = "true" ] && command -v k3s &> /dev/null; then
+    echo ""
+    echo "=============================================="
+    echo "  k3s containerd로 이미지 import"
+    echo "=============================================="
+    echo ""
+    
+    for IMAGE_INFO in "${IMAGES[@]}"; do
+        IFS=':' read -r NAME DOCKERFILE CONTEXT <<< "$IMAGE_INFO"
+        FULL_IMAGE="${REGISTRY}/${NAME}:${TAG}"
+        
+        echo "Importing ${FULL_IMAGE} to k3s..."
+        docker save ${FULL_IMAGE} | sudo k3s ctr images import -
+    done
+    
+    echo ""
+    echo "All images imported to k3s!"
+    echo ""
+    echo "k3s 이미지 확인:"
+    echo "  sudo k3s ctr images list | grep quartz"
+else
+    echo ""
+    echo "=============================================="
+    echo "  레지스트리에 푸시하려면:"
+    echo "=============================================="
+    echo ""
+    for IMAGE_INFO in "${IMAGES[@]}"; do
+        IFS=':' read -r NAME DOCKERFILE CONTEXT <<< "$IMAGE_INFO"
+        echo "  docker push ${REGISTRY}/${NAME}:${TAG}"
+    done
+    echo ""
+    echo "k3s에 로컬 이미지 import하려면:"
+    echo "  IMPORT_TO_K3S=true ./scripts/build_images.sh"
+fi
 

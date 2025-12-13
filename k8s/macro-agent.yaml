@@ -18,6 +18,7 @@ spec:
       containers:
       - name: macro-agent
         image: quartz/macro-agent:latest
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8001
         envFrom:

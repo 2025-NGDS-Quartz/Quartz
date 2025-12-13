@@ -18,6 +18,7 @@ spec:
       containers:
       - name: trading-agent
         image: quartz/trading-agent:latest
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8005
         envFrom:

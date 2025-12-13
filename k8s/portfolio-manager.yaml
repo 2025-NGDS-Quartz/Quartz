@@ -18,6 +18,7 @@ spec:
       containers:
       - name: portfolio-manager
         image: quartz/portfolio-manager:latest
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8004
         envFrom:

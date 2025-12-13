@@ -15,7 +15,10 @@ resources:
   - portfolio-manager.yaml
   - frontend.yaml
 
-commonLabels:
-  app.kubernetes.io/part-of: quartz
-  app.kubernetes.io/managed-by: kustomize
+labels:
+  - pairs:
+      app.kubernetes.io/part-of: quartz
+      app.kubernetes.io/managed-by: kustomize
+    includeSelectors: true
+    includeTemplates: true
 

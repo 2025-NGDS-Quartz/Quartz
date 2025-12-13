@@ -18,6 +18,7 @@ spec:
       containers:
       - name: technical-agent
         image: quartz/technical-agent:latest
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8003
         envFrom:

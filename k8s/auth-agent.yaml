@@ -18,6 +18,7 @@ spec:
       containers:
       - name: auth-agent
         image: quartz/auth-agent:latest
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8006
         envFrom:

@@ -19,6 +19,7 @@ spec:
       containers:
       - name: api-proxy
         image: quartz/api-proxy:latest
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
         envFrom:
@@ -83,6 +84,7 @@ spec:
       containers:
       - name: frontend
         image: quartz/frontend:latest
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 80
         resources:
