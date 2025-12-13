@@ -133,12 +133,12 @@ class AutomationScheduler:
         """스케줄러 시작"""
         self.logger.info("🚀 Starting automation scheduler...")
         
-        # 1시간마다 실행 (매시 정각)
+        # 12시간마다 실행 (매일 0시, 12시 정각)
         self.scheduler.add_job(
             self.crawl_and_process,
-            trigger=CronTrigger(minute=0),  # 매시 0분
-            id='hourly_crawl',
-            name='Hourly News Crawling & Processing',
+            trigger=CronTrigger(hour='0,12', minute=0),  # 매일 0시, 12시
+            id='twice_daily_crawl',
+            name='Twice Daily News Crawling & Processing',
             max_instances=1  # 동시에 하나만 실행
         )
         
@@ -153,7 +153,7 @@ class AutomationScheduler:
         self.scheduler.start()
         
         self.logger.info("✅ Scheduler started")
-        self.logger.info("⏰ Schedule: Every hour at minute 0")
+        self.logger.info("⏰ Schedule: Every 12 hours (00:00, 12:00)")
         self.logger.info("📊 Stats: Daily at 00:00")
         
         # 즉시 실행 옵션
@@ -195,7 +195,7 @@ def main():
     print("AUTOMATED STOCK SELECTION AGENT")
     print("🤖 "*30)
     print("\n📋 Configuration:")
-    print("  - Crawl & Process: Every hour (at minute 0)")
+    print("  - Crawl & Process: Every 12 hours (00:00, 12:00)")
     print("  - Statistics: Daily at 00:00")
     print("  - Sources: Naver, Hankyung, MK")
     print("  - Pages per source: 3")
