@@ -4,6 +4,7 @@ import Dashboard from './components/Dashboard';
 import PortfolioPage from './components/PortfolioPage';
 import CandidatesPage from './components/CandidatesPage';
 import TechnicalPage from './components/TechnicalPage';
+import MacroAnalysisPage from './components/MacroAnalysisPage';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path="/portfolio" element={<PortfolioPage />} />
           <Route path="/candidates" element={<CandidatesPage />} />
           <Route path="/technical/:ticker?" element={<TechnicalPage />} />
+          <Route path="/macro" element={<MacroAnalysisPage />} />
         </Routes>
       </Layout>
     </Router>

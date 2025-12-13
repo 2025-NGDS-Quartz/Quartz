@@ -33,10 +33,15 @@ S3_BUCKET_NAME = os.getenv("S3_BUCKET_NAME", "quartz-bucket")
 # S3 클라이언트
 s3_client = boto3.client('s3', region_name=AWS_REGION)
 
-# 분석 결과 캐시
+# 분석 결과 캐시 (요약본 + 원본)
 _cache: Dict[str, Any] = {
+    # 요약본 (_short.md) - 포트폴리오 에이전트용
     "positive_summary": None,
     "negative_summary": None,
+    # 원본 보고서 - 프론트엔드용
+    "positive_full": None,
+    "negative_full": None,
+    # 공통
     "market_bias_hint": "uncertain",
     "last_update": None
 }
@@ -57,8 +62,13 @@ class HealthResponse(BaseModel):
     last_update: Optional[str] = None
 
 
-def get_latest_report_key(prefix: str) -> Optional[str]:
-    """S3에서 가장 최신 보고서 키 조회"""
+def get_latest_report_key(prefix: str, is_short: bool = True) -> Optional[str]:
+    """S3에서 가장 최신 보고서 키 조회
+    
+    Args:
+        prefix: S3 키 prefix (예: "macro-analysis/Report_Positive_")
+        is_short: True면 요약본(_short.md), False면 원본(.md) 조회
+    """
     try:
         response = s3_client.list_objects_v2(
             Bucket=S3_BUCKET_NAME,
@@ -75,10 +85,16 @@ def get_latest_report_key(prefix: str) -> Optional[str]:
             reverse=True
         )
         
-        # _short 파일 찾기
-        for f in files:
-            if '_short.md' in f:
-                return f
+        if is_short:
+            # _short 파일 찾기
+            for f in files:
+                if '_short.md' in f:
+                    return f
+        else:
+            # 원본 파일 찾기 (_short가 아닌 .md 파일)
+            for f in files:
+                if f.endswith('.md') and '_short.md' not in f:
+                    return f
         
         return None
     except Exception as e:
@@ -124,28 +140,40 @@ def determine_market_bias(positive: str, negative: str) -> str:
 
 
 async def refresh_cache():
-    """S3에서 최신 보고서를 읽어 캐시 갱신"""
+    """S3에서 최신 보고서를 읽어 캐시 갱신 (요약본 + 원본)"""
     global _cache
     
     # S3 폴더 경로
     S3_FOLDER = "macro-analysis/"
     
     try:
-        # 긍정 보고서 조회
-        pos_key = get_latest_report_key(f"{S3_FOLDER}Report_Positive_")
-        if pos_key:
-            pos_content = read_s3_file(pos_key)
-            if pos_content:
-                _cache["positive_summary"] = pos_content
+        # === 요약본 조회 (포트폴리오 에이전트용) ===
+        pos_short_key = get_latest_report_key(f"{S3_FOLDER}Report_Positive_", is_short=True)
+        if pos_short_key:
+            pos_short_content = read_s3_file(pos_short_key)
+            if pos_short_content:
+                _cache["positive_summary"] = pos_short_content
         
-        # 부정 보고서 조회
-        neg_key = get_latest_report_key(f"{S3_FOLDER}Report_Negative_")
-        if neg_key:
-            neg_content = read_s3_file(neg_key)
-            if neg_content:
-                _cache["negative_summary"] = neg_content
+        neg_short_key = get_latest_report_key(f"{S3_FOLDER}Report_Negative_", is_short=True)
+        if neg_short_key:
+            neg_short_content = read_s3_file(neg_short_key)
+            if neg_short_content:
+                _cache["negative_summary"] = neg_short_content
         
-        # 시장 편향 결정
+        # === 원본 조회 (프론트엔드용) ===
+        pos_full_key = get_latest_report_key(f"{S3_FOLDER}Report_Positive_", is_short=False)
+        if pos_full_key:
+            pos_full_content = read_s3_file(pos_full_key)
+            if pos_full_content:
+                _cache["positive_full"] = pos_full_content
+        
+        neg_full_key = get_latest_report_key(f"{S3_FOLDER}Report_Negative_", is_short=False)
+        if neg_full_key:
+            neg_full_content = read_s3_file(neg_full_key)
+            if neg_full_content:
+                _cache["negative_full"] = neg_full_content
+        
+        # 시장 편향 결정 (요약본 기준)
         if _cache["positive_summary"] and _cache["negative_summary"]:
             _cache["market_bias_hint"] = determine_market_bias(
                 _cache["positive_summary"],
@@ -153,7 +181,7 @@ async def refresh_cache():
             )
         
         _cache["last_update"] = datetime.utcnow().isoformat() + "Z"
-        logger.info("Cache refreshed successfully")
+        logger.info("Cache refreshed successfully (summary + full reports)")
         
     except Exception as e:
         logger.error(f"Error refreshing cache: {e}")
@@ -259,7 +287,7 @@ async def readiness_probe():
 @app.get("/result/analysis", response_model=MacroAnalysisResponse, tags=["Analysis"])
 async def get_analysis():
     """
-    거시경제 분석 결과 반환
+    거시경제 분석 요약 반환 (포트폴리오 에이전트용)
     
     S3에 저장된 최신 보고서 요약(_short 버전)을 반환합니다.
     
@@ -275,6 +303,30 @@ async def get_analysis():
     return MacroAnalysisResponse(
         positive_summary=_cache["positive_summary"] or "거시경제 긍정 보고서를 아직 사용할 수 없습니다.",
         negative_summary=_cache["negative_summary"] or "거시경제 부정 보고서를 아직 사용할 수 없습니다.",
+        market_bias_hint=_cache["market_bias_hint"],
+        last_update=_cache["last_update"]
+    )
+
+
+@app.get("/result/analysis/full", response_model=MacroAnalysisResponse, tags=["Analysis"])
+async def get_analysis_full():
+    """
+    거시경제 분석 원본 반환 (프론트엔드용)
+    
+    S3에 저장된 최신 보고서 원본(전체 버전)을 반환합니다.
+    
+    Returns:
+        - positive_summary: 긍정적 관점의 전체 보고서
+        - negative_summary: 부정적 관점의 전체 보고서
+        - market_bias_hint: 시장 편향 (bullish/bearish/neutral/uncertain)
+    """
+    # 캐시가 비어있으면 갱신 시도
+    if _cache["positive_full"] is None and _cache["negative_full"] is None:
+        await refresh_cache()
+    
+    return MacroAnalysisResponse(
+        positive_summary=_cache["positive_full"] or "거시경제 긍정 보고서를 아직 사용할 수 없습니다.",
+        negative_summary=_cache["negative_full"] or "거시경제 부정 보고서를 아직 사용할 수 없습니다.",
         market_bias_hint=_cache["market_bias_hint"],
         last_update=_cache["last_update"]
     )

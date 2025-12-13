@@ -112,6 +112,14 @@ export interface TokenStatus {
   remaining_seconds: number;
 }
 
+// 거시경제 분석
+export interface MacroAnalysis {
+  positive_summary: string;
+  negative_summary: string;
+  market_bias_hint: 'bullish' | 'bearish' | 'neutral' | 'uncertain';
+  last_update: string | null;
+}
+
 // 대시보드 전체 데이터
 export interface DashboardData {
   agents: AgentHealth[];

@@ -237,11 +237,11 @@ async def get_token_status():
         return TokenStatus(is_valid=False, expires_at=None, remaining_seconds=0)
 
 
-# ==================== 거시경제 요약 ====================
+# ==================== 거시경제 분석 ====================
 
 @app.get("/api/macro-summary")
 async def get_macro_summary():
-    """거시경제 요약 조회"""
+    """거시경제 요약 조회 (요약본)"""
     try:
         async with httpx.AsyncClient(timeout=30.0) as client:
             response = await client.get(f"{MACRO_AGENT_URL}/result/analysis")
@@ -260,6 +260,31 @@ async def get_macro_summary():
         return {
             "positive_summary": "거시경제 데이터 조회 실패",
             "negative_summary": "거시경제 데이터 조회 실패",
+            "market_bias_hint": "uncertain"
+        }
+
+
+@app.get("/api/macro-full")
+async def get_macro_full():
+    """거시경제 원본 보고서 조회"""
+    try:
+        async with httpx.AsyncClient(timeout=30.0) as client:
+            response = await client.get(f"{MACRO_AGENT_URL}/result/analysis/full")
+            
+            if response.status_code == 200:
+                return response.json()
+            else:
+                logger.warning(f"Macro full API returned {response.status_code}")
+                return {
+                    "positive_summary": "거시경제 보고서 없음",
+                    "negative_summary": "거시경제 보고서 없음",
+                    "market_bias_hint": "uncertain"
+                }
+    except httpx.RequestError as e:
+        logger.error(f"Macro full request error: {e}")
+        return {
+            "positive_summary": "거시경제 보고서 조회 실패",
+            "negative_summary": "거시경제 보고서 조회 실패",
             "market_bias_hint": "uncertain"
         }
 

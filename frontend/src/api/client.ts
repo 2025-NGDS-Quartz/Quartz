@@ -5,6 +5,7 @@ import type {
   TechnicalAnalysisResult,
   TokenStatus,
   AgentHealth,
+  MacroAnalysis,
 } from '../types';
 
 // API 베이스 URL (프록시 서버 경유)
@@ -67,13 +68,15 @@ export const triggerDecision = async (): Promise<{
   return response.data;
 };
 
-// 거시경제 요약 조회
-export const getMacroSummary = async (): Promise<{
-  positive_summary: string;
-  negative_summary: string;
-  market_bias_hint: string;
-}> => {
-  const response = await api.get('/macro-summary');
+// 거시경제 분석 요약 조회 (포트폴리오 에이전트용)
+export const getMacroSummary = async (): Promise<MacroAnalysis> => {
+  const response = await api.get<MacroAnalysis>('/macro-summary');
+  return response.data;
+};
+
+// 거시경제 분석 원본 조회 (프론트엔드용)
+export const getMacroAnalysis = async (): Promise<MacroAnalysis> => {
+  const response = await api.get<MacroAnalysis>('/macro-full');
   return response.data;
 };
 

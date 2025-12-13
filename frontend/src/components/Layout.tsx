@@ -6,6 +6,7 @@ import {
   TrendingUp,
   BarChart3,
   Activity,
+  Globe,
 } from 'lucide-react';
 
 interface LayoutProps {
@@ -17,6 +18,7 @@ const navItems = [
   { path: '/portfolio', icon: Briefcase, label: '포트폴리오' },
   { path: '/candidates', icon: TrendingUp, label: '후보종목' },
   { path: '/technical', icon: BarChart3, label: '기술분석' },
+  { path: '/macro', icon: Globe, label: '거시경제분석' },
 ];
 
 export default function Layout({ children }: LayoutProps) {
