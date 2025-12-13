@@ -17,5 +17,7 @@ data:
   MACRO_AGENT_URL: "http://macro-agent:8001"
   TICKER_SELECTOR_URL: "http://ticker-selector:8002"
   TECHNICAL_AGENT_URL: "http://technical-agent:8003"
+  PORTFOLIO_MANAGER_URL: "http://portfolio-manager:8004"
+  TRADING_AGENT_URL: "http://trading-agent:8005"
   TRADING_AGENT_WS_URL: "ws://trading-agent:8005/ws/orders"
 

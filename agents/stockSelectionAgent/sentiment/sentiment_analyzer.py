@@ -17,8 +17,8 @@ class SentimentAnalyzer:
     """GPT 기반 뉴스 감성 분석"""
     
     def __init__(self, batch_size: int = 20):
-        # GPT_API_KEY 또는 OPENAI_API_KEY 둘 다 지원
-        api_key = os.getenv('OPENAI_API_KEY') or os.getenv('GPT_API_KEY')
+        # GPT_API_KEY 또는 GPT_API_KEY 둘 다 지원
+        api_key = os.getenv('GPT_API_KEY') or os.getenv('GPT_API_KEY')
         self.client = OpenAI(api_key=api_key)
         self.batch_size = batch_size
         self.cache_file = Path("data/sentiment_cache.json")

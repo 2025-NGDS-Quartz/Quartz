@@ -36,7 +36,7 @@ HANSEC_APP_SECRET = os.getenv("HANSEC_INVESTMENT_APP_SECRET_KEY", "")
 HANSEC_CANO = os.getenv("HANSEC_INVESTMENT_CANO", "")
 HANSEC_ACNT_PRDT_CD = os.getenv("HANSEC_INVESTMENT_ACNT_PRDT_CD", "01")
 HANSEC_BASE_URL = "https://openapi.koreainvestment.com:9443"
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "")
+GPT_API_KEY = os.getenv("GPT_API_KEY", "")
 
 # 에이전트 URL
 AUTH_AGENT_URL = os.getenv("AUTH_AGENT_URL", "http://auth-agent:8006")
@@ -153,7 +153,7 @@ class PortfolioManager:
         self._ws_connection: Optional[websockets.WebSocketClientProtocol] = None
         self._decision_task: Optional[asyncio.Task] = None
         self._rebalance_task: Optional[asyncio.Task] = None
-        self._openai_client = AsyncOpenAI(api_key=OPENAI_API_KEY) if OPENAI_API_KEY else None
+        self._openai_client = AsyncOpenAI(api_key=GPT_API_KEY) if GPT_API_KEY else None
         self._s3_client = None
         self._high_volume_mode = False  # 거래량 높음 모드
         
@@ -609,7 +609,12 @@ class PortfolioManager:
             return {"ticker_decisions": []}
         
         # 데이터 수집
-        portfolio = await self.get_portfolio()
+        try:
+            portfolio = await self.get_portfolio()
+        except Exception as e:
+            logger.error(f"Failed to get portfolio: {e}")
+            return {"ticker_decisions": []}  # 포트폴리오 조회 실패 시 결정 불가
+        
         macro = await self.get_macro_summary()
         candidates = await self.get_candidate_tickers(5)
         
@@ -617,31 +622,37 @@ class PortfolioManager:
         universe = []
         processed_tickers = set()
         
-        # 보유 종목 추가
+        # 보유 종목 추가 (기술분석 실패해도 포트폴리오 데이터로 추가)
         for pos in portfolio["positions"]:
             tech = await self.get_technical_analysis(pos["ticker"])
             universe.append({
                 "ticker": pos["ticker"],
                 "name": pos["name"],
                 "current_price": pos["current_price"],
-                "technical": self._simplify_technical(tech) if tech else {},
+                "technical": self._simplify_technical(tech) if tech else self._get_empty_technical(),
                 "fundamental": {"valuation": "fair", "quality": "medium", "growth": "medium"},
                 "is_in_portfolio": True
             })
             processed_tickers.add(pos["ticker"])
         
-        # 후보 종목 추가
+        # 후보 종목 추가 (기술분석 실패 시 해당 종목 스킵)
         for candidate in candidates[:5]:
             ticker = candidate.get("ticker", "")
             if ticker in processed_tickers:
                 continue
             
             tech = await self.get_technical_analysis(ticker)
+            
+            # 기술분석 실패 또는 현재가 없으면 스킵
+            if not tech or tech.get("current_price", 0) <= 0:
+                logger.warning(f"Skipping candidate {ticker}: no technical data or price")
+                continue
+            
             universe.append({
                 "ticker": ticker,
                 "name": candidate.get("name", ""),
-                "current_price": tech.get("current_price", 0) if tech else 0,
-                "technical": self._simplify_technical(tech) if tech else {},
+                "current_price": tech.get("current_price", 0),
+                "technical": self._simplify_technical(tech),
                 "fundamental": {
                     "valuation": "fair",
                     "quality": "medium",
@@ -651,6 +662,22 @@ class PortfolioManager:
                 "is_in_portfolio": False
             })
             processed_tickers.add(ticker)
+        
+        # universe가 비어있으면 기본 결정 반환 (모두 HOLD)
+        if not universe:
+            logger.warning("Universe is empty, returning default HOLD decision")
+            return {
+                "meta": {
+                    "decision_time_utc": datetime.utcnow().isoformat() + "Z",
+                    "overall_comment": "No stocks to analyze. Holding current positions."
+                },
+                "global_view": {
+                    "macro_bias": macro.get("market_bias_hint", "uncertain"),
+                    "risk_action": "keep_exposure",
+                    "target_cash_ratio": 0.5
+                },
+                "ticker_decisions": []
+            }
         
         # GPT 입력 구성
         gpt_input = {
@@ -706,10 +733,29 @@ class PortfolioManager:
             logger.error(f"GPT call failed: {e}")
             return {"ticker_decisions": []}
     
+    def _get_empty_technical(self) -> Dict:
+        """빈 기술분석 데이터 (기본값)"""
+        return {
+            "day": {
+                "trend": "sideway",
+                "rsi": 50,
+                "macd_signal": "neutral",
+                "bollinger_position": "middle",
+                "fibonacci_zone": "none"
+            },
+            "week": {
+                "trend": "sideway",
+                "macd_signal": "neutral"
+            },
+            "month": {
+                "trend": "sideway"
+            }
+        }
+    
     def _simplify_technical(self, tech: Dict) -> Dict:
         """기술적 분석 데이터 단순화"""
         if not tech:
-            return {}
+            return self._get_empty_technical()
         
         day = tech.get("day", {})
         week = tech.get("week", {})

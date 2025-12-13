@@ -122,7 +122,7 @@ def load_candidates_from_local() -> Optional[Dict]:
         return None
 
 
-def load_candidates_data() -> Dict:
+def load_candidates_data(raise_on_missing: bool = True) -> Optional[Dict]:
     """후보 종목 데이터 로드 (S3 우선, 로컬 폴백)"""
     # 1. S3에서 먼저 시도
     data = load_candidates_from_s3()
@@ -134,12 +134,28 @@ def load_candidates_data() -> Dict:
     
     # 3. 둘 다 실패
     if data is None:
-        raise HTTPException(
-            status_code=404,
-            detail="Stock candidates not found. Please run the pipeline first."
-        )
+        if raise_on_missing:
+            raise HTTPException(
+                status_code=404,
+                detail="Stock candidates not found. Please run the pipeline first."
+            )
+        return None
     
     return data
+
+
+def get_empty_candidates_response() -> Dict:
+    """빈 후보 종목 응답"""
+    return {
+        "timestamp": datetime.now().isoformat(),
+        "total_stocks": 0,
+        "statistics": {
+            "high_priority": 0,
+            "mid_priority": 0,
+            "low_priority": 0
+        },
+        "top_candidates": []
+    }
 
 
 def check_data_available() -> bool:
@@ -217,22 +233,29 @@ async def get_stock_candidates(request: CandidatesRequest = CandidatesRequest())
     
     Returns:
         최신 거래 후보 종목 리스트 (중요도 순)
+        데이터가 없으면 빈 리스트 반환
     """
     # 최대 10개로 제한
     top_n = min(request.top_n, 10)
     logger.info(f"Received request for top {top_n} candidates (importance-based)")
     
     try:
-        # 데이터 로드
-        data = load_candidates_data()
+        # 데이터 로드 (없으면 None 반환)
+        data = load_candidates_data(raise_on_missing=False)
+        
+        # 데이터가 없으면 빈 응답 반환
+        if data is None:
+            logger.warning("No candidates data available, returning empty response")
+            empty_response = get_empty_candidates_response()
+            return CandidatesResponse(**empty_response)
         
         # top_n만큼만 반환
-        top_candidates = data['top_candidates'][:top_n]
+        top_candidates = data.get('top_candidates', [])[:top_n]
         
         response = CandidatesResponse(
-            timestamp=data['timestamp'],
-            total_stocks=data['total_stocks'],
-            statistics=data['statistics'],
+            timestamp=data.get('timestamp', datetime.now().isoformat()),
+            total_stocks=data.get('total_stocks', 0),
+            statistics=data.get('statistics', {"high_priority": 0, "mid_priority": 0, "low_priority": 0}),
             top_candidates=top_candidates
         )
         

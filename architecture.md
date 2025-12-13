@@ -61,7 +61,7 @@
 | `AWS_SECRET_ACCESS_KEY` | AWS 시크릿 키 | - |
 | `AWS_REGION` | AWS 리전 | `ap-northeast-2` |
 | `S3_BUCKET_NAME` | S3 버킷명 | `quartz-bucket` |
-| `OPENAI_API_KEY` | OpenAI API 키 (GPT 호출용) | - |
+| `GPT_API_KEY` | OpenAI API 키 (GPT 호출용) | - |
 | `GEMINI_API_KEY` | Gemini API 키 (거시경제 에이전트용) | - |
 
 ### 2.5 한국투자증권 API 기본 URL
@@ -85,7 +85,7 @@
 - 모든 에이전트는 k3s를 통해 한 인스턴스 내에서 동작. 각 인스턴스 별로 별도의 이미지로 빌드, 각 포드 간의 통신을 통해 작업이 이뤄짐
 - 거시경제에이전트는 1시간에 한번씩 gemini search grounded api 를 사용해서 뉴스 감성분석 진행, 거시경제 보고서 작성 후 긍정적 관점의 보고서, 부정적 관점의 보고서를 각각 하나씩 S3 버킷에 올림. Report_Negative_{YYYYMMDDhhmmss}.md, Report_Positive_{YYYYMMDDhhmmss}.md 두가지
 - 거래종목 선택 에이전트는 뉴스 감성 분석을 통해 거래할 후보 종목들을 선정해서 파일로 정리(파일은 백업없이 갱신, 요청이 들어오면 파일의 내용을 읽어서 반환)
-- 포트폴리오 에이전트는 거래종목 선택 에이전트와 거시경제에이전트에게 각각 GET으로 거시경제 분위기와 종목을 받는다. (30분에 한번)
+- 포트폴리오 에이전트는 거시경제에이전트에게 GET으로 거시경제 분위기를, 거래종목 선택 에이전트에게 POST로 후보 종목을 받는다. (30분에 한번)
 - 포트폴리오 에이전트는 받은 종목들의 ticker를 기술적 분석 에이전트와 기업분석 에이전트에 POST 요청으로 전달해서 각 종목 별 기술분석과 기업분석을 진행하고 결과를 반환받음
 - 거시경제, 기술분석 및 기업분석을 통해 거래 여부를 결정하고 운용가능 자금을 분산해서 거래 에이전트에게 구매 명령(WebSocket) 전달 (보유 금액이 적으면 구매하지 않음)
 - 포트폴리오에이전트는 위 작업과 별개로 (거래량을 보고있다가 거래량이 많을 때에는 5분, 거래량이 적을 때에는 10분에 한번씩) 현재 포트폴리오(보유주식과 운용가능자금)을 파악하고 보유주식들에 대해 매도 여부를 결정
@@ -201,7 +201,7 @@
 
 - **실행 방법**
   - `python run.py`로 API 서버와 스케줄러 동시 실행
-  - API 서버: http://localhost:8000
+  - API 서버: http://localhost:8002
   - 스케줄러: 1시간마다 (매시 정각) 자동 실행
 
 - **아키텍처 구성**
@@ -258,11 +258,17 @@
   - 종목 매칭: 종목 사전 기반 + 정규식 패턴 매칭
 
 - **데이터 저장 구조**
-  - 크롤링 뉴스: `data/news_raw/{날짜}_{시간}.json`
-  - 처리된 뉴스: `data/processed/processed_{날짜}_{시간}.json`
-  - 후보 종목: `data/stock_candidates.json`
-  - 감성 캐시: `data/sentiment_cache.json`
-  - 로그: `data/logs/`
+  - 크롤링 뉴스: `data/news_raw/{날짜}_{시간}.json` (로컬)
+  - 처리된 뉴스: `data/processed/processed_{날짜}_{시간}.json` (로컬)
+  - **후보 종목: S3 `s3://quartz-bucket/select-ticker/stock_candidates.json` (주 저장소)**
+  - 후보 종목 로컬 백업: `data/stock_candidates.json` (S3 실패 시 폴백)
+  - 감성 캐시: `data/sentiment_cache.json` (로컬)
+  - 로그: `data/logs/` (로컬)
+
+- **S3 연동**
+  - 파이프라인 완료 시 후보 종목 파일을 S3에 업로드
+  - API 요청 시 S3에서 먼저 조회, 실패 시 로컬 파일 폴백
+  - 데이터 없을 시 빈 응답 반환 (404 대신 빈 배열)
 
 - **후보 종목 파일 형식** (`data/stock_candidates.json`)
   ```json
@@ -1068,6 +1074,13 @@
   3. 발급 실패: 30초 후 재시도 (최대 5회), 모두 실패 시 에이전트 종료 (k8s가 재시작)
   4. 23시간 55분마다 토큰 갱신 (토큰 유효기간 24시간보다 5분 일찍 갱신)
   5. 다른 에이전트가 토큰 요청 시 만료까지 5분 미만 남았으면 즉시 갱신 후 반환
+  6. **토큰이 없는 상태에서 요청 시 자동으로 신규 발급 시도**
+
+- **Readiness Probe 동작**
+  - 토큰이 유효하면 즉시 `status: ok` 반환
+  - **토큰이 없거나 만료된 경우: 한국투자증권 API로 신규 토큰 발급 시도**
+  - 발급 성공 시 `status: ok`, 실패 시 HTTP 503 반환
+  - 이를 통해 시스템 시작 시 토큰 없어도 자동으로 발급 후 Ready 상태가 됨
 
 - **토큰 상태 확인 API**
   - `GET /result/auth-token/status`
@@ -1082,7 +1095,8 @@
       ```
 
 - **에러 처리**
-  - 토큰 요청 시 토큰이 없거나 만료됨: HTTP 503 반환, 요청 에이전트가 재시도
+  - 토큰 요청 시 토큰이 없는 경우: **자동으로 신규 발급 시도 후 반환**
+  - 토큰이 없고 발급도 실패한 경우: HTTP 503 반환, 요청 에이전트가 재시도
   - 한국투자증권 API 오류: 에러 로그 기록 후 재시도
 
 
@@ -1107,17 +1121,48 @@
 | HTTP 4xx | 재시도 안함 | - | 에러 로그 후 즉시 실패 처리 |
 | 토큰 만료 (401) | 1회 | 토큰 재발급 후 즉시 | 인증 에이전트 헬스체크 |
 
-### 4.2 에이전트별 기본값 (폴백)
+### 4.2 에이전트별 기본값 (폴백) - Graceful Degradation
 
 | 에이전트 | 실패 시 기본 동작 |
 |---------|-----------------|
-| 거래종목 선택 | 빈 배열 `[]` 반환 (신규 매수 없음) |
-| 기술분석 | 해당 ticker 분석 스킵 |
-| 포트폴리오 관리 | 전부 HOLD, 신규매수 없음 |
-| 거래 | 주문 실패로 처리, 포트폴리오에 알림 |
-| 인증관리 | 에이전트 재시작 (k8s 자동) |
+| 거시경제 분석 | 기본값 반환: `market_bias_hint: "uncertain"`, 빈 요약문 |
+| 거래종목 선택 | 빈 배열 `[]` 반환 (신규 매수 없음), 404 대신 빈 응답 |
+| 기술분석 | 보유 종목: 기본 기술분석 값 사용, 후보 종목: 해당 ticker 스킵 |
+| 포트폴리오 관리 | universe 비어있으면 전부 HOLD, 현금 비중 50% 유지 |
+| 거래 | 3회 재시도 후 주문 실패로 처리, 포트폴리오에 실패 응답 |
+| 인증관리 | 토큰 없으면 자동 발급 시도, 실패 시 에이전트 재시작 (k8s 자동) |
 
-### 4.3 로깅 형식
+### 4.3 Graceful Degradation 상세
+
+시스템은 일부 에이전트나 데이터가 누락되어도 계속 동작합니다:
+
+```
+[거시경제 에이전트] ─── 실패 ───> 기본값 반환 ("uncertain")
+       │
+       ▼
+[포트폴리오 관리]
+       │
+       ├──[거래종목 선택] ─── 실패/데이터 없음 ───> 빈 배열 []
+       │
+       ├──[기술분석] ─── 실패 ───> 보유 종목: 기본값, 후보: 스킵
+       │
+       ▼
+  universe 구성
+       │
+       ├─── 비어있음 ───> 기본 HOLD 결정 (매매 없음)
+       │
+       └─── 있음 ───> GPT 호출 ───> 매매 결정
+                              │
+                              ▼
+                     [거래 에이전트] ─── 실패 ───> 3회 재시도 후 실패 응답
+```
+
+- **보유 종목 기술분석 실패**: 기본 기술분석 값 사용 (RSI=50, trend=sideway, macd=neutral)
+- **후보 종목 기술분석 실패**: 해당 종목 스킵하고 다른 후보로 진행
+- **모든 후보 종목 실패**: 보유 종목만으로 매도/보유 결정
+- **보유 종목도 없고 후보도 없음**: HOLD 결정 반환, 현금 유지
+
+### 4.4 로깅 형식
 
 모든 에이전트는 JSON 형식 로그 출력:
 ```
@@ -1157,7 +1202,7 @@ metadata:
   name: quartz-config
   namespace: quartz
 data:
-  IS_PRODUCTION: "false"
+  IS_PRODUCTION: "true"
   AWS_REGION: "ap-northeast-2"
   S3_BUCKET_NAME: "quartz-bucket"
   MIN_ORDER_KRW: "100000"
@@ -1165,6 +1210,12 @@ data:
   MAX_TURNOVER_RATIO: "0.3"
   MAX_BUY_CANDIDATES: "3"
   MAX_SELL_CANDIDATES: "3"
+  # 에이전트 URL (k3s 내부 DNS)
+  AUTH_AGENT_URL: "http://auth-agent:8006"
+  MACRO_AGENT_URL: "http://macro-agent:8001"
+  TICKER_SELECTOR_URL: "http://ticker-selector:8002"
+  TECHNICAL_AGENT_URL: "http://technical-agent:8003"
+  TRADING_AGENT_WS_URL: "ws://trading-agent:8005/ws/orders"
 ```
 
 ### 5.3 Secret 구성
@@ -1178,14 +1229,20 @@ metadata:
   namespace: quartz
 type: Opaque
 data:
+  # 한국투자증권 API
   HANSEC_INVESTMENT_APP_KEY: <base64>
   HANSEC_INVESTMENT_APP_SECRET_KEY: <base64>
-  HANSEC_INVESTMENT_CANO: <base64>
-  HANSEC_INVESTMENT_ACNT_PRDT_CD: <base64>
+  HANSEC_INVESTMENT_CANO: <base64>         # 계좌번호 앞 8자리
+  HANSEC_INVESTMENT_ACNT_PRDT_CD: <base64> # 계좌상품코드 뒤 2자리 (예: "01")
+  # AWS
   AWS_ACCESS_KEY_ID: <base64>
   AWS_SECRET_ACCESS_KEY: <base64>
-  OPENAI_API_KEY: <base64>
-  GEMINI_API_KEY: <base64>
+  # AI/LLM
+  GPT_API_KEY: <base64>                 # GPT 호출용
+  GEMINI_API_KEY: <base64>                 # 거시경제 에이전트용
+  # 거시경제 데이터 API (macroAnalysisAgent용)
+  ECOS_API_KEY: <base64>                   # 한국은행 ECOS API (필수)
+  FRED_API_KEY: <base64>                   # 미국 FRED API (선택, 없으면 미국 지표 생략)
 ```
 
 ### 5.4 Probe 설정
@@ -1226,10 +1283,10 @@ startupProbe:
 ```
 1. [거시경제 에이전트] → S3에 보고서 업로드 (1시간 주기, 별도 동작)
 2. [포트폴리오 관리] → GET /result/analysis → [거시경제 에이전트]
-3. [포트폴리오 관리] → GET /result/tickers → [거래종목 선택 에이전트]
+3. [포트폴리오 관리] → POST /api/candidates → [거래종목 선택 에이전트]
 4. [포트폴리오 관리] → POST /result/analysis (각 ticker) → [기술분석 에이전트]
 5. [포트폴리오 관리] → GPT 호출 (매수/매도/보유 결정)
-6. [포트폴리오 관리] → WebSocket 주문 명령 → [거래 에이전트]
+6. [포트폴리오 관리] → WebSocket /ws/orders 주문 명령 → [거래 에이전트]
 7. [거래 에이전트] → GET /result/auth-token → [인증 에이전트]
 8. [거래 에이전트] → 한국투자증권 API 호출 (주문 실행)
 9. [거래 에이전트] → WebSocket 주문 결과 → [포트폴리오 관리]
@@ -1256,8 +1313,8 @@ startupProbe:
 
 | 데이터 | S3 경로 | 보관 주기 |
 |-------|--------|----------|
-| 거시경제 보고서 | `macroeconomics/Report_{Positive\|Negative}_{timestamp}.md` | 7일 |
-| 선정 종목 | `select-ticker/selected_tickers.json` | 갱신 (단일 파일) |
+| 거시경제 보고서 | `Report_{Positive\|Negative}_{timestamp}.md`, `Report_{Positive\|Negative}_{timestamp}_short.md` | 7일 |
+| 선정 종목 | `select-ticker/stock_candidates.json` | 갱신 (단일 파일) |
 | 기술분석 결과 | `technical-analysis/{ticker}_{timestamp}.json` | 1일 |
 | 포트폴리오 결정 | `portfolio-decisions/decision_{timestamp}.json` | 30일 |
 

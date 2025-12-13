@@ -13,6 +13,7 @@ resources:
   - technical-agent.yaml
   - trading-agent.yaml
   - portfolio-manager.yaml
+  - frontend.yaml
 
 commonLabels:
   app.kubernetes.io/part-of: quartz

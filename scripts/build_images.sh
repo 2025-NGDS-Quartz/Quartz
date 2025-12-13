@@ -32,6 +32,14 @@ docker build -f agents/tradingAgent/Dockerfile -t ${REGISTRY}/trading-agent:${TA
 echo "Building portfolio-manager..."
 docker build -f agents/portfolioManager/Dockerfile -t ${REGISTRY}/portfolio-manager:${TAG} .
 
+# Frontend
+echo "Building frontend..."
+docker build -f frontend/Dockerfile -t ${REGISTRY}/frontend:${TAG} frontend/
+
+# API Proxy
+echo "Building api-proxy..."
+docker build -f frontend/api-proxy/Dockerfile -t ${REGISTRY}/api-proxy:${TAG} frontend/api-proxy/
+
 echo "All images built successfully!"
 echo ""
 echo "To push images to registry:"
@@ -41,4 +49,6 @@ echo "  docker push ${REGISTRY}/ticker-selector:${TAG}"
 echo "  docker push ${REGISTRY}/technical-agent:${TAG}"
 echo "  docker push ${REGISTRY}/trading-agent:${TAG}"
 echo "  docker push ${REGISTRY}/portfolio-manager:${TAG}"
+echo "  docker push ${REGISTRY}/frontend:${TAG}"
+echo "  docker push ${REGISTRY}/api-proxy:${TAG}"
 
