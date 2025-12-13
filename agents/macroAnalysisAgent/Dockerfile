@@ -17,6 +17,7 @@ RUN apt-get update && apt-get install -y \
     zlib1g-dev \
     ca-certificates \
     tzdata \
+    curl \
     # Python 3.12 설치를 위한 PPA
     software-properties-common \
     && add-apt-repository ppa:deadsnakes/ppa \
@@ -24,8 +25,11 @@ RUN apt-get update && apt-get install -y \
     && apt-get install -y \
     python3.12 \
     python3.12-venv \
-    python3-pip \
+    python3.12-dev \
     && rm -rf /var/lib/apt/lists/*
+
+# pip 설치 (Python 3.12용 - distutils 문제 우회)
+RUN curl -sS https://bootstrap.pypa.io/get-pip.py | python3.12
 
 # 한국 시간 적용
 ENV TZ=Asia/Seoul
@@ -52,7 +56,8 @@ WORKDIR /app
 
 # Python 의존성 설치
 COPY requirements.txt .
-RUN python3.12 -m pip install --no-cache-dir -r requirements.txt
+RUN python3.12 -m pip install --no-cache-dir --upgrade pip setuptools wheel && \
+    python3.12 -m pip install --no-cache-dir -r requirements.txt
 
 # C++ 소스 코드 복사 및 빌드
 COPY agents/macroAnalysisAgent/main.cpp .
@@ -70,6 +75,10 @@ COPY agents/macroAnalysisAgent/api_server.py .
 
 # 포트 노출 (architecture.md: macro-agent 8001)
 EXPOSE 8001
+
+# 헬스체크
+HEALTHCHECK --interval=30s --timeout=10s --start-period=10s --retries=3 \
+    CMD curl -f http://localhost:8001/health/live || exit 1
 
 # Python API 서버 실행 (C++ 프로그램은 API 서버에서 주기적으로 호출)
 CMD ["python3.12", "-m", "uvicorn", "api_server:app", "--host", "0.0.0.0", "--port", "8001"]
