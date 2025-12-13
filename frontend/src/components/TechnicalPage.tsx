@@ -10,18 +10,8 @@ import {
   Minus,
   Search,
 } from 'lucide-react';
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-  ReferenceLine,
-} from 'recharts';
 import { getTechnicalAnalysis } from '../api/client';
-import type { TechnicalAnalysisResult, PeriodAnalysis } from '../types';
+import type { PeriodAnalysis } from '../types';
 
 // RSI 게이지 컴포넌트
 function RSIGauge({ value }: { value: number }) {
@@ -111,12 +101,6 @@ function MACDSignal({ macd }: { macd: PeriodAnalysis['macd'] }) {
 
 // 볼린저밴드 시각화
 function BollingerBandChart({ bb, currentPrice }: { bb: PeriodAnalysis['bollinger_band']; currentPrice: number }) {
-  const data = [
-    { name: '하단', value: bb.bottom },
-    { name: '중간', value: bb.middle },
-    { name: '상단', value: bb.top },
-  ];
-
   const position = ((currentPrice - bb.bottom) / (bb.top - bb.bottom)) * 100;
 
   return (
@@ -270,7 +254,7 @@ export default function TechnicalPage() {
   const [inputTicker, setInputTicker] = useState(paramTicker || '');
   const [searchTicker, setSearchTicker] = useState(paramTicker || '');
 
-  const { data: analysis, isLoading, error, refetch } = useQuery({
+  const { data: analysis, isLoading, error } = useQuery({
     queryKey: ['technical', searchTicker],
     queryFn: () => getTechnicalAnalysis(searchTicker),
     enabled: !!searchTicker && searchTicker.length === 6,
