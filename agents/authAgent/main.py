@@ -7,9 +7,10 @@
 import os
 import asyncio
 import logging
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from typing import Optional
 from contextlib import asynccontextmanager
+from zoneinfo import ZoneInfo
 
 import httpx
 from fastapi import FastAPI, HTTPException
@@ -107,13 +108,18 @@ class AuthTokenManager:
                             self.token_type = data.get("token_type", "Bearer")
                             
                             # 만료 시간 파싱 (형식: "2024-01-16 08:16:59")
+                            # 한국투자증권 API는 KST(한국 시간)으로 반환
                             expires_str = data.get("access_token_token_expired", "")
                             if expires_str:
-                                self.expires_at = datetime.strptime(expires_str, "%Y-%m-%d %H:%M:%S")
+                                # KST로 파싱 후 UTC로 변환하여 저장
+                                kst = ZoneInfo("Asia/Seoul")
+                                expires_naive = datetime.strptime(expires_str, "%Y-%m-%d %H:%M:%S")
+                                expires_kst = expires_naive.replace(tzinfo=kst)
+                                self.expires_at = expires_kst.astimezone(timezone.utc)
                             else:
                                 # expires_in 사용 (초 단위)
                                 expires_in = data.get("expires_in", 86400)
-                                self.expires_at = datetime.now() + timedelta(seconds=expires_in)
+                                self.expires_at = datetime.now(timezone.utc) + timedelta(seconds=expires_in)
                         
                         logger.info(f"Token issued successfully, expires at: {self.expires_at}")
                         return True
@@ -160,12 +166,14 @@ class AuthTokenManager:
             
             # 만료 5분 전 체크
             if self.expires_at:
-                remaining = (self.expires_at - datetime.now()).total_seconds()
+                now_utc = datetime.now(timezone.utc)
+                remaining = (self.expires_at - now_utc).total_seconds()
                 if remaining < 300:  # 5분 미만
                     logger.info("Token expiring soon, refreshing...")
         
         # 5분 미만이면 갱신
-        if self.expires_at and (self.expires_at - datetime.now()).total_seconds() < 300:
+        now_utc = datetime.now(timezone.utc)
+        if self.expires_at and (self.expires_at - now_utc).total_seconds() < 300:
             await self._issue_token()
         
         async with self._lock:
@@ -183,7 +191,9 @@ class AuthTokenManager:
         remaining = 0
         
         if self.expires_at:
-            remaining = max(0, int((self.expires_at - datetime.now()).total_seconds()))
+            # UTC 기준으로 남은 시간 계산
+            now_utc = datetime.now(timezone.utc)
+            remaining = max(0, int((self.expires_at - now_utc).total_seconds()))
             if remaining == 0:
                 is_valid = False
         

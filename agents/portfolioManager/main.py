@@ -222,6 +222,7 @@ class PortfolioManager:
             "CANO": HANSEC_CANO,
             "ACNT_PRDT_CD": HANSEC_ACNT_PRDT_CD,
             "AFHR_FLPR_YN": "N",
+            "OFL_YN": "",  # 오프라인여부 (공란: 기본값)
             "INQR_DVSN": "02",  # 종목별
             "UNPR_DVSN": "01",
             "FUND_STTL_ICLD_YN": "N",
