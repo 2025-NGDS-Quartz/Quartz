@@ -145,7 +145,7 @@ function ReportCard({
         <div className="flex items-center justify-center h-48">
           <RefreshCw className="w-6 h-6 text-gray-400 animate-spin" />
         </div>
-      ) : content && !content.includes('데이터') ? (
+      ) : content && content.length > 100 ? (
         <div className="max-h-[500px] overflow-y-auto pr-2">
           <MarkdownContent content={content} />
         </div>
