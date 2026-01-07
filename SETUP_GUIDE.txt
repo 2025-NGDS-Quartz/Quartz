@@ -1,0 +1,261 @@
+Quartz 실행가이드
+
+1. 사전 요구사항
+
+다음 도구들이 설치되어 있어야 합니다:
+
+[필수]
+- Docker (이미지 빌드용)
+- kubectl (Kubernetes CLI)
+- k3s 또는 Kubernetes 클러스터
+  - k3s 설치: curl -sfL https://get.k3s.io | sh -
+
+[권장]
+- Git (소스코드 관리)
+- Python 3.12+ (로컬 개발/테스트용)
+- Node.js 18+ (프론트엔드 로컬 개발용)
+
+[시스템 요구사항]
+- 메모리: 최소 8GB RAM (권장 16GB+)
+- 디스크: 최소 20GB 여유 공간
+- 네트워크: 인터넷 연결 필수 (API 호출)
+
+
+
+2. 필요한 API 키
+
+[한국투자증권 API] - 필수
+- 발급처: https://apiportal.koreainvestment.com
+- 필요 정보:
+  * APP KEY (앱 키)
+  * APP SECRET KEY (앱 시크릿 키)
+  * 계좌번호 앞 8자리 (CANO)
+  * 계좌상품코드 (보통 "01")
+- 실전투자용 키로 발급받아야 실제 거래 가능
+
+[OpenAI GPT API] - 필수
+- 발급처: https://platform.openai.com/api-keys
+- 포트폴리오 매매 의사결정에 사용
+
+[Google Gemini API] - 필수
+- 발급처: https://aistudio.google.com/app/apikey
+- 거시경제 분석 보고서 생성에 사용
+
+[AWS] - 필수
+- 발급처: AWS IAM Console
+- 필요 권한: S3 읽기/쓰기
+- S3 버킷 생성 필요 (예: quartz-bucket)
+
+[한국은행 ECOS API] - 필수
+- 발급처: https://ecos.bok.or.kr/api/
+- 거시경제 데이터 수집에 사용
+
+[미국 FRED API] - 선택
+- 발급처: https://fred.stlouisfed.org/docs/api/api_key.html
+- 미국 거시경제 데이터 수집에 사용 (선택사항)
+
+
+3. Secret 설정 (k8s/secret.yaml)
+
+[STEP 3.1] k8s/secret.yaml 파일을 편집합니다.
+
+[STEP 3.2] 각 값을 base64로 인코딩합니다.
+
+    Windows PowerShell:
+    -------------------
+    [Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes("your_value"))
+    
+    Linux/macOS:
+    ------------
+    echo -n "your_value" | base64
+
+[STEP 3.3] 인코딩된 값을 secret.yaml에 입력합니다.
+
+    예시:
+    -----
+    # 한국투자증권 API
+    HANSEC_INVESTMENT_APP_KEY: "UHM0MDMyMzEyMzEy..."          # APP KEY base64
+    HANSEC_INVESTMENT_APP_SECRET_KEY: "Y2xLMjM0MjM0..."      # APP SECRET base64
+    HANSEC_INVESTMENT_CANO: "MTIzNDU2Nzg="                   # 계좌번호 앞 8자리 base64
+    HANSEC_INVESTMENT_ACNT_PRDT_CD: "MDE="                   # "01" base64 (보통 01)
+    
+    # AWS
+    AWS_ACCESS_KEY_ID: "QUtJQTEyMzQ1Njc4OQ=="               # AWS Access Key base64
+    AWS_SECRET_ACCESS_KEY: "d1hZekFiQzEyMzQ1Njc4OTAx..."    # AWS Secret Key base64
+    
+    # AI/LLM
+    GPT_API_KEY: "c2stcHJvai0xMjM0NTY3ODkw..."              # OpenAI API Key base64
+    GEMINI_API_KEY: "QUl6YVN5QTEyMzQ1Njc4OTAx..."           # Gemini API Key base64
+    
+    # 거시경제 데이터 API
+    ECOS_API_KEY: "MTIzNDU2Nzg5MGFiY2RlZg=="               # ECOS API Key base64
+    FRED_API_KEY: "YWJjZGVmMTIzNDU2Nzg5MA=="               # FRED API Key base64 (선택)
+
+[STEP 3.4] ConfigMap 확인 (k8s/configmap.yaml)
+
+    필요시 다음 값들을 환경에 맞게 수정:
+    - S3_BUCKET_NAME: 생성한 S3 버킷 이름
+    - MIN_ORDER_KRW: 최소 주문 금액 (기본: 100000)
+    - MAX_SINGLE_TICKER_WEIGHT: 단일 종목 최대 비중 (기본: 0.2 = 20%)
+
+
+4. Docker 이미지 빌드
+
+[STEP 4.1] 프로젝트 루트 디렉토리로 이동
+
+    cd /path/to/Quartz
+
+[STEP 4.2] 빌드 스크립트 실행 (권장)
+
+    Linux/macOS:
+    ------------
+    chmod +x scripts/build_images.sh
+    ./scripts/build_images.sh
+    
+    Windows (Git Bash 또는 WSL):
+    ----------------------------
+    bash scripts/build_images.sh
+
+[STEP 4.3] 또는 개별 이미지 빌드
+
+    # Auth Agent
+    docker build -f agents/authAgent/Dockerfile -t quartz/auth-agent:latest .
+    
+    # Macro Agent (C++ 빌드 포함, 시간 오래 걸림)
+    docker build -f agents/macroAnalysisAgent/Dockerfile -t quartz/macro-agent:latest .
+    
+    # Ticker Selector
+    docker build -f agents/stockSelectionAgent/Dockerfile -t quartz/ticker-selector:latest .
+    
+    # Technical Agent
+    docker build -f agents/technicalAgent/Dockerfile -t quartz/technical-agent:latest .
+    
+    # Trading Agent
+    docker build -f agents/tradingAgent/Dockerfile -t quartz/trading-agent:latest .
+    
+    # Portfolio Manager
+    docker build -f agents/portfolioManager/Dockerfile -t quartz/portfolio-manager:latest .
+    
+    # Frontend
+    docker build -f frontend/Dockerfile -t quartz/frontend:latest frontend/
+    
+    # API Proxy
+    docker build -f frontend/api-proxy/Dockerfile -t quartz/api-proxy:latest frontend/api-proxy/
+
+[STEP 4.4] k3s에 이미지 import (k3s 사용 시)
+
+    # 모든 이미지 import
+    docker save quartz/auth-agent:latest | sudo k3s ctr images import -
+    docker save quartz/macro-agent:latest | sudo k3s ctr images import -
+    docker save quartz/ticker-selector:latest | sudo k3s ctr images import -
+    docker save quartz/technical-agent:latest | sudo k3s ctr images import -
+    docker save quartz/trading-agent:latest | sudo k3s ctr images import -
+    docker save quartz/portfolio-manager:latest | sudo k3s ctr images import -
+    docker save quartz/frontend:latest | sudo k3s ctr images import -
+    docker save quartz/api-proxy:latest | sudo k3s ctr images import -
+    
+    # import 확인
+    sudo k3s ctr images list | grep quartz
+
+
+5. Kubernetes 배포
+
+[STEP 5.1] kubectl 연결 확인
+
+    kubectl cluster-info
+    kubectl get nodes
+
+[STEP 5.2] Kustomize를 사용한 배포 (권장)
+
+    kubectl apply -k k8s/
+
+[STEP 5.3] 또는 개별 리소스 배포
+
+    # 순서대로 실행
+    kubectl apply -f k8s/namespace.yaml
+    kubectl apply -f k8s/configmap.yaml
+    kubectl apply -f k8s/secret.yaml
+    kubectl apply -f k8s/auth-agent.yaml
+    kubectl apply -f k8s/macro-agent.yaml
+    kubectl apply -f k8s/ticker-selector.yaml
+    kubectl apply -f k8s/technical-agent.yaml
+    kubectl apply -f k8s/trading-agent.yaml
+    kubectl apply -f k8s/portfolio-manager.yaml
+    kubectl apply -f k8s/frontend.yaml
+
+[STEP 5.4] 배포 스크립트 사용 (선택)
+
+    chmod +x scripts/deploy.sh
+    ./scripts/deploy.sh
+
+
+6. 배포 확인
+
+[STEP 6.1] Pod 상태 확인
+
+    kubectl get pods -n quartz
+    
+    # 정상 상태 예시:
+    # NAME                                 READY   STATUS    RESTARTS   AGE
+    # auth-agent-xxxx                      1/1     Running   0          1m
+    # macro-agent-xxxx                     1/1     Running   0          1m
+    # ticker-selector-xxxx                 1/1     Running   0          1m
+    # technical-agent-xxxx                 1/1     Running   0          1m
+    # trading-agent-xxxx                   1/1     Running   0          1m
+    # portfolio-manager-xxxx               1/1     Running   0          1m
+    # frontend-xxxx                        1/1     Running   0          1m
+    # api-proxy-xxxx                       1/1     Running   0          1m
+
+[STEP 6.2] Service 확인
+
+    kubectl get svc -n quartz
+
+[STEP 6.3] 로그 확인
+
+    # 각 에이전트 로그 확인
+    kubectl logs -f deployment/auth-agent -n quartz
+    kubectl logs -f deployment/macro-agent -n quartz
+    kubectl logs -f deployment/ticker-selector -n quartz
+    kubectl logs -f deployment/technical-agent -n quartz
+    kubectl logs -f deployment/trading-agent -n quartz
+    kubectl logs -f deployment/portfolio-manager -n quartz
+    kubectl logs -f deployment/frontend -n quartz
+
+[STEP 6.4] Health Check
+
+    # Pod 내부에서 health 엔드포인트 테스트
+    kubectl exec -it deployment/auth-agent -n quartz -- curl localhost:8006/health/live
+    kubectl exec -it deployment/portfolio-manager -n quartz -- curl localhost:8004/health/ready
+
+
+7. 프론트엔드 접속
+
+[STEP 7.1] NodePort로 접속 (기본)
+
+    # Frontend Service 정보 확인
+    kubectl get svc frontend -n quartz
+    
+    # 브라우저에서 접속
+    http://<노드IP>:30080
+
+[STEP 7.2] Port Forward로 접속 (개발/테스트)
+
+    kubectl port-forward svc/frontend 8080:80 -n quartz
+    
+    # 브라우저에서 접속
+    http://localhost:8080
+
+
+
+8. 전체 삭제 (클린업)
+
+    # 모든 리소스 삭제
+    kubectl delete -k k8s/
+    
+    # 또는 namespace 삭제 (모든 리소스 함께 삭제됨)
+    kubectl delete namespace quartz
+
+
+9. 배포된 파일 확인
+
+    http://3.39.204.121:30080

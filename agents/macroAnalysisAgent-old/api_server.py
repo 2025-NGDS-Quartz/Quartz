@@ -1,19 +1,17 @@
 """
 거시경제 분석 에이전트 API 서버
-Python 분석 프로그램의 결과를 S3에서 조회하여 제공
+C++ 분석 프로그램의 결과를 S3에서 조회하여 제공
 """
 import os
 import logging
+import subprocess
 import asyncio
 from datetime import datetime
 from typing import Optional, Dict, Any
-from contextlib import asynccontextmanager
 
 import boto3
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
-
-from main import run_analysis
 
 # 로깅 설정
 logging.basicConfig(
@@ -22,31 +20,18 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
+app = FastAPI(
+    title="Macro Analysis Agent API",
+    description="거시경제 분석 에이전트 API - C++ 분석 결과를 S3에서 조회하여 제공",
+    version="1.0.0"
+)
+
 # 환경 변수
 AWS_REGION = os.getenv("AWS_REGION", "ap-northeast-2")
 S3_BUCKET_NAME = os.getenv("S3_BUCKET_NAME", "quartz-bucket")
-AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID", "")
-AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY", "")
 
 # S3 클라이언트
-s3_client = None
-
-def init_s3_client():
-    """S3 클라이언트 초기화"""
-    global s3_client
-    try:
-        if AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY:
-            s3_client = boto3.client(
-                's3',
-                region_name=AWS_REGION,
-                aws_access_key_id=AWS_ACCESS_KEY_ID,
-                aws_secret_access_key=AWS_SECRET_ACCESS_KEY
-            )
-        else:
-            s3_client = boto3.client('s3', region_name=AWS_REGION)
-        logger.info("S3 client initialized")
-    except Exception as e:
-        logger.error(f"Failed to initialize S3 client: {e}")
+s3_client = boto3.client('s3', region_name=AWS_REGION)
 
 # 분석 결과 캐시 (요약본 + 원본)
 _cache: Dict[str, Any] = {
@@ -84,9 +69,6 @@ def get_latest_report_key(prefix: str, is_short: bool = True) -> Optional[str]:
         prefix: S3 키 prefix (예: "macro-analysis/Report_Positive_")
         is_short: True면 요약본(_short.md), False면 원본(.md) 조회
     """
-    if not s3_client:
-        return None
-        
     try:
         response = s3_client.list_objects_v2(
             Bucket=S3_BUCKET_NAME,
@@ -122,9 +104,6 @@ def get_latest_report_key(prefix: str, is_short: bool = True) -> Optional[str]:
 
 def read_s3_file(key: str) -> Optional[str]:
     """S3에서 파일 읽기"""
-    if not s3_client:
-        return None
-        
     try:
         response = s3_client.get_object(Bucket=S3_BUCKET_NAME, Key=key)
         content = response['Body'].read().decode('utf-8')
@@ -208,32 +187,56 @@ async def refresh_cache():
         logger.error(f"Error refreshing cache: {e}")
 
 
-async def run_python_analysis():
-    """Python 분석 프로그램 실행"""
+async def run_cpp_analysis():
+    """C++ 분석 프로그램 실행"""
     try:
-        logger.info("Starting Python macro analysis...")
+        logger.info("Starting C++ macro analysis...")
         
-        # Python 분석 함수 호출
-        result = await run_analysis()
+        # C++ 실행 파일 경로
+        executable = "/app/macro_analysis"
         
-        if result["success"]:
-            logger.info(f"Python macro analysis completed successfully. Uploaded files: {result['uploaded_files']}")
+        if not os.path.exists(executable):
+            logger.warning(f"C++ executable not found at {executable}")
+            return
+        
+        # 프로세스 실행
+        process = await asyncio.create_subprocess_exec(
+            executable,
+            stdout=asyncio.subprocess.PIPE,
+            stderr=asyncio.subprocess.PIPE
+        )
+        
+        stdout, stderr = await process.communicate()
+        
+        # stdout 출력 (C++ 프로그램의 진행 상황)
+        if stdout:
+            stdout_text = stdout.decode('utf-8', errors='replace')
+            for line in stdout_text.strip().split('\n'):
+                if line.strip():
+                    logger.info(f"[C++] {line}")
+        
+        # stderr 출력 (에러 메시지)
+        if stderr:
+            stderr_text = stderr.decode('utf-8', errors='replace')
+            for line in stderr_text.strip().split('\n'):
+                if line.strip():
+                    logger.error(f"[C++ ERROR] {line}")
+        
+        if process.returncode == 0:
+            logger.info("C++ macro analysis completed successfully")
         else:
-            logger.error(f"Python macro analysis failed. Errors: {result['errors']}")
-        
-        return result
+            logger.error(f"C++ macro analysis failed with return code: {process.returncode}")
             
     except Exception as e:
-        logger.error(f"Error running Python analysis: {e}")
-        return {"success": False, "errors": [str(e)]}
+        logger.error(f"Error running C++ analysis: {e}")
 
 
 async def analysis_scheduler():
-    """12시간마다 Python 분석 실행 및 캐시 갱신"""
+    """12시간마다 C++ 분석 실행 및 캐시 갱신"""
     while True:
         try:
-            # Python 분석 실행
-            await run_python_analysis()
+            # C++ 분석 실행
+            await run_cpp_analysis()
             
             # 잠시 대기 후 캐시 갱신 (S3 업로드 완료 대기)
             await asyncio.sleep(30)
@@ -248,35 +251,18 @@ async def analysis_scheduler():
         await asyncio.sleep(43200)
 
 
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    """앱 생명주기 관리"""
+@app.on_event("startup")
+async def startup_event():
+    """앱 시작 시 초기화"""
     logger.info("Macro Analysis Agent starting...")
-    
-    # S3 클라이언트 초기화
-    init_s3_client()
     
     # 초기 캐시 로드
     await refresh_cache()
     
     # 백그라운드 스케줄러 시작
-    scheduler_task = asyncio.create_task(analysis_scheduler())
+    asyncio.create_task(analysis_scheduler())
     
     logger.info("Macro Analysis Agent started")
-    
-    yield
-    
-    # 종료 시 스케줄러 취소
-    scheduler_task.cancel()
-    logger.info("Macro Analysis Agent stopped")
-
-
-app = FastAPI(
-    title="Macro Analysis Agent API",
-    description="거시경제 분석 에이전트 API - Python 분석 결과를 S3에서 조회하여 제공",
-    version="2.0.0",
-    lifespan=lifespan
-)
 
 
 @app.get("/health/live", tags=["Health"])
@@ -355,8 +341,8 @@ async def manual_refresh():
 
 @app.post("/run-analysis", tags=["Admin"])
 async def trigger_analysis():
-    """Python 분석 수동 실행"""
-    asyncio.create_task(run_python_analysis())
+    """C++ 분석 수동 실행"""
+    asyncio.create_task(run_cpp_analysis())
     return {"status": "started", "message": "Analysis job started in background"}
 
 
